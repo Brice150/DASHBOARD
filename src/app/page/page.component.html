@@ -1,4 +1,7 @@
 <div class="main-container">
+    <div class="project-title">
+        <span>Dashboard</span>
+    </div>
     <div class="switch-container">
         <a (click)="changeMode()">
             <i *ngIf="user.prefersDarkMode" class='bx bxs-sun'></i>
@@ -7,23 +10,11 @@
     </div>
     <div class="cards-container">
         <div class="flex">
-            <div class="card">
-                <div class="title">
-                    Weather
-                </div>
-            </div>
-            <div class="card">
-                <div class="title">
-                    Finance
-                </div>
-            </div>
+            <app-weather></app-weather>
+            <app-finance></app-finance>
         </div>
         <div class="center">
-            <div class="card">
-                <div class="title">
-                    TODO List
-                </div>
-            </div>
+            <app-tasks></app-tasks>
         </div>
     </div>
 </div>
