@@ -17,7 +17,7 @@ Frontend : Angular
   ### Clone the project
 
   ```bash
-    git clone https://github.com/Brice150/GAMETIME.git
+    git clone https://github.com/Brice150/DASHBOARD.git
   ```
 
   ### Install dependencies
