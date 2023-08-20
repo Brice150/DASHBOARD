@@ -1,3 +1,29 @@
 <div class="main-container">
-    test
+    <div class="switch-container">
+        <a (click)="changeMode()">
+            <i *ngIf="user.prefersDarkMode" class='bx bxs-sun'></i>
+            <i *ngIf="!user.prefersDarkMode" class='bx bxs-moon'></i>
+        </a>
+    </div>
+    <div class="cards-container">
+        <div class="flex">
+            <div class="card">
+                <div class="title">
+                    Weather
+                </div>
+            </div>
+            <div class="card">
+                <div class="title">
+                    Finance
+                </div>
+            </div>
+        </div>
+        <div class="center">
+            <div class="card">
+                <div class="title">
+                    TODO List
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

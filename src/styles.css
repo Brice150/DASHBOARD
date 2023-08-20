@@ -1,8 +1,20 @@
 :root {
-    --text: #ffffff;
-    --background: #2d3643;
-    --primary: red;
-    --secondary: gold;
+    --color-background: white;
+    --color-text-primary: #003c91;
+    --color-text-secondary: black;
+    --box-shadow-color: rgba(132, 139, 200, 0.18);
+    --box-shadow: 0 2rem 3rem var(--box-shadow-color);
+    
+    --strong-radius: 20px;
+    --light-radius: 10px;
+}
+
+.dark-theme-variables {
+    --color-background: #181a1e;
+    --color-text-primary: #003c91;
+    --color-text-secondary: white;
+    --box-shadow-color: rgba(0, 0, 0, 0.4);
+    --box-shadow: 0 2rem 3rem var(--box-shadow-color);
 }
 
 html, body { 
@@ -10,7 +22,6 @@ html, body {
 }
 
 body { 
-    background-color: var(--background);
     margin: 0; 
     padding: 0;
     box-sizing: border-box;
