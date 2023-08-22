@@ -1,15 +1,9 @@
 export interface WeatherInfos {
-    current_weather: CurrentWeather;
     daily: Daily;
 }
 
-export interface CurrentWeather {
-    weathercode: number;
-    temperature: number;
-    windspeed: number;
-}
-
 export interface Daily {
+    icon: string[];
     weathercode: number[];
     precipitation_sum: number[];
     temperature_2m_max: number[];

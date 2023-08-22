@@ -1,6 +1,5 @@
 .card {
     position: relative;
-    margin: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -26,42 +25,48 @@
 }
 
 .card .content {
+    margin-top: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.content .current {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    width: 100%;
 }
 
 .content .forecast {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
 }
 
 .content .forecast .day {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     flex-direction: column;
+    border-radius: var(--light-radius);
+    box-shadow: var(--box-shadow);
+    padding: 5px;
+    width: 180px;
+    margin: 5px 0;
 }
 
 .content .forecast .temperature-gap {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
 }
 
 .content span {
     color: var(--color-text-secondary);
     font-size: 17px;
     font-weight: 600;
+}
+
+.content .subtitle {
+    font-size: 18px;
+    color: var(--color-text-primary);
 }
 
 @media screen and (max-width: 800px) {
