@@ -3,7 +3,37 @@
     <div class="title">
         <span>Weather</span>
     </div>
-    <div class="content">
-        <span>Raining</span>
+    <div class="content" *ngIf="weatherInfo">
+        <div class="current">
+            <div class="weathercode">
+                <span>{{weatherInfo.current_weather.weathercode}}</span>
+            </div>
+            <div class="temperature">
+                <span>{{weatherInfo.current_weather.temperature}} °C</span>
+            </div>
+            <div class="windspeed">
+                <span>{{weatherInfo.current_weather.windspeed}} km/h</span>
+            </div>
+        </div>
+        <div class="forecast">
+            <div class="day" *ngFor="let useless of ' '.repeat(4).split(''); let index = index">
+                <div class="day-value">
+                    <span>{{weatherInfo.daily.time[index]}}</span>
+                </div>
+                <div class="weathercode">
+                    <span>{{weatherInfo.daily.weathercode[index]}}</span>
+                </div>
+                <div class="temperature-gap">
+                    <span>{{weatherInfo.daily.temperature_2m_max[index]}} °C</span>
+                    <span>{{weatherInfo.daily.temperature_2m_min[index]}} °C</span>
+                </div>
+                <div class="precipitation">
+                    <span>{{weatherInfo.daily.precipitation_sum[index]}} mm</span>
+                </div>
+                <div class="windspeed">
+                    <span>{{weatherInfo.daily.windspeed_10m_max[index]}} km/h</span>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

@@ -29,6 +29,32 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.content .current {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.content .forecast {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content .forecast .day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.content .forecast .temperature-gap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
 }
 
