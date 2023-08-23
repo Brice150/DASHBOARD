@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { WeatherInfos } from 'src/app/core/interface/weatherInfos';
 import { DayOfWeekPipe } from 'src/app/shared/pipes/dayOfWeek.pipe';
-import { WeatherIconPipe } from 'src/app/shared/pipes/weatherIcon.pipe';
+import { WeatherImagePipe } from 'src/app/shared/pipes/weatherImage.pipe';
 
 @Component({
   selector: 'app-weather',
@@ -15,7 +15,7 @@ export class WeatherComponent implements OnInit {
   "&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_sum,windspeed_10m_max&current_weather=true&timezone=auto";
   weatherInfo!: WeatherInfos;
   dayOfWeekPipe: DayOfWeekPipe = new DayOfWeekPipe();
-  weatherIcon: WeatherIconPipe = new WeatherIconPipe();
+  weatherImage: WeatherImagePipe = new WeatherImagePipe();
 
   constructor(
     private http: HttpClient
@@ -28,16 +28,16 @@ export class WeatherComponent implements OnInit {
   getWeatherInfos() {
     this.http.get<WeatherInfos>(this.weatherApiUrl).subscribe((response: WeatherInfos) => {
       this.weatherInfo = response;
-      const transformedTime = [];
-      const transformedIcons = [];
+      const transformedTime: string[] = [];
+      const transformedImage: string[] = [];
   
       for (let index = 0; index < 4; index++) {
         transformedTime.push(this.dayOfWeekPipe.transform(response.daily.time[index]));
-        transformedIcons.push(this.weatherIcon.transform(response.daily.weathercode[index]));   
+        transformedImage.push(this.weatherImage.transform(response.daily.weathercode[index]));   
       }
   
       this.weatherInfo.daily.time = transformedTime;
-      this.weatherInfo.daily.icon = transformedIcons;
+      this.weatherInfo.daily.image = transformedImage;
     });
   }
 }

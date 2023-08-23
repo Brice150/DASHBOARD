@@ -3,7 +3,7 @@ export interface WeatherInfos {
 }
 
 export interface Daily {
-    icon: string[];
+    image: string[];
     weathercode: number[];
     precipitation_sum: number[];
     temperature_2m_max: number[];

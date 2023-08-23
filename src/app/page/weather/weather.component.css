@@ -9,7 +9,7 @@
     border-radius: var(--strong-radius);
     width: 100%;
     max-width: 540px;
-    height: 300px;
+    min-height: 400px;
 }
 
 .card .title {
@@ -25,7 +25,6 @@
 }
 
 .card .content {
-    margin-top: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -34,22 +33,55 @@
 
 .content .forecast {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     flex-wrap: wrap;
     width: 100%;
 }
 
 .content .forecast .day {
+    position: relative;
     display: flex;
     justify-content: space-around;
     align-items: center;
     flex-direction: column;
     border-radius: var(--light-radius);
     box-shadow: var(--box-shadow);
-    padding: 5px;
     width: 180px;
-    margin: 5px 0;
+    margin: 10px;
+    background-size: cover;
+    overflow: hidden;
+    padding-bottom: 10px;
+    cursor: pointer;
+    transition: ease 0.5s;
+}
+
+.content .forecast .day:hover {
+    transform: scale(1.1);
+}
+
+.content .forecast .day .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 1;
+}
+
+.day .day-value {
+    position: relative;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    background-color: var(--color-text-secondary);
+    width: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    padding: 2px 0;
+    border-radius: var(--light-radius);
 }
 
 .content .forecast .temperature-gap {
@@ -59,9 +91,11 @@
 }
 
 .content span {
-    color: var(--color-text-secondary);
+    position: relative;
+    color: white;
     font-size: 17px;
     font-weight: 600;
+    z-index: 2;
 }
 
 .content .subtitle {
@@ -69,8 +103,23 @@
     color: var(--color-text-primary);
 }
 
-@media screen and (max-width: 800px) {
+.content .forecast .day:nth-child(1) .day-value {
+    background-color: var(--color-text-primary);
+    
+}
+
+.content .forecast .day:nth-child(1) .day-value .subtitle{
+    color: var(--color-text-secondary);
+}
+
+@media screen and (max-width: 885px) {
     .card {
         max-width: none;
+    }
+}
+
+@media screen and (max-width: 443px) {
+    .forecast {
+        margin-top: 40px;
     }
 }

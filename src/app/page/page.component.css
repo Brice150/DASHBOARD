@@ -59,17 +59,15 @@
     margin: 10px;
     width: 100%;
     max-width: 540px;
-    height: 300px;
 }
 
 .center app-tasks {
     margin: 10px;
     width: 100%;
     max-width: 1100px;
-    min-height: 200px;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 885px) {
     .flex {
         flex-wrap: wrap;
     }

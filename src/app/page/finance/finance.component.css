@@ -9,7 +9,7 @@
     border-radius: var(--strong-radius);
     width: 100%;
     max-width: 540px;
-    height: 300px;
+    min-height: 400px;
 }
 
 .card .title {
@@ -37,7 +37,7 @@
     font-weight: 600;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 885px) {
     .card {
         max-width: none;
     }
