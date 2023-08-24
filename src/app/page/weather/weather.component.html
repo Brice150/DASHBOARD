@@ -5,7 +5,10 @@
     </div>
     <div class="content" *ngIf="weatherInfo">
         <div class="forecast">
-            <div class="day" *ngFor="let useless of ' '.repeat(4).split(''); let index = index" [ngStyle]="{'background-image': weatherInfo.daily.image[index]}">
+            <div class="day" *ngFor="let useless of ' '.repeat(4).split(''); let index = index" 
+            [ngStyle]="{'background-image': weatherInfo.daily.image[index]}"
+            (click)="openWeatherDialog(index)"
+            >
                 <div class="overlay"></div>
                 <div class="day-value">
                     <span class="subtitle">{{weatherInfo.daily.time[index]}}</span>

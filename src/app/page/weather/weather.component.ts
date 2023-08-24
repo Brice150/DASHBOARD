@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { WeatherInfos } from 'src/app/core/interface/weatherInfos';
+import { WeatherDialogComponent } from 'src/app/shared/components/weather-dialog/weather-dialog.component';
 import { DayOfWeekPipe } from 'src/app/shared/pipes/dayOfWeek.pipe';
 import { WeatherImagePipe } from 'src/app/shared/pipes/weatherImage.pipe';
 
@@ -15,10 +17,11 @@ export class WeatherComponent implements OnInit {
   "&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_sum,windspeed_10m_max&current_weather=true&timezone=auto";
   weatherInfo!: WeatherInfos;
   dayOfWeekPipe: DayOfWeekPipe = new DayOfWeekPipe();
-  weatherImage: WeatherImagePipe = new WeatherImagePipe();
+  weatherImagePipe: WeatherImagePipe = new WeatherImagePipe();
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    public dialog: MatDialog
     ) {}
 
   ngOnInit() {
@@ -33,11 +36,22 @@ export class WeatherComponent implements OnInit {
   
       for (let index = 0; index < 4; index++) {
         transformedTime.push(this.dayOfWeekPipe.transform(response.daily.time[index]));
-        transformedImage.push(this.weatherImage.transform(response.daily.weathercode[index]));   
+        transformedImage.push(this.weatherImagePipe.transform(response.daily.weathercode[index]));
       }
   
       this.weatherInfo.daily.time = transformedTime;
       this.weatherInfo.daily.image = transformedImage;
+    });
+  }
+
+  openWeatherDialog(index: number) {
+    const dialogData = {
+      weatherInfo: this.weatherInfo,
+      index: index
+    };
+
+    this.dialog.open(WeatherDialogComponent, {
+      data: dialogData
     });
   }
 }
