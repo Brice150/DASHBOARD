@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { TasksDialogComponent } from 'src/app/shared/components/dialogs/tasks-dialog/tasks-dialog.component';
 
 @Component({
   selector: 'app-tasks',
@@ -6,5 +8,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./tasks.component.css']
 })
 export class TasksComponent {
-  
+  constructor(
+    public dialog: MatDialog
+  ) {}
+
+  openTasksDialog() {
+    this.dialog.open(TasksDialogComponent);
+  }
 }
