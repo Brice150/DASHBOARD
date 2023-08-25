@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { WeatherInfos } from 'src/app/core/interface/weatherInfos';
-import { WeatherDialogComponent } from 'src/app/shared/components/weather-dialog/weather-dialog.component';
+import { CityDialogComponent } from 'src/app/shared/components/dialogs/city-dialog/city-dialog.component';
+import { WeatherDialogComponent } from 'src/app/shared/components/dialogs/weather-dialog/weather-dialog.component';
 import { DayOfWeekPipe } from 'src/app/shared/pipes/dayOfWeek.pipe';
 import { WeatherImagePipe } from 'src/app/shared/pipes/weatherImage.pipe';
 
@@ -53,5 +54,9 @@ export class WeatherComponent implements OnInit {
     this.dialog.open(WeatherDialogComponent, {
       data: dialogData
     });
+  }
+
+  openCityDialog() {
+    this.dialog.open(CityDialogComponent);
   }
 }

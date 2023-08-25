@@ -3,6 +3,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     background-color: var(--color-background);
     color: var(--color-text-primary);
     box-shadow: var(--box-shadow);
@@ -37,6 +38,7 @@
     align-items: center;
     flex-wrap: wrap;
     width: 100%;
+    margin-top: 10px;
 }
 
 .content .forecast .day {
@@ -112,6 +114,33 @@
     color: var(--color-text-secondary);
 }
 
+.buttons {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.buttons .button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 12px;
+    background-color: var(--color-text-primary);
+    border-radius: 10px;
+    transition: 0.5s ease;
+    color: var(--color-text-secondary);
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.buttons .button:hover {
+    transform: scale(1.1);
+}
+
 @media screen and (max-width: 885px) {
     .card {
         max-width: none;
@@ -119,7 +148,11 @@
 }
 
 @media screen and (max-width: 443px) {
-    .forecast {
+    .content .forecast {
         margin-top: 40px;
+    }
+
+    .buttons {
+        margin-bottom: 20px;
     }
 }
