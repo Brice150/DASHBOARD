@@ -35,7 +35,7 @@
 
 .content span {
     position: relative;
-    color: white;
+    color: var(--color-text-secondary);
     font-size: 17px;
     font-weight: 600;
     z-index: 2;

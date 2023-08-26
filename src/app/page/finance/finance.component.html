@@ -1,10 +1,23 @@
 <div class="card">
     <div class="title">
-        <span>Finance</span>
+        <span>{{financeInfos.ETF}}</span>
     </div>
     <div class="content">
         <div class="forecast">
-            <span>Become rich</span>
+            <div class="amount" *ngFor="let useless of ' '.repeat(4).split(''); let index = index"
+            [ngStyle]="{'background-image': 'url(' + imagePath + 'finance/gold.png)' }"
+            (click)="openFinanceDialog(index)"
+            >
+                <div class="header">
+                    <img class="mastercard" [src]="imagePath + 'finance/mastercard.png'">
+                    <span class="subtitle">{{financeInfos.date[index]}}</span>
+                    <img class="ship" [src]="imagePath + 'finance/ship.png'">
+                </div>
+                <div class="total">
+                    <span>{{financeInfos.totalAmount[index] | currency:'EUR':'':'1.0-0'}} €</span>
+                    <span *ngIf="index === 0">+ {{financeInfos.moneyInput.amountPerMonth | currency:'EUR':'':'1.0-0'}} € / Month</span>
+                </div>
+            </div>
         </div>
     </div>
     <div class="buttons">

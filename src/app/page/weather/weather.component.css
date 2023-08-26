@@ -106,8 +106,7 @@
 }
 
 .content .forecast .day:nth-child(1) .day-value {
-    background-color: var(--color-text-primary);
-    
+    background-color: var(--color-text-primary);  
 }
 
 .content .forecast .day:nth-child(1) .day-value .subtitle{

@@ -41,12 +41,58 @@
     margin-top: 10px;
 }
 
+.content .forecast .amount {
+    border-radius: var(--light-radius);
+    box-shadow: var(--box-shadow);
+    width: 180px;
+    height: 110px;
+    margin: 10px;
+    background-size: cover;
+    overflow: hidden;
+    cursor: pointer;
+    transition: ease 0.5s;
+    z-index: 2;
+}
+
+.content .forecast .amount:hover {
+    transform: scale(1.1);
+}
+
+.amount .header {
+    margin-top: 5px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.header .subtitle {
+    font-size: 18px;
+    text-transform: uppercase;
+}
+
+.header .mastercard {
+    width: 30px;
+    height: auto;
+}
+
+.header .ship {
+    width: 35px;
+    height: auto;
+}
+
+.total {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    height: 75px;
+}
+
 .content span {
-    position: relative;
-    color: white;
+    color: black;
     font-size: 17px;
     font-weight: 600;
-    z-index: 2;
 }
 
 .buttons {
