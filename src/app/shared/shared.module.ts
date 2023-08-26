@@ -5,11 +5,12 @@ import { RouterModule } from "@angular/router";
 import { DayOfWeekPipe } from "./pipes/dayOfWeek.pipe";
 import { WeatherImagePipe } from "./pipes/weatherImage.pipe";
 import { MatDialogModule } from "@angular/material/dialog";
-import { CityDialogComponent } from "./components/dialogs/city-dialog/city-dialog.component";
-import { WeatherDialogComponent } from "./components/dialogs/weather-dialog/weather-dialog.component";
-import { StrategyDialogComponent } from "./components/dialogs/strategy-dialog/strategy-dialog.component";
-import { TasksDialogComponent } from "./components/dialogs/tasks-dialog/tasks-dialog.component";
-import { FinanceDialogComponent } from "./components/dialogs/finance-dialog/finance-dialog.component";
+import { CityDialogComponent } from "./components/dialogs/city/city-dialog.component";
+import { WeatherDialogComponent } from "./components/dialogs/weather/weather-dialog.component";
+import { StrategyDialogComponent } from "./components/dialogs/strategy/strategy-dialog.component";
+import { TasksDialogComponent } from "./components/dialogs/tasks/tasks-dialog.component";
+import { FinanceDialogComponent } from "./components/dialogs/finance/finance-dialog.component";
+import { ConfirmationDialogComponent } from "./components/dialogs/confirmation/confirmation-dialog.component";
 
 @NgModule({
     declarations: [
@@ -19,7 +20,8 @@ import { FinanceDialogComponent } from "./components/dialogs/finance-dialog/fina
         CityDialogComponent,
         StrategyDialogComponent,
         TasksDialogComponent,
-        FinanceDialogComponent
+        FinanceDialogComponent,
+        ConfirmationDialogComponent
     ],
     imports: [
         CommonModule,
@@ -34,7 +36,8 @@ import { FinanceDialogComponent } from "./components/dialogs/finance-dialog/fina
         CityDialogComponent,
         StrategyDialogComponent,
         TasksDialogComponent,
-        FinanceDialogComponent
+        FinanceDialogComponent,
+        ConfirmationDialogComponent
     ]
 })
 export class SharedModule {}

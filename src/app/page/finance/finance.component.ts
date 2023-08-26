@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { FinanceInfos, MoneyInput } from 'src/app/core/interface/financeInfos';
-import { FinanceDialogComponent } from 'src/app/shared/components/dialogs/finance-dialog/finance-dialog.component';
-import { StrategyDialogComponent } from 'src/app/shared/components/dialogs/strategy-dialog/strategy-dialog.component';
+import { FinanceDialogComponent } from 'src/app/shared/components/dialogs/finance/finance-dialog.component';
+import { StrategyDialogComponent } from 'src/app/shared/components/dialogs/strategy/strategy-dialog.component';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -16,15 +16,17 @@ export class FinanceComponent implements OnInit {
   financeInfos!: FinanceInfos;
 
   constructor(
-    private http: HttpClient,
     public dialog: MatDialog
   ) {}
 
   ngOnInit() {
-    const moneyInput: MoneyInput = {'amountPerMonth': 100, 'initialAmount': 1000};
+    const moneyInput: MoneyInput = {
+      'amountPerMonth': 100, 
+      'initialAmount': 1000,
+      'percentage': 1.08
+    };
 
     this.financeInfos = {
-      'ETF': 'S&P500',
       'date': ['Today', '1 Year', '10 Year', '25 Years'],
       'totalAmount': [moneyInput.initialAmount],
       'moneyInput': moneyInput
@@ -34,14 +36,13 @@ export class FinanceComponent implements OnInit {
   }
 
   calculateAmounts() {
-    const percentage: number = 1.08;
     for (let index = 1; index < 4; index++) {
       let totalAmount = this.financeInfos.totalAmount[index - 1];
       const startYear = this.getNumberOfYears(index - 1) + 1;
 
       for (let year = startYear; year <= this.getNumberOfYears(index); year++) {
         totalAmount += this.financeInfos.moneyInput.amountPerMonth * 12;
-        totalAmount *= percentage;
+        totalAmount *= this.financeInfos.moneyInput.percentage;
       }
 
       this.financeInfos.totalAmount[index] = totalAmount;
@@ -73,6 +74,16 @@ export class FinanceComponent implements OnInit {
   }
   
   openStrategyDialog() {
-    this.dialog.open(StrategyDialogComponent);
+    const dialogRef = this.dialog.open(StrategyDialogComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.changeStrategy();
+      }
+    });
+  }
+
+  changeStrategy() {
+    //TODO
   }
 }

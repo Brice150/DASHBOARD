@@ -23,7 +23,7 @@ export class FinanceDialogComponent implements OnInit{
     this.index = this.data.index;
   }
 
-  cancel(): void {
+  close() {
     this.dialogRef.close(false);
   }
 }

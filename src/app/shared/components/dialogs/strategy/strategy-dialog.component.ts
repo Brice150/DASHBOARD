@@ -12,7 +12,11 @@ export class StrategyDialogComponent{
     public dialogRef: MatDialogRef<StrategyDialogComponent>
     ) {}
 
-  cancel(): void {
+  close() {
     this.dialogRef.close(false);
+  }
+
+  validate() {
+    this.dialogRef.close(true);
   }
 }

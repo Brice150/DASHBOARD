@@ -12,7 +12,11 @@ export class CityDialogComponent{
     public dialogRef: MatDialogRef<CityDialogComponent>
     ) {}
 
-  cancel(): void {
+  close() {
     this.dialogRef.close(false);
+  }
+
+  validate() {
+    this.dialogRef.close(true);
   }
 }

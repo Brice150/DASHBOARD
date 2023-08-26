@@ -24,7 +24,6 @@ export class PageComponent implements OnInit{
   generateDefaultUser() {
     this.user = {
       prefersDarkMode: false,
-      ETF: 'S&P500',
       city: 'Paris'
     };
   }

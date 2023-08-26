@@ -1,12 +1,13 @@
 <div class="card">
     <div class="title">
-        <span>{{financeInfos.ETF}}</span>
+        <span>Finance</span>
     </div>
     <div class="content">
         <div class="forecast">
             <div class="amount" *ngFor="let useless of ' '.repeat(4).split(''); let index = index"
             [ngStyle]="{'background-image': 'url(' + imagePath + 'finance/gold.png)' }"
             (click)="openFinanceDialog(index)"
+            title="More Info"
             >
                 <div class="header">
                     <img class="mastercard" [src]="imagePath + 'finance/mastercard.png'">
@@ -21,6 +22,6 @@
         </div>
     </div>
     <div class="buttons">
-        <a class="button" (click)="openStrategyDialog()">Change Strategy</a>
+        <a class="button" (click)="openStrategyDialog()" title="Change Strategy">Change Strategy</a>
     </div>
 </div>

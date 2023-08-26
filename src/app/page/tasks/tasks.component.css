@@ -31,6 +31,36 @@
     align-items: center;
     flex-direction: column;
     width: 100%;
+    margin-top: 40px;
+}
+
+.content .forecast {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+}
+
+.content .forecast .task {
+    border-radius: var(--light-radius);
+    box-shadow: var(--box-shadow);
+    width: 80%;
+    margin: 10px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.task .info {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-bottom: 20px;
 }
 
 .content span {
@@ -41,15 +71,49 @@
     z-index: 2;
 }
 
+.content .task-title, .task-date {
+    width: 30%;
+    min-width: 100px;
+    text-align: center;
+    margin: 5px 0;
+}
+
+.content .task-description {
+    width: 30%;
+    min-width: 220px;
+    text-align: center;
+    margin: 5px 0;
+}
+
+.content .task-date {
+    width: 30%;
+    min-width: 100px;
+    text-align: center;
+    margin: 5px 0;
+}
+
 .buttons {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-top: 20px;
+    margin-bottom: 30px;
 }
 
-.buttons .button {
+.task-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.task-buttons a {
+    margin-bottom: 20px;
+}
+
+a {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -64,6 +128,14 @@
     font-weight: 600;
 }
 
-.buttons .button:hover {
+.modify {
+    background-color: green;
+}
+
+.delete {
+    background-color: red;
+}
+
+a:hover {
     transform: scale(1.1);
 }

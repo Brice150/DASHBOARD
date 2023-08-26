@@ -28,7 +28,7 @@ h1 {
     justify-content: center;
 }
 
-.buttons .cancel {
+.buttons a {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -43,6 +43,6 @@ h1 {
     font-weight: 600;
 }
 
-.buttons .cancel:hover {
+.buttons a:hover {
     transform: scale(1.1);
 }

@@ -25,10 +25,10 @@ h1 {
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
 }
 
-.buttons .cancel {
+.buttons a {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -43,6 +43,10 @@ h1 {
     font-weight: 600;
 }
 
-.buttons .cancel:hover {
+.buttons .validate {
+    background-color: green;
+}
+
+.buttons a:hover {
     transform: scale(1.1);
 }

@@ -1,8 +1,9 @@
-import { TaskList } from "./task";
+import { FinanceInfos } from "./financeInfos";
+import { Task } from "./task";
 
 export interface User {
     prefersDarkMode: boolean;
-    ETF: string;
+    finance?: FinanceInfos;
     city: string;
-    taskList?: TaskList;
+    tasks?: Task;
 }
