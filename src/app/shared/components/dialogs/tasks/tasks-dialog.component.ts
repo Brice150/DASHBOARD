@@ -20,7 +20,8 @@ export class TasksDialogComponent implements OnInit {
 
   ngOnInit() {
     this.user = this.data.user;
-    if (this.data.index) {
+    
+    if (this.data.index || this.data.index === 0) {      
       this.index = this.data.index;
       this.task = this.user.tasks[this.index];
     }
