@@ -3,7 +3,7 @@ import { Task } from "./task";
 
 export interface User {
     prefersDarkMode: boolean;
-    finance?: FinanceInfos;
+    financeInfos: FinanceInfos;
     city: string;
-    tasks?: Task;
+    tasks: Task[];
 }

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { User } from 'src/app/core/interface/user';
 import { WeatherInfos } from 'src/app/core/interface/weatherInfos';
 import { CityDialogComponent } from 'src/app/shared/components/dialogs/city/city-dialog.component';
 import { WeatherDialogComponent } from 'src/app/shared/components/dialogs/weather/weather-dialog.component';
@@ -13,6 +14,8 @@ import { WeatherImagePipe } from 'src/app/shared/pipes/weatherImage.pipe';
   styleUrls: ['./weather.component.css']
 })
 export class WeatherComponent implements OnInit {
+  @Input() user!: User;
+  @Output() refreshEvent: EventEmitter<void> = new EventEmitter<void>();
   weatherApiUrl: string = "https://api.open-meteo.com/v1/meteofrance" +
   "?latitude=48.112&longitude=-1.6743" +
   "&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_sum,windspeed_10m_max&current_weather=true&timezone=auto";
@@ -57,16 +60,22 @@ export class WeatherComponent implements OnInit {
   }
 
   openCityDialog() {
-    const dialogRef = this.dialog.open(CityDialogComponent);
+    const dialogData = {
+      user: this.user
+    };
+
+    const dialogRef = this.dialog.open(CityDialogComponent, {
+      data: dialogData
+    });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.changeCity();
+        this.reload();
       }
     });
   }
 
-  changeCity() {
-    //TODO
+  reload() {
+    this.refreshEvent.emit();
   }
 }

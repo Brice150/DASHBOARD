@@ -1,7 +1,6 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { FinanceInfos, MoneyInput } from 'src/app/core/interface/financeInfos';
+import { User } from 'src/app/core/interface/user';
 import { FinanceDialogComponent } from 'src/app/shared/components/dialogs/finance/finance-dialog.component';
 import { StrategyDialogComponent } from 'src/app/shared/components/dialogs/strategy/strategy-dialog.component';
 import { environment } from 'src/environments/environment';
@@ -13,39 +12,28 @@ import { environment } from 'src/environments/environment';
 })
 export class FinanceComponent implements OnInit {
   imagePath: string = environment.imagePath;
-  financeInfos!: FinanceInfos;
+  @Input() user!: User;
+  @Output() refreshEvent: EventEmitter<void> = new EventEmitter<void>();
 
   constructor(
     public dialog: MatDialog
   ) {}
 
   ngOnInit() {
-    const moneyInput: MoneyInput = {
-      'amountPerMonth': 100, 
-      'initialAmount': 1000,
-      'percentage': 1.08
-    };
-
-    this.financeInfos = {
-      'date': ['Today', '1 Year', '10 Year', '25 Years'],
-      'totalAmount': [moneyInput.initialAmount],
-      'moneyInput': moneyInput
-    }
-
     this.calculateAmounts();
   }
 
   calculateAmounts() {
     for (let index = 1; index < 4; index++) {
-      let totalAmount = this.financeInfos.totalAmount[index - 1];
+      let totalAmount = this.user.financeInfos.totalAmount[index - 1];
       const startYear = this.getNumberOfYears(index - 1) + 1;
 
       for (let year = startYear; year <= this.getNumberOfYears(index); year++) {
-        totalAmount += this.financeInfos.moneyInput.amountPerMonth * 12;
-        totalAmount *= this.financeInfos.moneyInput.percentage;
+        totalAmount += this.user.financeInfos.moneyInput.amountPerMonth * 12;
+        totalAmount *= this.user.financeInfos.moneyInput.percentage;
       }
 
-      this.financeInfos.totalAmount[index] = totalAmount;
+      this.user.financeInfos.totalAmount[index] = totalAmount;
     }
   }
 
@@ -64,7 +52,7 @@ export class FinanceComponent implements OnInit {
 
   openFinanceDialog(index: number) {
     const dialogData = {
-      financeInfo: this.financeInfos,
+      financeInfo: this.user.financeInfos,
       index: index
     };
 
@@ -74,16 +62,22 @@ export class FinanceComponent implements OnInit {
   }
   
   openStrategyDialog() {
-    const dialogRef = this.dialog.open(StrategyDialogComponent);
+    const dialogData = {
+      user: this.user
+    };
+
+    const dialogRef = this.dialog.open(StrategyDialogComponent, {
+      data: dialogData
+    });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.changeStrategy();
+        this.reload();
       }
     });
   }
 
-  changeStrategy() {
-    //TODO
+  reload() {
+    this.refreshEvent.emit();
   }
 }

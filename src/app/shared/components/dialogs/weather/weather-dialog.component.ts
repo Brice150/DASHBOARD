@@ -7,14 +7,14 @@ import { WeatherInfos } from 'src/app/core/interface/weatherInfos';
   templateUrl: './weather-dialog.component.html',
   styleUrls: ['./weather-dialog.component.css']
 })
-export class WeatherDialogComponent implements OnInit{
+export class WeatherDialogComponent implements OnInit {
   weatherInfo!: WeatherInfos;
   index!: number;
 
   constructor(
     public dialogRef: MatDialogRef<WeatherDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
-    ) {}
+  ) {}
 
   ngOnInit() {
     this.weatherInfo = this.data.weatherInfo;

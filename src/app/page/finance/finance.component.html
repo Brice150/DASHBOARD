@@ -11,12 +11,12 @@
             >
                 <div class="header">
                     <img class="mastercard" [src]="imagePath + 'finance/mastercard.png'">
-                    <span class="subtitle">{{financeInfos.date[index]}}</span>
+                    <span class="subtitle">{{user.financeInfos.date[index]}}</span>
                     <img class="ship" [src]="imagePath + 'finance/ship.png'">
                 </div>
                 <div class="total">
-                    <span>{{financeInfos.totalAmount[index] | currency:'EUR':'':'1.0-0'}} €</span>
-                    <span *ngIf="index === 0">+ {{financeInfos.moneyInput.amountPerMonth | currency:'EUR':'':'1.0-0'}} € / Month</span>
+                    <span>{{user.financeInfos.totalAmount[index] | currency:'EUR':'':'1.0-0'}} €</span>
+                    <span *ngIf="index === 0">+ {{user.financeInfos.moneyInput.amountPerMonth | currency:'EUR':'':'1.0-0'}} € / Month</span>
                 </div>
             </div>
         </div>

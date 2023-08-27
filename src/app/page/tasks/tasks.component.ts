@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Task } from 'src/app/core/interface/task';
+import { User } from 'src/app/core/interface/user';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation/confirmation-dialog.component';
 import { TasksDialogComponent } from 'src/app/shared/components/dialogs/tasks/tasks-dialog.component';
 
@@ -9,27 +10,18 @@ import { TasksDialogComponent } from 'src/app/shared/components/dialogs/tasks/ta
   templateUrl: './tasks.component.html',
   styleUrls: ['./tasks.component.css']
 })
-export class TasksComponent implements OnInit{
-  tasks: Task[] = [];
+export class TasksComponent {
+  @Input() user!: User;
+  @Output() refreshEvent: EventEmitter<void> = new EventEmitter<void>();
 
   constructor(
     public dialog: MatDialog
   ) {}
 
-  ngOnInit() {
-    for (let index = 0; index < 4; index++) {
-      const task: Task = {
-        'title': 'title' + index,
-        'description': 'description' + index,
-        'date': new Date()
-      }
-      this.tasks.push(task);
-    }
-  }
-
-  openTasksDialog(task?: Task) {
+  openTasksDialog(index?: number) {
     const dialogData = {
-      task: task
+      user: this.user,
+      index: index
     };
 
     const dialogRef = this.dialog.open(TasksDialogComponent, {
@@ -38,26 +30,29 @@ export class TasksComponent implements OnInit{
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.addTask();
+        this.reload();
       }
     });
   }
 
-  addTask() {
-    //TODO
-  }
+  openConfirmationDialog(index: number) {
+    const dialogData = {
+      user: this.user,
+      index: index
+    };
 
-  openConfirmationDialog(task: Task) {
-    const dialogRef = this.dialog.open(ConfirmationDialogComponent);
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: dialogData
+    });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.deleteTask(task);
+        this.reload();
       }
     });
   }
 
-  deleteTask(task: Task) {
-    //TODO
+  reload() {
+    this.refreshEvent.emit();
   }
 }
