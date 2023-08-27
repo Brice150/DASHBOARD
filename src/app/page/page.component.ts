@@ -22,16 +22,6 @@ export class PageComponent implements OnInit{
   }
 
   generateDefaultUser() {
-    const tasks: Task[] = [];
-    for (let index = 0; index < 4; index++) {
-      const task: Task = {
-        'title': 'title' + index,
-        'description': 'description' + index,
-        'date': new Date()
-      }
-      tasks.push(task);
-    }
-
     const moneyInput: MoneyInput = {
       'amountPerMonth': 100, 
       'initialAmount': 1000,
@@ -48,7 +38,7 @@ export class PageComponent implements OnInit{
       prefersDarkMode: false,
       city: 'Paris',
       financeInfos: financeInfos,
-      tasks: tasks
+      tasks: []
     };
   }
 
