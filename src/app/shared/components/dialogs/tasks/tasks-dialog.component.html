@@ -1,6 +1,12 @@
 <div mat-dialog-content class="container">
-    <h1 *ngIf="task">{{task.title}}</h1>
-    <h1 *ngIf="!task">Add Task</h1>
+    <h1 *ngIf="modifyMode">Modify Task</h1>
+    <h1 *ngIf="!modifyMode">Add Task</h1>
+    <div class="task">   
+        <div class="info">
+            <textarea [(ngModel)]="title" [placeholder]="'Title'"></textarea>
+            <textarea [(ngModel)]="description" [placeholder]="'Description'"></textarea>
+        </div>
+    </div>
     <div class="buttons">
         <a class="close" title="Close" (click)="close()">
             <span>Close</span>

@@ -10,8 +10,9 @@ import { User } from 'src/app/core/interface/user';
 })
 export class TasksDialogComponent implements OnInit {
   user!: User;
-  index!: number;
-  task!: Task;
+  title!: string;
+  description!: string;
+  modifyMode: boolean = true;
 
   constructor(
     public dialogRef: MatDialogRef<TasksDialogComponent>,
@@ -19,11 +20,12 @@ export class TasksDialogComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.modifyMode = this.data.index || this.data.index === 0;
     this.user = this.data.user;
     
-    if (this.data.index || this.data.index === 0) {      
-      this.index = this.data.index;
-      this.task = this.user.tasks[this.index];
+    if (this.modifyMode) {      
+      this.title = this.user.tasks[this.data.index].title;
+      this.description = this.user.tasks[this.data.index].description;
     }
   }
 
@@ -32,6 +34,18 @@ export class TasksDialogComponent implements OnInit {
   }
 
   validate() {
+    if (this.modifyMode) {
+      this.user.tasks[this.data.index].title = this.title;
+      this.user.tasks[this.data.index].description = this.description;
+    } else {
+      const newTask: Task = {
+        title: this.title,
+        description: this.description,
+        date: new Date()
+      };
+      this.user.tasks.push(newTask);
+    }
+    
     localStorage.setItem('userDashboard', JSON.stringify(this.user));
     this.dialogRef.close(true);
   }

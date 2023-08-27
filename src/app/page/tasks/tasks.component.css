@@ -10,7 +10,6 @@
     border-radius: var(--strong-radius);
     width: 100%;
     max-width: 1100px;
-    min-height: 200px;
 }
 
 .card .title {
@@ -71,7 +70,7 @@
     z-index: 2;
 }
 
-.content .task-title, .task-date {
+.content .task-title {
     width: 30%;
     min-width: 100px;
     text-align: center;

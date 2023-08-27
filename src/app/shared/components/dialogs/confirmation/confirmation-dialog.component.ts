@@ -9,7 +9,6 @@ import { User } from 'src/app/core/interface/user';
 })
 export class ConfirmationDialogComponent implements OnInit {
   user!: User;
-  index!: number;
 
   constructor(
     public dialogRef: MatDialogRef<ConfirmationDialogComponent>,
@@ -18,7 +17,6 @@ export class ConfirmationDialogComponent implements OnInit {
 
   ngOnInit() {
     this.user = this.data.user;
-    this.index = this.data.index;
   }
 
   cancel() {
@@ -26,6 +24,7 @@ export class ConfirmationDialogComponent implements OnInit {
   }
 
   delete() {
+    this.user.tasks.splice(this.data.index, 1);
     localStorage.setItem('userDashboard', JSON.stringify(this.user));
     this.dialogRef.close(true);
   }
