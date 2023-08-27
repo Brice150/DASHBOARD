@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../core/interface/user';
 import { FinanceInfos, MoneyInput } from '../core/interface/financeInfos';
-import { Task } from '../core/interface/task';
 @Component({
   selector: 'app-root',
   templateUrl: './page.component.html',
@@ -9,6 +8,8 @@ import { Task } from '../core/interface/task';
 })
 export class PageComponent implements OnInit{
   user: User = {} as User;
+
+  constructor() {}
 
   ngOnInit() {
     let storedUser: string | null = localStorage.getItem('userDashboard');
@@ -25,7 +26,7 @@ export class PageComponent implements OnInit{
     const moneyInput: MoneyInput = {
       'amountPerMonth': 100, 
       'initialAmount': 1000,
-      'percentage': 1.08
+      'percentage': 8
     };
 
     const financeInfos: FinanceInfos = {
@@ -56,5 +57,9 @@ export class PageComponent implements OnInit{
     document.body.classList.toggle('dark-theme-variables');
     this.user.prefersDarkMode = document.body.classList.contains('dark-theme-variables');
     localStorage.setItem('userDashboard', JSON.stringify(this.user));
+  }
+
+  reload() {
+    this.ngOnInit();
   }
 }

@@ -5,6 +5,7 @@ import { appRouter } from './app.router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PageModule } from './page/page.module';
 import { HttpClientModule } from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { HttpClientModule } from '@angular/common/http';
     appRouter,
     BrowserAnimationsModule,
     PageModule,
-    HttpClientModule
+    HttpClientModule,
+    ToastrModule.forRoot()
   ],
   bootstrap: [AppComponent]
 })

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { ToastrService } from 'ngx-toastr';
 import { User } from 'src/app/core/interface/user';
 import { WeatherInfos } from 'src/app/core/interface/weatherInfos';
 import { CityDialogComponent } from 'src/app/shared/components/dialogs/city/city-dialog.component';
@@ -13,7 +14,7 @@ import { WeatherImagePipe } from 'src/app/shared/pipes/weatherImage.pipe';
   templateUrl: './weather.component.html',
   styleUrls: ['./weather.component.css']
 })
-export class WeatherComponent implements OnInit {
+export class WeatherComponent implements OnInit, OnChanges {
   @Input() user!: User;
   @Output() refreshEvent: EventEmitter<void> = new EventEmitter<void>();
   weatherApiUrl: string = "https://api.open-meteo.com/v1/meteofrance" +
@@ -25,11 +26,16 @@ export class WeatherComponent implements OnInit {
 
   constructor(
     private http: HttpClient,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private toastr: ToastrService
     ) {}
 
   ngOnInit() {
     this.getWeatherInfos();
+  }
+
+  ngOnChanges() {
+    this.ngOnInit();
   }
 
   getWeatherInfos() {
@@ -71,6 +77,9 @@ export class WeatherComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.reload();
+        this.toastr.success('City updated', 'Weather', {
+          positionClass: 'toast-top-center' 
+        });
       }
     });
   }

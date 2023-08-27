@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { ToastrService } from 'ngx-toastr';
 import { Task } from 'src/app/core/interface/task';
 import { User } from 'src/app/core/interface/user';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation/confirmation-dialog.component';
@@ -15,7 +16,8 @@ export class TasksComponent {
   @Output() refreshEvent: EventEmitter<void> = new EventEmitter<void>();
 
   constructor(
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private toastr: ToastrService
   ) {}
 
   openTasksDialog(index?: number) {
@@ -31,6 +33,9 @@ export class TasksComponent {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.reload();
+        this.toastr.success('Task added/updated', 'Task', {
+          positionClass: 'toast-top-center' 
+        });
       }
     });
   }
@@ -48,6 +53,9 @@ export class TasksComponent {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.reload();
+        this.toastr.success('Task deleted', 'Task', {
+          positionClass: 'toast-top-center' 
+        });
       }
     });
   }

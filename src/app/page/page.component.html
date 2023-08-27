@@ -10,11 +10,11 @@
     </div>
     <div class="cards-container">
         <div class="flex">
-            <app-weather [user]="user" (refreshEvent)="ngOnInit()"></app-weather>
-            <app-finance [user]="user" (refreshEvent)="ngOnInit()"></app-finance>
+            <app-weather [user]="user" (refreshEvent)="reload()"></app-weather>
+            <app-finance [user]="user" (refreshEvent)="reload()"></app-finance>
         </div>
         <div class="center">
-            <app-tasks [user]="user" (refreshEvent)="ngOnInit()"></app-tasks>
+            <app-tasks [user]="user" (refreshEvent)="reload()"></app-tasks>
         </div>
     </div>
 </div>

@@ -41,15 +41,29 @@ h1 {
     align-items: center;
     flex-wrap: wrap;
     width: 100%;
-    margin-bottom: 20px;
 }
 
-.info textarea {
+.info .value-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 5px 0;
+}
+
+.value-container label {
+    color: var(--color-text-secondary);
+    text-align: center;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.value-container textarea {
     background-color: var(--color-background);
     color: var(--color-text-secondary);
     border: none;
     resize: none;
-    text-align: justify;
+    text-align: center;
     font-size: 17px;
     font-weight: 600;
     font-family: Roboto, "Helvetica Neue", sans-serif;
