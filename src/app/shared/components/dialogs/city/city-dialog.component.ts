@@ -1,7 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
+import { CityGeolocation } from 'src/app/core/interface/cityGeolocation';
 import { User } from 'src/app/core/interface/user';
+import { citiesGeolocation } from 'src/app/shared/data/citiesGeolocation';
 
 @Component({
   selector: 'app-city-dialog',
@@ -28,12 +30,12 @@ export class CityDialogComponent implements OnInit {
   }
 
   validate() {
-    if (this.city) {
-      this.user.city = this.city;
+    if (this.city && citiesGeolocation.some((cityGeolocation) => cityGeolocation.city.toLowerCase().trim() === this.city.toLowerCase().trim())) {
+      this.user.city = this.city.toLowerCase().trim();
       localStorage.setItem('userDashboard', JSON.stringify(this.user));
       this.dialogRef.close(true);
     } else {
-      this.toastr.error('City is empty', 'Weather', {
+      this.toastr.error('City is invalid', 'Weather', {
         positionClass: 'toast-top-center' 
       });
     }

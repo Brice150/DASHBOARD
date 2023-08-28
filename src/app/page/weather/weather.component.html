@@ -14,9 +14,9 @@
                     <span class="subtitle">{{weatherInfo.daily.time[index]}}</span>
                 </div>
                 <div class="temperature-gap">
-                    <span>{{weatherInfo.daily.temperature_2m_min[index]}} °C</span>
+                    <span>{{weatherInfo.daily.temperature_2m_min[index] | number:'1.0-0'}}°C</span>
                     <span>-</span>
-                    <span>{{weatherInfo.daily.temperature_2m_max[index]}} °C</span>
+                    <span>{{weatherInfo.daily.temperature_2m_max[index] | number:'1.0-0'}}°C</span>
                 </div>
                 <div class="precipitation">
                     <span>{{weatherInfo.daily.precipitation_sum[index]}} mm</span>

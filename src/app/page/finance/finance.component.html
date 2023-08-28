@@ -17,6 +17,7 @@
                 <div class="total">
                     <span>{{user.financeInfos.totalAmount[index] | currency:'EUR':'':'1.0-0'}} €</span>
                     <span *ngIf="index === 0">+ {{user.financeInfos.moneyInput.amountPerMonth | currency:'EUR':'':'1.0-0'}} € / Month</span>
+                    <span *ngIf="index !== 0">+ {{user.financeInfos.moneyInput.percentage | number:'1.0-0'}}% / Year</span>
                 </div>
             </div>
         </div>

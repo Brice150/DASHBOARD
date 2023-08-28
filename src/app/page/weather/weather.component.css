@@ -88,8 +88,9 @@
 
 .content .forecast .temperature-gap {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
+    width: 60%;
 }
 
 .content span {
