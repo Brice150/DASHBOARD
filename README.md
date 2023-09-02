@@ -19,12 +19,12 @@ Frontend : Angular
 
   ### Finance
   - See finance forecast for 25 years
-  - View your invested money vs interests in a graph
+  - View your invested money vs interests
   - Change saving strategy
 
   ### Tasks List
   - See your tasks
-  - add, update or delete a task 
+  - Add, update or delete a task 
 
 </details>
 
