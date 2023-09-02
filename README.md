@@ -9,9 +9,6 @@ Frontend : Angular
 <details>
   <summary>Pages Features</summary>
 
-  ### Dark Mode
-  - Select light or dark mode
-
   ### Weather
   - See weather forecast for 4 days
   - View weather stats hourly for a selected day
@@ -25,6 +22,9 @@ Frontend : Angular
   ### Tasks List
   - See your tasks
   - Add, update or delete a task 
+
+  ### Dark/Light Mode
+  - Select dark/light mode
 
 </details>
 
