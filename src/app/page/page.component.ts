@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../core/interface/user';
-import { FinanceInfos, MoneyInput } from '../core/interface/financeInfos';
+import { FinanceInfos, MoneyInput, Yearly } from '../core/interface/financeInfos';
 @Component({
   selector: 'app-root',
   templateUrl: './page.component.html',
@@ -24,15 +24,25 @@ export class PageComponent implements OnInit{
 
   generateDefaultUser() {
     const moneyInput: MoneyInput = {
-      'amountPerMonth': 100, 
-      'initialAmount': 1000,
-      'percentage': 8
+      amountPerMonth: 100, 
+      initialAmount: 1000,
+      percentage: 8
     };
 
+    const yearly: Yearly = {
+      date: [
+        '0', '1', '2', '3', '4', '5', '6', '7', '8', 
+        '9', '10', '11', '12', '13', '14', '15', '16', '17', 
+        '18', '19', '20', '21', '22', '23', '24', '25'
+      ],
+      invested: [moneyInput.initialAmount],
+      interests: [0],
+      total: [moneyInput.initialAmount]
+    }
+
     const financeInfos: FinanceInfos = {
-      date: ['Today', '1 Year', '10 Year', '25 Years'],
-      totalAmount: [moneyInput.initialAmount],
-      moneyInput: moneyInput
+      moneyInput: moneyInput,
+      yearly: yearly
     };
 
     this.user = {

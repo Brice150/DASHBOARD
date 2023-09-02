@@ -1,5 +1,5 @@
 <div mat-dialog-content class="container">
-    <h1>{{weatherInfo.daily.time[index]}}</h1>
+    <h1>{{weatherInfo.daily.time[index] | dayOfWeek}}</h1>
     <div class="weather">   
         <div class="info">
             <canvas id="weatherGraph"></canvas>

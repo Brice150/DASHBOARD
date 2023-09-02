@@ -11,11 +11,13 @@ import { StrategyDialogComponent } from "./components/dialogs/strategy/strategy-
 import { TasksDialogComponent } from "./components/dialogs/tasks/tasks-dialog.component";
 import { FinanceDialogComponent } from "./components/dialogs/finance/finance-dialog.component";
 import { ConfirmationDialogComponent } from "./components/dialogs/confirmation/confirmation-dialog.component";
+import { YearPipe } from "./pipes/year.pipe";
 
 @NgModule({
     declarations: [
         DayOfWeekPipe,
         WeatherImagePipe,
+        YearPipe,
         WeatherDialogComponent,
         CityDialogComponent,
         StrategyDialogComponent,
@@ -32,6 +34,7 @@ import { ConfirmationDialogComponent } from "./components/dialogs/confirmation/c
     exports: [
         DayOfWeekPipe,
         WeatherImagePipe, 
+        YearPipe,
         WeatherDialogComponent,
         CityDialogComponent,
         StrategyDialogComponent,

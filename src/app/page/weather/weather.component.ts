@@ -23,7 +23,9 @@ export class WeatherComponent implements OnInit, OnChanges {
   latitudeApiParams: string = "?latitude=";
   longitudeApiParams: string = "&longitude=";
   cityGeolocationApiParams!: string;
-  otherApiParams: string = "&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_sum,windspeed_10m_max&current_weather=true&timezone=auto";
+  otherApiParams: string = "&hourly=temperature_2m,precipitation,windspeed_10m" +
+  "&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_sum,windspeed_10m_max" +
+  "&current_weather=true&timezone=auto";
   weatherInfo!: WeatherInfos;
   dayOfWeekPipe: DayOfWeekPipe = new DayOfWeekPipe();
   weatherImagePipe: WeatherImagePipe = new WeatherImagePipe();
@@ -54,17 +56,13 @@ export class WeatherComponent implements OnInit, OnChanges {
       this.cityGeolocationApiParams = "?latitude=48.8567&longitude=2.3522";
     } 
     const api: string = this.weatherApiUrl + this.cityGeolocationApiParams + this.otherApiParams;
-    this.http.get<WeatherInfos>(api).subscribe((response: WeatherInfos) => {
+    this.http.get<WeatherInfos>(api).subscribe((response: WeatherInfos) => {     
       this.weatherInfo = response;
-      const transformedTime: string[] = [];
       const transformedImage: string[] = [];
     
       for (let index = 0; index < 4; index++) {
-        transformedTime.push(this.dayOfWeekPipe.transform(response.daily.time[index]));
         transformedImage.push(this.weatherImagePipe.transform(response.daily.weathercode[index]));
       }
-    
-      this.weatherInfo.daily.time = transformedTime;
       this.weatherInfo.daily.image = transformedImage;
     });
   }

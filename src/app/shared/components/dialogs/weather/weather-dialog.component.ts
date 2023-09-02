@@ -1,7 +1,9 @@
+import { DatePipe } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Chart } from 'chart.js/auto';
-import { WeatherInfos } from 'src/app/core/interface/weatherInfos';
+import { Hourly, WeatherInfos } from 'src/app/core/interface/weatherInfos';
+import { DayOfWeekPipe } from 'src/app/shared/pipes/dayOfWeek.pipe';
 
 @Component({
   selector: 'app-weather-dialog',
@@ -11,6 +13,9 @@ import { WeatherInfos } from 'src/app/core/interface/weatherInfos';
 export class WeatherDialogComponent implements OnInit {
   weatherInfo!: WeatherInfos;
   index!: number;
+  dayWeatherInfo: Hourly = {} as Hourly;
+  dayOfWeekPipe: DayOfWeekPipe = new DayOfWeekPipe();
+  datePipe: DatePipe = new DatePipe("en-FR");
 
   constructor(
     public dialogRef: MatDialogRef<WeatherDialogComponent>,
@@ -20,25 +25,45 @@ export class WeatherDialogComponent implements OnInit {
   ngOnInit() {    
     this.weatherInfo = this.data.weatherInfo;
     this.index = this.data.index;
+    this.getDayWeatherInfo();
+    this.displayGraph();    
+  }
 
+  getDayWeatherInfo() {
+    this.dayWeatherInfo.time = [];
+    this.dayWeatherInfo.precipitation = [];
+    this.dayWeatherInfo.temperature_2m = [];
+    this.dayWeatherInfo.windspeed_10m = [];
+    for (let index = 0; index < this.weatherInfo.hourly.time.length ; index++) {  
+        if (this.dayOfWeekPipe.transform(this.weatherInfo.hourly.time[index]) === this.dayOfWeekPipe.transform(this.weatherInfo.daily.time[this.index])) {
+          const hour: string = this.datePipe.transform(new Date(this.weatherInfo.hourly.time[index]), "HH") + "h";
+          this.dayWeatherInfo.time.push(hour);
+          this.dayWeatherInfo.precipitation.push(this.weatherInfo.hourly.precipitation[index]);
+          this.dayWeatherInfo.temperature_2m.push(this.weatherInfo.hourly.temperature_2m[index]);
+          this.dayWeatherInfo.windspeed_10m.push(this.weatherInfo.hourly.windspeed_10m[index]);
+        } 
+    }
+  }
+
+  displayGraph() {
     const graph = document.getElementById('weatherGraph') as HTMLCanvasElement | null;
     if (graph) {
       const weatherGraph = new Chart(graph, {
         type: 'line',
         data: {
-          labels: ['11h', '12h', '13h'],
+          labels: this.dayWeatherInfo.time,
           datasets: [
             {
               label: 'Precipitation',
-              data: [1, 0, 0]
+              data: this.dayWeatherInfo.precipitation
             },
             {
               label: 'Temperature',
-              data: [12, 19, 3]
+              data: this.dayWeatherInfo.temperature_2m
             },
             {
               label: 'Windspeed',
-              data: [10, 15.5, 2]
+              data: this.dayWeatherInfo.windspeed_10m
             },
           ]
         }

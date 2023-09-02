@@ -11,7 +11,7 @@
             >
                 <div class="overlay"></div>
                 <div class="day-value">
-                    <span class="subtitle">{{weatherInfo.daily.time[index]}}</span>
+                    <span class="subtitle">{{weatherInfo.daily.time[index] | dayOfWeek}}</span>
                 </div>
                 <div class="temperature-gap">
                     <span>{{weatherInfo.daily.temperature_2m_min[index] | number:'1.0-0'}}°C</span>

@@ -10,7 +10,6 @@ import { FinanceInfos } from 'src/app/core/interface/financeInfos';
 })
 export class FinanceDialogComponent implements OnInit {
   financeInfo!: FinanceInfos;
-  index!: number;
 
   constructor(
     public dialogRef: MatDialogRef<FinanceDialogComponent>,
@@ -19,22 +18,24 @@ export class FinanceDialogComponent implements OnInit {
 
   ngOnInit() {
     this.financeInfo = this.data.financeInfo;
-    this.index = this.data.index;
+    this.displayGraph();
+  }
 
+  displayGraph() {
     const graph = document.getElementById('financeGraph') as HTMLCanvasElement | null;
     if (graph) {
       const financeGraph = new Chart(graph, {
         type: 'bar',
         data: {
-          labels: ['1 Year', '2 Year', '3 Year'],
+          labels: this.financeInfo.yearly.date,
           datasets: [
             {
               label: 'Invested',
-              data: [1, 2, 3]
+              data: this.financeInfo.yearly.invested
             },
             {
               label: 'Interests',
-              data: [0.5, 3, 5]
+              data: this.financeInfo.yearly.interests
             }
           ]
         },
