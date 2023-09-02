@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
-import { User } from 'src/app/core/interface/user';
+import { User } from 'src/app/core/interfaces/user';
 import { FinanceDialogComponent } from 'src/app/shared/components/dialogs/finance/finance-dialog.component';
 import { StrategyDialogComponent } from 'src/app/shared/components/dialogs/strategy/strategy-dialog.component';
 import { environment } from 'src/environments/environment';

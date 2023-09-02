@@ -10,7 +10,7 @@
     </div>
     <div class="cards-container">
         <div class="flex">
-            <app-weather [user]="user" (refreshEvent)="reload()"></app-weather>
+            <app-weather [user]="user" [defaultCityName]="defaultCityName" (refreshEvent)="reload()"></app-weather>
             <app-finance [user]="user" (refreshEvent)="reload()"></app-finance>
         </div>
         <div class="center">

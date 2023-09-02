@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import Chart from 'chart.js/auto';
-import { FinanceInfos } from 'src/app/core/interface/financeInfos';
+import { FinanceInfos } from 'src/app/core/interfaces/financeInfos';
 
 @Component({
   selector: 'app-finance-dialog',

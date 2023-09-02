@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../core/interface/user';
-import { FinanceInfos, MoneyInput, Yearly } from '../core/interface/financeInfos';
+import { User } from '../core/interfaces/user';
+import { FinanceInfos, MoneyInput, Yearly } from '../core/interfaces/financeInfos';
 @Component({
   selector: 'app-root',
   templateUrl: './page.component.html',
@@ -8,6 +8,7 @@ import { FinanceInfos, MoneyInput, Yearly } from '../core/interface/financeInfos
 })
 export class PageComponent implements OnInit{
   user: User = {} as User;
+  defaultCityName: string = "Paris";
 
   constructor() {}
 
@@ -47,7 +48,7 @@ export class PageComponent implements OnInit{
 
     this.user = {
       prefersDarkMode: false,
-      city: 'Paris',
+      city: this.defaultCityName,
       financeInfos: financeInfos,
       tasks: []
     };

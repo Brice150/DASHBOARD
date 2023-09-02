@@ -2,7 +2,7 @@ import { DatePipe } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Chart } from 'chart.js/auto';
-import { Hourly, WeatherInfos } from 'src/app/core/interface/weatherInfos';
+import { Hourly, WeatherInfos } from 'src/app/core/interfaces/weatherInfos';
 import { DayOfWeekPipe } from 'src/app/shared/pipes/dayOfWeek.pipe';
 
 @Component({

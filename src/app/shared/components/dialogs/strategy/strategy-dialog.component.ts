@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
-import { User } from 'src/app/core/interface/user';
+import { User } from 'src/app/core/interfaces/user';
 
 @Component({
   selector: 'app-strategy-dialog',
