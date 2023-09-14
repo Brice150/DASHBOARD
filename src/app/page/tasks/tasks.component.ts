@@ -9,32 +9,29 @@ import { TasksDialogComponent } from 'src/app/shared/components/dialogs/tasks/ta
 @Component({
   selector: 'app-tasks',
   templateUrl: './tasks.component.html',
-  styleUrls: ['./tasks.component.css']
+  styleUrls: ['./tasks.component.css'],
 })
 export class TasksComponent {
   @Input() user!: User;
   @Output() refreshEvent: EventEmitter<void> = new EventEmitter<void>();
 
-  constructor(
-    public dialog: MatDialog,
-    private toastr: ToastrService
-  ) {}
+  constructor(public dialog: MatDialog, private toastr: ToastrService) {}
 
   openTasksDialog(index?: number) {
     const dialogData = {
       user: this.user,
-      index: index
+      index: index,
     };
 
     const dialogRef = this.dialog.open(TasksDialogComponent, {
-      data: dialogData
+      data: dialogData,
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.reload();
         this.toastr.success('Task added/updated', 'Task', {
-          positionClass: 'toast-top-center' 
+          positionClass: 'toast-top-center',
         });
       }
     });
@@ -43,18 +40,18 @@ export class TasksComponent {
   openConfirmationDialog(index: number) {
     const dialogData = {
       user: this.user,
-      index: index
+      index: index,
     };
 
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-      data: dialogData
+      data: dialogData,
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.reload();
         this.toastr.success('Task deleted', 'Task', {
-          positionClass: 'toast-top-center' 
+          positionClass: 'toast-top-center',
         });
       }
     });

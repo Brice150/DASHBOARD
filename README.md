@@ -9,55 +9,59 @@ Frontend : Angular
 <details>
   <summary>Pages Features</summary>
 
-  ### Weather
-  - See weather forecast for 4 days
-  - View weather stats hourly for a selected day
-  - Change weather city
+### Weather
 
-  ### Finance
-  - See finance forecast for 25 years
-  - View your invested money vs interests
-  - Change saving strategy
+- See weather forecast for 4 days
+- View weather stats hourly for a selected day
+- Change weather city
 
-  ### Tasks List
-  - See your tasks
-  - Add, update or delete a task 
+### Finance
 
-  ### Dark/Light Mode
-  - Select dark/light mode
+- See finance forecast for 25 years
+- View your invested money vs interests
+- Change saving strategy
+
+### Tasks List
+
+- See your tasks
+- Add, update or delete a task
+
+### Dark/Light Mode
+
+- Select dark/light mode
 
 </details>
 
 <details>
   <summary>Run Locally</summary>
 
-  ### Clone the project
+### Clone the project
 
-  ```bash
-    git clone https://github.com/Brice150/DASHBOARD.git
-  ```
+```bash
+  git clone https://github.com/Brice150/DASHBOARD.git
+```
 
-  ### Install dependencies
+### Install dependencies
 
-  ```bash
-    npm install
-  ```
+```bash
+  npm install
+```
 
-  ### Start the server
+### Start the server
 
-  ```bash
-    ng serve -o
-  ```
+```bash
+  ng serve -o
+```
 
 </details>
 
 <details>
   <summary>API Reference</summary>
 
-  ### Weather
+### Weather
 
-  ```https
-    GET /api.open-meteo.com/v1/meteofrance?latitude=${latitude}&longitude=${longitude}&${params}
-  ```
+```https
+  GET /api.open-meteo.com/v1/meteofrance?latitude=${latitude}&longitude=${longitude}&${params}
+```
 
 </details>

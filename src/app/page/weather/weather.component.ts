@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { CityGeolocation } from 'src/app/core/interfaces/cityGeolocation';
@@ -14,7 +21,7 @@ import { WeatherImagePipe } from 'src/app/shared/pipes/weatherImage.pipe';
 @Component({
   selector: 'app-weather',
   templateUrl: './weather.component.html',
-  styleUrls: ['./weather.component.css']
+  styleUrls: ['./weather.component.css'],
 })
 export class WeatherComponent implements OnInit, OnChanges {
   @Input() user!: User;
@@ -28,7 +35,7 @@ export class WeatherComponent implements OnInit, OnChanges {
     public dialog: MatDialog,
     private toastr: ToastrService,
     private weatherService: WeatherService
-    ) {}
+  ) {}
 
   ngOnInit() {
     this.getWeatherInfos();
@@ -39,50 +46,62 @@ export class WeatherComponent implements OnInit, OnChanges {
   }
 
   getWeatherInfos() {
-    let city: CityGeolocation | undefined = citiesGeolocation.find((cityGeolocation) => {
-      return cityGeolocation.city.toLowerCase().trim() === this.user.city.toLowerCase().trim()
-    });
+    let city: CityGeolocation | undefined = citiesGeolocation.find(
+      (cityGeolocation) => {
+        return (
+          cityGeolocation.city.toLowerCase().trim() ===
+          this.user.city.toLowerCase().trim()
+        );
+      }
+    );
     if (!city) {
       city = citiesGeolocation.find((cityGeolocation) => {
-        return cityGeolocation.city.toLowerCase().trim() === this.defaultCityName.toLowerCase().trim()
+        return (
+          cityGeolocation.city.toLowerCase().trim() ===
+          this.defaultCityName.toLowerCase().trim()
+        );
       });
     }
-    this.weatherService.getWeatherInfo(city!).subscribe((response: WeatherInfos) => {     
-      this.weatherInfo = response;
-      const transformedImage: string[] = [];
-    
-      for (let index = 0; index < 4; index++) {
-        transformedImage.push(this.weatherImagePipe.transform(response.daily.weathercode[index]));
-      }
-      this.weatherInfo.daily.image = transformedImage;
-    });
+    this.weatherService
+      .getWeatherInfo(city!)
+      .subscribe((response: WeatherInfos) => {
+        this.weatherInfo = response;
+        const transformedImage: string[] = [];
+
+        for (let index = 0; index < 4; index++) {
+          transformedImage.push(
+            this.weatherImagePipe.transform(response.daily.weathercode[index])
+          );
+        }
+        this.weatherInfo.daily.image = transformedImage;
+      });
   }
 
   openWeatherDialog(index: number) {
     const dialogData = {
       weatherInfo: this.weatherInfo,
-      index: index
+      index: index,
     };
 
     this.dialog.open(WeatherDialogComponent, {
-      data: dialogData
+      data: dialogData,
     });
   }
 
   openCityDialog() {
     const dialogData = {
-      user: this.user
+      user: this.user,
     };
 
     const dialogRef = this.dialog.open(CityDialogComponent, {
-      data: dialogData
+      data: dialogData,
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.reload();
         this.toastr.success('City updated', 'Weather', {
-          positionClass: 'toast-top-center' 
+          positionClass: 'toast-top-center',
         });
       }
     });

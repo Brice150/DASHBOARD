@@ -8,25 +8,25 @@ import { DayOfWeekPipe } from 'src/app/shared/pipes/dayOfWeek.pipe';
 @Component({
   selector: 'app-weather-dialog',
   templateUrl: './weather-dialog.component.html',
-  styleUrls: ['./weather-dialog.component.css']
+  styleUrls: ['./weather-dialog.component.css'],
 })
 export class WeatherDialogComponent implements OnInit {
   weatherInfo!: WeatherInfos;
   index!: number;
   dayWeatherInfo: Hourly = {} as Hourly;
   dayOfWeekPipe: DayOfWeekPipe = new DayOfWeekPipe();
-  datePipe: DatePipe = new DatePipe("en-FR");
+  datePipe: DatePipe = new DatePipe('en-FR');
 
   constructor(
     public dialogRef: MatDialogRef<WeatherDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
-  ngOnInit() {    
+  ngOnInit() {
     this.weatherInfo = this.data.weatherInfo;
     this.index = this.data.index;
     this.getDayWeatherInfo();
-    this.displayGraph();    
+    this.displayGraph();
   }
 
   getDayWeatherInfo() {
@@ -34,19 +34,34 @@ export class WeatherDialogComponent implements OnInit {
     this.dayWeatherInfo.precipitation = [];
     this.dayWeatherInfo.temperature_2m = [];
     this.dayWeatherInfo.windspeed_10m = [];
-    for (let index = 0; index < this.weatherInfo.hourly.time.length ; index++) {  
-        if (this.dayOfWeekPipe.transform(this.weatherInfo.hourly.time[index]) === this.dayOfWeekPipe.transform(this.weatherInfo.daily.time[this.index])) {
-          const hour: string = this.datePipe.transform(new Date(this.weatherInfo.hourly.time[index]), "HH") + "h";
-          this.dayWeatherInfo.time.push(hour);
-          this.dayWeatherInfo.precipitation.push(this.weatherInfo.hourly.precipitation[index]);
-          this.dayWeatherInfo.temperature_2m.push(this.weatherInfo.hourly.temperature_2m[index]);
-          this.dayWeatherInfo.windspeed_10m.push(this.weatherInfo.hourly.windspeed_10m[index]);
-        } 
+    for (let index = 0; index < this.weatherInfo.hourly.time.length; index++) {
+      if (
+        this.dayOfWeekPipe.transform(this.weatherInfo.hourly.time[index]) ===
+        this.dayOfWeekPipe.transform(this.weatherInfo.daily.time[this.index])
+      ) {
+        const hour: string =
+          this.datePipe.transform(
+            new Date(this.weatherInfo.hourly.time[index]),
+            'HH'
+          ) + 'h';
+        this.dayWeatherInfo.time.push(hour);
+        this.dayWeatherInfo.precipitation.push(
+          this.weatherInfo.hourly.precipitation[index]
+        );
+        this.dayWeatherInfo.temperature_2m.push(
+          this.weatherInfo.hourly.temperature_2m[index]
+        );
+        this.dayWeatherInfo.windspeed_10m.push(
+          this.weatherInfo.hourly.windspeed_10m[index]
+        );
+      }
     }
   }
 
   displayGraph() {
-    const graph = document.getElementById('weatherGraph') as HTMLCanvasElement | null;
+    const graph = document.getElementById(
+      'weatherGraph'
+    ) as HTMLCanvasElement | null;
     if (graph) {
       const weatherGraph = new Chart(graph, {
         type: 'line',
@@ -55,18 +70,18 @@ export class WeatherDialogComponent implements OnInit {
           datasets: [
             {
               label: 'Precipitation',
-              data: this.dayWeatherInfo.precipitation
+              data: this.dayWeatherInfo.precipitation,
             },
             {
               label: 'Temperature',
-              data: this.dayWeatherInfo.temperature_2m
+              data: this.dayWeatherInfo.temperature_2m,
             },
             {
               label: 'Windspeed',
-              data: this.dayWeatherInfo.windspeed_10m
+              data: this.dayWeatherInfo.windspeed_10m,
             },
-          ]
-        }
+          ],
+        },
       });
     }
   }

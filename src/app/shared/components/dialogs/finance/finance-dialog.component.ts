@@ -6,7 +6,7 @@ import { FinanceInfos } from 'src/app/core/interfaces/financeInfos';
 @Component({
   selector: 'app-finance-dialog',
   templateUrl: './finance-dialog.component.html',
-  styleUrls: ['./finance-dialog.component.css']
+  styleUrls: ['./finance-dialog.component.css'],
 })
 export class FinanceDialogComponent implements OnInit {
   financeInfo!: FinanceInfos;
@@ -22,7 +22,9 @@ export class FinanceDialogComponent implements OnInit {
   }
 
   displayGraph() {
-    const graph = document.getElementById('financeGraph') as HTMLCanvasElement | null;
+    const graph = document.getElementById(
+      'financeGraph'
+    ) as HTMLCanvasElement | null;
     if (graph) {
       const financeGraph = new Chart(graph, {
         type: 'bar',
@@ -31,24 +33,24 @@ export class FinanceDialogComponent implements OnInit {
           datasets: [
             {
               label: 'Invested',
-              data: this.financeInfo.yearly.invested
+              data: this.financeInfo.yearly.invested,
             },
             {
               label: 'Interests',
-              data: this.financeInfo.yearly.interests
-            }
-          ]
+              data: this.financeInfo.yearly.interests,
+            },
+          ],
         },
         options: {
           scales: {
             x: {
-              stacked: true
+              stacked: true,
             },
             y: {
-              stacked: true
-            }
-          }
-        }
+              stacked: true,
+            },
+          },
+        },
       });
     }
   }

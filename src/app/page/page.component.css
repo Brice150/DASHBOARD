@@ -1,78 +1,81 @@
 .main-container {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    margin: 0;
-    min-height: 100vh;
-    width: 100%;
-    background-color: var(--color-background);
-    color: var(--color-text-primary);
-    position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 0;
+  min-height: 100vh;
+  width: 100%;
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  position: relative;
 }
 
 .main-container .project-title {
-    top: 20px;
-    position: absolute;
+  top: 20px;
+  position: absolute;
 }
 
 .project-title span {
-    font-size: 30px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
 .main-container .switch-container {
-    top: 20px;
-    position: absolute;
-    right: 20px;
+  top: 20px;
+  position: absolute;
+  right: 20px;
 }
 
 .switch-container a {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 }
 
 .switch-container a i {
-    font-size: 25px;
+  font-size: 25px;
 }
 
 .main-container .cards-container {
-    margin-top: 70px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    width: 95%;
+  margin-top: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 95%;
 }
 
-.cards-container .flex, .center {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
+.cards-container .flex,
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 
-.flex app-weather, app-finance {
-    margin: 10px;
-    width: 100%;
-    max-width: 540px;
+.flex app-weather,
+app-finance {
+  margin: 10px;
+  width: 100%;
+  max-width: 540px;
 }
 
 .center app-tasks {
-    margin: 10px;
-    width: 100%;
-    max-width: 1100px;
+  margin: 10px;
+  width: 100%;
+  max-width: 1100px;
 }
 
 @media screen and (max-width: 885px) {
-    .flex {
-        flex-wrap: wrap;
-    }
+  .flex {
+    flex-wrap: wrap;
+  }
 
-    .flex app-weather, app-finance {
-        max-width: none;
-    }
+  .flex app-weather,
+  app-finance {
+    max-width: none;
+  }
 }

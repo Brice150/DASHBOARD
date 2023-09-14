@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { User } from 'src/app/core/interfaces/user';
@@ -9,7 +16,7 @@ import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-finance',
   templateUrl: './finance.component.html',
-  styleUrls: ['./finance.component.css']
+  styleUrls: ['./finance.component.css'],
 })
 export class FinanceComponent implements OnInit, OnChanges {
   imagePath: string = environment.imagePath;
@@ -17,10 +24,7 @@ export class FinanceComponent implements OnInit, OnChanges {
   @Input() user!: User;
   @Output() refreshEvent: EventEmitter<void> = new EventEmitter<void>();
 
-  constructor(
-    public dialog: MatDialog,
-    private toastr: ToastrService
-  ) {}
+  constructor(public dialog: MatDialog, private toastr: ToastrService) {}
 
   ngOnInit() {
     this.calculateAmounts();
@@ -31,17 +35,26 @@ export class FinanceComponent implements OnInit, OnChanges {
   }
 
   calculateAmounts() {
-    this.user.financeInfos.yearly.invested[0] = this.user.financeInfos.moneyInput.initialAmount;
+    this.user.financeInfos.yearly.invested[0] =
+      this.user.financeInfos.moneyInput.initialAmount;
     this.user.financeInfos.yearly.interests[0] = 0;
-    this.user.financeInfos.yearly.total[0] = this.user.financeInfos.moneyInput.initialAmount;
-    
-    for (let index = 1; index < this.user.financeInfos.yearly.date.length; index++) {
+    this.user.financeInfos.yearly.total[0] =
+      this.user.financeInfos.moneyInput.initialAmount;
+
+    for (
+      let index = 1;
+      index < this.user.financeInfos.yearly.date.length;
+      index++
+    ) {
       let invested: number = this.user.financeInfos.yearly.invested[index - 1];
-      let interests: number = this.user.financeInfos.yearly.interests[index - 1];
-  
+      let interests: number =
+        this.user.financeInfos.yearly.interests[index - 1];
+
       invested += this.user.financeInfos.moneyInput.amountPerMonth * 12;
-      interests += (invested + interests) * (this.user.financeInfos.moneyInput.percentage / 100);
-  
+      interests +=
+        (invested + interests) *
+        (this.user.financeInfos.moneyInput.percentage / 100);
+
       this.user.financeInfos.yearly.invested[index] = invested;
       this.user.financeInfos.yearly.interests[index] = interests;
       this.user.financeInfos.yearly.total[index] = invested + interests;
@@ -50,28 +63,28 @@ export class FinanceComponent implements OnInit, OnChanges {
 
   openFinanceDialog() {
     const dialogData = {
-      financeInfo: this.user.financeInfos
+      financeInfo: this.user.financeInfos,
     };
 
     this.dialog.open(FinanceDialogComponent, {
-      data: dialogData
+      data: dialogData,
     });
   }
-  
+
   openStrategyDialog() {
     const dialogData = {
-      user: this.user
+      user: this.user,
     };
 
     const dialogRef = this.dialog.open(StrategyDialogComponent, {
-      data: dialogData
+      data: dialogData,
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.reload();
         this.toastr.success('Strategy updated', 'Finance', {
-          positionClass: 'toast-top-center' 
+          positionClass: 'toast-top-center',
         });
       }
     });

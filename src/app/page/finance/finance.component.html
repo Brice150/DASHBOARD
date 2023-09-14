@@ -1,28 +1,55 @@
 <div class="card">
-    <div class="title">
-        <span>Finance</span>
-    </div>
-    <div class="content">
-        <div class="forecast">
-            <div class="amount" *ngFor="let index of indexToDisplay"
-            [ngStyle]="{'background-image': 'url(' + imagePath + 'finance/gold.png)' }"
-            (click)="openFinanceDialog()"
-            title="More Info"
-            >
-                <div class="header">
-                    <img class="mastercard" [src]="imagePath + 'finance/mastercard.png'">
-                    <span class="subtitle">{{user.financeInfos.yearly.date[index] | year}}</span>
-                    <img class="ship" [src]="imagePath + 'finance/ship.png'">
-                </div>
-                <div class="total">
-                    <span>{{user.financeInfos.yearly.total[index] | currency:'EUR':'':'1.0-0'}} €</span>
-                    <span *ngIf="index === 0">+ {{user.financeInfos.moneyInput.amountPerMonth | currency:'EUR':'':'1.0-0'}} € / Month</span>
-                    <span *ngIf="index !== 0">+ {{user.financeInfos.moneyInput.percentage | number:'1.0-0'}}% / Year</span>
-                </div>
-            </div>
+  <div class="title">
+    <span>Finance</span>
+  </div>
+  <div class="content">
+    <div class="forecast">
+      <div
+        class="amount"
+        *ngFor="let index of indexToDisplay"
+        [ngStyle]="{
+          'background-image': 'url(' + imagePath + 'finance/gold.png)'
+        }"
+        (click)="openFinanceDialog()"
+        title="More Info"
+      >
+        <div class="header">
+          <img
+            class="mastercard"
+            [src]="imagePath + 'finance/mastercard.png'"
+          />
+          <span class="subtitle">{{
+            user.financeInfos.yearly.date[index] | year
+          }}</span>
+          <img class="ship" [src]="imagePath + 'finance/ship.png'" />
         </div>
+        <div class="total">
+          <span
+            >{{
+              user.financeInfos.yearly.total[index]
+                | currency : "EUR" : "" : "1.0-0"
+            }}
+            €</span
+          >
+          <span *ngIf="index === 0"
+            >+
+            {{
+              user.financeInfos.moneyInput.amountPerMonth
+                | currency : "EUR" : "" : "1.0-0"
+            }}
+            € / Month</span
+          >
+          <span *ngIf="index !== 0"
+            >+ {{ user.financeInfos.moneyInput.percentage | number : "1.0-0" }}%
+            / Year</span
+          >
+        </div>
+      </div>
     </div>
-    <div class="buttons">
-        <a class="button" (click)="openStrategyDialog()" title="Change Strategy">Change Strategy</a>
-    </div>
+  </div>
+  <div class="buttons">
+    <a class="button" (click)="openStrategyDialog()" title="Change Strategy"
+      >Change Strategy</a
+    >
+  </div>
 </div>

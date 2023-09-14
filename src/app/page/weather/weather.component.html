@@ -1,33 +1,47 @@
 <div class="card">
-    <div class="title">
-        <span>Weather</span>
-    </div>
-    <div class="content" *ngIf="weatherInfo">
-        <div class="forecast">
-            <div class="day" *ngFor="let useless of ' '.repeat(4).split(''); let index = index" 
-            [ngStyle]="{'background-image': weatherInfo.daily.image[index]}"
-            (click)="openWeatherDialog(index)"
-            title="More Info"
-            >
-                <div class="overlay"></div>
-                <div class="day-value">
-                    <span class="subtitle">{{weatherInfo.daily.time[index] | dayOfWeek}}</span>
-                </div>
-                <div class="temperature-gap">
-                    <span>{{weatherInfo.daily.temperature_2m_min[index] | number:'1.0-0'}}°C</span>
-                    <span>-</span>
-                    <span>{{weatherInfo.daily.temperature_2m_max[index] | number:'1.0-0'}}°C</span>
-                </div>
-                <div class="precipitation">
-                    <span>{{weatherInfo.daily.precipitation_sum[index]}} mm</span>
-                </div>
-                <div class="windspeed">
-                    <span>{{weatherInfo.daily.windspeed_10m_max[index]}} km/h</span>
-                </div>
-            </div>
+  <div class="title">
+    <span>Weather</span>
+  </div>
+  <div class="content" *ngIf="weatherInfo">
+    <div class="forecast">
+      <div
+        class="day"
+        *ngFor="let useless of ' '.repeat(4).split(''); let index = index"
+        [ngStyle]="{ 'background-image': weatherInfo.daily.image[index] }"
+        (click)="openWeatherDialog(index)"
+        title="More Info"
+      >
+        <div class="overlay"></div>
+        <div class="day-value">
+          <span class="subtitle">{{
+            weatherInfo.daily.time[index] | dayOfWeek
+          }}</span>
         </div>
+        <div class="temperature-gap">
+          <span
+            >{{
+              weatherInfo.daily.temperature_2m_min[index] | number : "1.0-0"
+            }}°C</span
+          >
+          <span>-</span>
+          <span
+            >{{
+              weatherInfo.daily.temperature_2m_max[index] | number : "1.0-0"
+            }}°C</span
+          >
+        </div>
+        <div class="precipitation">
+          <span>{{ weatherInfo.daily.precipitation_sum[index] }} mm</span>
+        </div>
+        <div class="windspeed">
+          <span>{{ weatherInfo.daily.windspeed_10m_max[index] }} km/h</span>
+        </div>
+      </div>
     </div>
-    <div class="buttons">
-        <a class="button" (click)="openCityDialog()" title="Change City">Change City</a>
-    </div>
+  </div>
+  <div class="buttons">
+    <a class="button" (click)="openCityDialog()" title="Change City"
+      >Change City</a
+    >
+  </div>
 </div>

@@ -1,27 +1,31 @@
 <div mat-dialog-content class="container">
-    <h1>Change Strategy</h1>
-    <div class="finance">   
-        <div class="info">
-            <div class="value-container">
-                <label for="initialAmount">Initial amount</label>
-                <input [(ngModel)]="initialAmount" type="number" name="initialAmount">
-            </div>
-            <div class="value-container">
-                <label for="amountPerMonth">Amount / Month</label>
-                <input [(ngModel)]="amountPerMonth" type="number" name="amountPerMonth">
-            </div>
-            <div class="value-container">
-                <label for="percentage">Percentage</label>
-                <input [(ngModel)]="percentage" type="number" name="percentage">
-            </div>
-        </div>
+  <h1>Change Strategy</h1>
+  <div class="finance">
+    <div class="info">
+      <div class="value-container">
+        <label for="initialAmount">Initial amount</label>
+        <input [(ngModel)]="initialAmount" type="number" name="initialAmount" />
+      </div>
+      <div class="value-container">
+        <label for="amountPerMonth">Amount / Month</label>
+        <input
+          [(ngModel)]="amountPerMonth"
+          type="number"
+          name="amountPerMonth"
+        />
+      </div>
+      <div class="value-container">
+        <label for="percentage">Percentage</label>
+        <input [(ngModel)]="percentage" type="number" name="percentage" />
+      </div>
     </div>
-    <div class="buttons">
-        <a class="close" title="Close" (click)="close()">
-            <span>Close</span>
-        </a>
-        <a class="validate" title="Validate" (click)="validate()">
-            <span>Validate</span>
-        </a>
-    </div>
+  </div>
+  <div class="buttons">
+    <a class="close" title="Close" (click)="close()">
+      <span>Close</span>
+    </a>
+    <a class="validate" title="Validate" (click)="validate()">
+      <span>Validate</span>
+    </a>
+  </div>
 </div>

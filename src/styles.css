@@ -1,34 +1,41 @@
 :root {
-    --color-background: white;
-    --color-text-primary: #003c91;
-    --color-text-secondary: black;
-    --box-shadow-color: rgba(132, 139, 200, 0.18);
-    --box-shadow: 0 2rem 3rem var(--box-shadow-color);
-    
-    --strong-radius: 20px;
-    --light-radius: 10px;
+  --color-background: white;
+  --color-text-primary: #003c91;
+  --color-text-secondary: black;
+  --box-shadow-color: rgba(132, 139, 200, 0.18);
+  --box-shadow: 0 2rem 3rem var(--box-shadow-color);
+
+  --strong-radius: 20px;
+  --light-radius: 10px;
 }
 
 .dark-theme-variables {
-    --color-background: #181a1e;
-    --color-text-secondary: white;
-    --box-shadow-color: rgba(0, 0, 0, 0.4);
-    --box-shadow: 0 2rem 3rem var(--box-shadow-color);
+  --color-background: #181a1e;
+  --color-text-secondary: white;
+  --box-shadow-color: rgba(0, 0, 0, 0.4);
+  --box-shadow: 0 2rem 3rem var(--box-shadow-color);
 }
 
-html, body { 
-    height: 100%; 
+html,
+body {
+  height: 100%;
 }
 
-body { 
-    margin: 0; 
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Roboto, "Helvetica Neue", sans-serif; 
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 ::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

@@ -7,7 +7,7 @@ import { User } from 'src/app/core/interfaces/user';
 @Component({
   selector: 'app-tasks-dialog',
   templateUrl: './tasks-dialog.component.html',
-  styleUrls: ['./tasks-dialog.component.css']
+  styleUrls: ['./tasks-dialog.component.css'],
 })
 export class TasksDialogComponent implements OnInit {
   user!: User;
@@ -24,8 +24,8 @@ export class TasksDialogComponent implements OnInit {
   ngOnInit() {
     this.modifyMode = this.data.index || this.data.index === 0;
     this.user = this.data.user;
-    
-    if (this.modifyMode) {      
+
+    if (this.modifyMode) {
       this.title = this.user.tasks[this.data.index].title;
       this.description = this.user.tasks[this.data.index].description;
     }
@@ -44,16 +44,16 @@ export class TasksDialogComponent implements OnInit {
         const newTask: Task = {
           title: this.title,
           description: this.description,
-          date: new Date()
+          date: new Date(),
         };
         this.user.tasks.push(newTask);
       }
-      
+
       localStorage.setItem('userDashboard', JSON.stringify(this.user));
       this.dialogRef.close(true);
     } else {
       this.toastr.error('Title is empty', 'Task', {
-        positionClass: 'toast-top-center' 
+        positionClass: 'toast-top-center',
       });
     }
   }

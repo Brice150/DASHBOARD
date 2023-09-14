@@ -8,7 +8,7 @@ import { citiesGeolocation } from 'src/app/shared/data/citiesGeolocation';
 @Component({
   selector: 'app-city-dialog',
   templateUrl: './city-dialog.component.html',
-  styleUrls: ['./city-dialog.component.css']
+  styleUrls: ['./city-dialog.component.css'],
 })
 export class CityDialogComponent implements OnInit {
   user!: User;
@@ -30,13 +30,20 @@ export class CityDialogComponent implements OnInit {
   }
 
   validate() {
-    if (this.city && citiesGeolocation.some((cityGeolocation) => cityGeolocation.city.toLowerCase().trim() === this.city.toLowerCase().trim())) {
+    if (
+      this.city &&
+      citiesGeolocation.some(
+        (cityGeolocation) =>
+          cityGeolocation.city.toLowerCase().trim() ===
+          this.city.toLowerCase().trim()
+      )
+    ) {
       this.user.city = this.city.toLowerCase().trim();
       localStorage.setItem('userDashboard', JSON.stringify(this.user));
       this.dialogRef.close(true);
     } else {
       this.toastr.error('City is invalid', 'Weather', {
-        positionClass: 'toast-top-center' 
+        positionClass: 'toast-top-center',
       });
     }
   }

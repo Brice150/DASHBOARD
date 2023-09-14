@@ -6,7 +6,7 @@ import { User } from 'src/app/core/interfaces/user';
 @Component({
   selector: 'app-strategy-dialog',
   templateUrl: './strategy-dialog.component.html',
-  styleUrls: ['./strategy-dialog.component.css']
+  styleUrls: ['./strategy-dialog.component.css'],
 })
 export class StrategyDialogComponent implements OnInit {
   user!: User;
@@ -19,13 +19,13 @@ export class StrategyDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private toastr: ToastrService
   ) {}
-   
+
   ngOnInit() {
     this.user = this.data.user;
     this.initialAmount = this.user.financeInfos.moneyInput.initialAmount;
     this.amountPerMonth = this.user.financeInfos.moneyInput.amountPerMonth;
     this.percentage = this.user.financeInfos.moneyInput.percentage;
-  }  
+  }
 
   close() {
     this.dialogRef.close(false);
@@ -40,7 +40,7 @@ export class StrategyDialogComponent implements OnInit {
       this.dialogRef.close(true);
     } else {
       this.toastr.error('All elements are required', 'Finance', {
-        positionClass: 'toast-top-center' 
+        positionClass: 'toast-top-center',
       });
     }
   }
