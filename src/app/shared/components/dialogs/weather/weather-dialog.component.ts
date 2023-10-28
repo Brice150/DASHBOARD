@@ -82,6 +82,9 @@ export class WeatherDialogComponent implements OnInit {
             },
           ],
         },
+        options: {
+          maintainAspectRatio: false,
+        },
       });
     }
   }

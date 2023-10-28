@@ -42,6 +42,7 @@ export class FinanceDialogComponent implements OnInit {
           ],
         },
         options: {
+          maintainAspectRatio: false,
           scales: {
             x: {
               stacked: true,

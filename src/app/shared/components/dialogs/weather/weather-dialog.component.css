@@ -39,6 +39,7 @@ h1 {
   align-items: center;
   flex-wrap: wrap;
   width: 100%;
+  min-height: 50vh;
 }
 
 .buttons {
