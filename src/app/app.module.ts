@@ -1,15 +1,14 @@
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 import { AppComponent } from './app.component';
 import { appRouter } from './app.router';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PageModule } from './page/page.module';
-import { HttpClientModule } from '@angular/common/http';
-import { ToastrModule } from 'ngx-toastr';
-import { ErrorPathComponent } from './error-path/error-path.component';
 
 @NgModule({
-  declarations: [AppComponent, ErrorPathComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     appRouter,
