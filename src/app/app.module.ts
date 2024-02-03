@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { AppComponent } from './app.component';
-import { appRouter } from './app.router';
+import { appRouter } from './app.routes';
 import { PageModule } from './page/page.module';
 
 @NgModule({
