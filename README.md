@@ -2,7 +2,7 @@
 <img height="130px" width="130px" src="./src/assets/images/logo.png">
 </div>
   
-# DASHBOARD
+# DASHBOARD, a personal everyday dashboard
 
 Frontend : Angular
 
