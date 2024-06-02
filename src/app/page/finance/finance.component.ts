@@ -1,18 +1,11 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnChanges,
-  OnInit,
-  Output,
-} from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from '../../../environments/environment';
 import { User } from '../../core/interfaces/user';
 import { FinanceDialogComponent } from '../../shared/components/dialogs/finance/finance-dialog.component';
 import { StrategyDialogComponent } from '../../shared/components/dialogs/strategy/strategy-dialog.component';
-import { CommonModule } from '@angular/common';
 import { YearPipe } from '../../shared/pipes/year.pipe';
 
 @Component({
@@ -22,50 +15,57 @@ import { YearPipe } from '../../shared/pipes/year.pipe';
   templateUrl: './finance.component.html',
   styleUrls: ['./finance.component.css'],
 })
-export class FinanceComponent implements OnInit, OnChanges {
+export class FinanceComponent implements OnInit {
   imagePath: string = environment.imagePath;
-  indexToDisplay: number[] = [0, 1, 10, 25];
   @Input() user!: User;
-  @Output() refreshEvent: EventEmitter<void> = new EventEmitter<void>();
 
   constructor(public dialog: MatDialog, private toastr: ToastrService) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.calculateAmounts();
   }
 
-  ngOnChanges() {
-    this.ngOnInit();
-  }
-
-  calculateAmounts() {
-    this.user.financeInfos.yearly.invested[0] =
-      this.user.financeInfos.moneyInput.initialAmount;
-    this.user.financeInfos.yearly.interests[0] = 0;
-    this.user.financeInfos.yearly.total[0] =
-      this.user.financeInfos.moneyInput.initialAmount;
-
-    for (
-      let index = 1;
-      index < this.user.financeInfos.yearly.date.length;
-      index++
+  calculateAmounts(): void {
+    if (
+      this.user.financeInfos.stockExchangeInfos &&
+      this.user.financeInfos.stockExchangeInfos.yearly
     ) {
-      let invested: number = this.user.financeInfos.yearly.invested[index - 1];
-      let interests: number =
-        this.user.financeInfos.yearly.interests[index - 1];
+      this.user.financeInfos.stockExchangeInfos.yearly.invested[0] =
+        this.user.financeInfos.stockExchangeInfos.stockMoneyInput.initialAmount;
+      this.user.financeInfos.stockExchangeInfos.yearly.interests[0] = 0;
+      this.user.financeInfos.stockExchangeInfos.yearly.total[0] =
+        this.user.financeInfos.stockExchangeInfos.stockMoneyInput.initialAmount;
 
-      invested += this.user.financeInfos.moneyInput.amountPerMonth * 12;
-      interests +=
-        (invested + interests) *
-        (this.user.financeInfos.moneyInput.percentage / 100);
+      for (
+        let index = 1;
+        index < this.user.financeInfos.stockExchangeInfos.yearly.date.length;
+        index++
+      ) {
+        let invested: number =
+          this.user.financeInfos.stockExchangeInfos.yearly.invested[index - 1];
+        let interests: number =
+          this.user.financeInfos.stockExchangeInfos.yearly.interests[index - 1];
 
-      this.user.financeInfos.yearly.invested[index] = invested;
-      this.user.financeInfos.yearly.interests[index] = interests;
-      this.user.financeInfos.yearly.total[index] = invested + interests;
+        invested +=
+          this.user.financeInfos.stockExchangeInfos.stockMoneyInput
+            .amountPerMonth * 12;
+        interests +=
+          (invested + interests) *
+          (this.user.financeInfos.stockExchangeInfos.stockMoneyInput
+            .percentage /
+            100);
+
+        this.user.financeInfos.stockExchangeInfos.yearly.invested[index] =
+          invested;
+        this.user.financeInfos.stockExchangeInfos.yearly.interests[index] =
+          interests;
+        this.user.financeInfos.stockExchangeInfos.yearly.total[index] =
+          invested + interests;
+      }
     }
   }
 
-  openFinanceDialog() {
+  openFinanceDialog(): void {
     const dialogData = {
       financeInfo: this.user.financeInfos,
     };
@@ -75,7 +75,7 @@ export class FinanceComponent implements OnInit, OnChanges {
     });
   }
 
-  openStrategyDialog() {
+  openStrategyDialog(): void {
     const dialogData = {
       user: this.user,
     };
@@ -86,15 +86,11 @@ export class FinanceComponent implements OnInit, OnChanges {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.reload();
+        this.calculateAmounts();
         this.toastr.success('Strategy updated', 'Finance', {
           positionClass: 'toast-top-center',
         });
       }
     });
-  }
-
-  reload() {
-    this.refreshEvent.emit();
   }
 }

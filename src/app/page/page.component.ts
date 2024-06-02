@@ -1,93 +1,64 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { User } from '../core/interfaces/user';
-import {
-  FinanceInfos,
-  MoneyInput,
-  Yearly,
-} from '../core/interfaces/financeInfos';
-import { WeatherComponent } from './weather/weather.component';
 import { FinanceComponent } from './finance/finance.component';
 import { TasksComponent } from './tasks/tasks.component';
-import { CommonModule } from '@angular/common';
+import { WeatherComponent } from './weather/weather.component';
+import { WeatherInfos } from '../core/interfaces/weatherInfos';
+import {
+  FinanceInfos,
+  RealEstate,
+  Savings,
+  Spendings,
+  StockExchange,
+} from '../core/interfaces/financeInfos';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, WeatherComponent, FinanceComponent, TasksComponent],
+  imports: [
+    CommonModule,
+    WeatherComponent,
+    FinanceComponent,
+    TasksComponent,
+    MatSlideToggleModule,
+  ],
   templateUrl: './page.component.html',
   styleUrls: ['./page.component.css'],
 })
 export class PageComponent implements OnInit {
   user: User = {} as User;
-  defaultCityName: string = 'Paris';
 
   constructor() {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     let storedUser: string | null = localStorage.getItem('userDashboard');
     if (storedUser !== null) {
       this.user = JSON.parse(storedUser);
     } else {
-      this.generateDefaultUser();
-      localStorage.setItem('userDashboard', JSON.stringify(this.user));
+      this.setDefaultUser();
     }
     this.handleMode();
   }
 
-  generateDefaultUser() {
-    const moneyInput: MoneyInput = {
-      amountPerMonth: 100,
-      initialAmount: 1000,
-      percentage: 8,
-    };
-
-    const yearly: Yearly = {
-      date: [
-        '0',
-        '1',
-        '2',
-        '3',
-        '4',
-        '5',
-        '6',
-        '7',
-        '8',
-        '9',
-        '10',
-        '11',
-        '12',
-        '13',
-        '14',
-        '15',
-        '16',
-        '17',
-        '18',
-        '19',
-        '20',
-        '21',
-        '22',
-        '23',
-        '24',
-        '25',
-      ],
-      invested: [moneyInput.initialAmount],
-      interests: [0],
-      total: [moneyInput.initialAmount],
-    };
-
-    const financeInfos: FinanceInfos = {
-      moneyInput: moneyInput,
-      yearly: yearly,
-    };
-
-    this.user = {
-      prefersDarkMode: false,
-      city: this.defaultCityName,
-      financeInfos: financeInfos,
-      tasks: [],
-    };
+  setDefaultUser(): void {
+    this.user.prefersDarkMode = false;
+    this.user.hidesFinanceInfos = false;
+    this.user.tasks = [];
+    this.user.weatherInfos = {} as WeatherInfos;
+    this.user.financeInfos = {} as FinanceInfos;
+    this.user.financeInfos.spendingsInfos = {} as Spendings;
+    this.user.financeInfos.spendingsInfos.totalAmount = 0;
+    this.user.financeInfos.savingInfos = {} as Savings;
+    this.user.financeInfos.savingInfos.totalAmount = 0;
+    this.user.financeInfos.stockExchangeInfos = {} as StockExchange;
+    this.user.financeInfos.stockExchangeInfos.totalAmount = 0;
+    this.user.financeInfos.realEstateInfos = {} as RealEstate;
+    this.user.financeInfos.realEstateInfos.totalAmount = 0;
   }
 
-  handleMode() {
+  handleMode(): void {
     if (this.user.prefersDarkMode) {
       document.body.classList.add('dark-theme-variables');
     } else {
@@ -99,7 +70,7 @@ export class PageComponent implements OnInit {
     localStorage.setItem('userDashboard', JSON.stringify(this.user));
   }
 
-  changeMode() {
+  changeMode(): void {
     document.body.classList.toggle('dark-theme-variables');
     this.user.prefersDarkMode = document.body.classList.contains(
       'dark-theme-variables'
@@ -107,7 +78,5 @@ export class PageComponent implements OnInit {
     localStorage.setItem('userDashboard', JSON.stringify(this.user));
   }
 
-  reload() {
-    this.ngOnInit();
-  }
+  hideFinance(): void {}
 }

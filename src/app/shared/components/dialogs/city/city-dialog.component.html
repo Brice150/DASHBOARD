@@ -1,10 +1,12 @@
 <div mat-dialog-content class="container">
-  <h1>Change City</h1>
+  <h1>Change Cities</h1>
   <div class="weather">
     <div class="info">
       <div class="value-container">
-        <label for="city">City</label>
-        <textarea [(ngModel)]="city" name="city"></textarea>
+        <textarea [(ngModel)]="cities[0].city"></textarea>
+        <textarea [(ngModel)]="cities[1].city"></textarea>
+        <textarea [(ngModel)]="cities[2].city"></textarea>
+        <textarea [(ngModel)]="cities[3].city"></textarea>
       </div>
     </div>
   </div>

@@ -24,22 +24,28 @@ export class StrategyDialogComponent implements OnInit {
     private toastr: ToastrService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.user = this.data.user;
-    this.initialAmount = this.user.financeInfos.moneyInput.initialAmount;
-    this.amountPerMonth = this.user.financeInfos.moneyInput.amountPerMonth;
-    this.percentage = this.user.financeInfos.moneyInput.percentage;
+    this.initialAmount =
+      this.user.financeInfos.stockExchangeInfos.stockMoneyInput.initialAmount;
+    this.amountPerMonth =
+      this.user.financeInfos.stockExchangeInfos.stockMoneyInput.amountPerMonth;
+    this.percentage =
+      this.user.financeInfos.stockExchangeInfos.stockMoneyInput.percentage;
   }
 
-  close() {
+  close(): void {
     this.dialogRef.close(false);
   }
 
-  validate() {
+  validate(): void {
     if (this.initialAmount && this.amountPerMonth && this.percentage) {
-      this.user.financeInfos.moneyInput.initialAmount = this.initialAmount;
-      this.user.financeInfos.moneyInput.amountPerMonth = this.amountPerMonth;
-      this.user.financeInfos.moneyInput.percentage = this.percentage;
+      this.user.financeInfos.stockExchangeInfos.stockMoneyInput.initialAmount =
+        this.initialAmount;
+      this.user.financeInfos.stockExchangeInfos.stockMoneyInput.amountPerMonth =
+        this.amountPerMonth;
+      this.user.financeInfos.stockExchangeInfos.stockMoneyInput.percentage =
+        this.percentage;
       localStorage.setItem('userDashboard', JSON.stringify(this.user));
       this.dialogRef.close(true);
     } else {

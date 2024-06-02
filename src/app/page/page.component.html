@@ -7,18 +7,15 @@
       <i *ngIf="user.prefersDarkMode" class="bx bxs-sun"></i>
       <i *ngIf="!user.prefersDarkMode" class="bx bxs-moon"></i>
     </a>
+    <mat-slide-toggle>Hide Finance</mat-slide-toggle>
   </div>
   <div class="cards-container">
     <div class="flex">
-      <app-weather
-        [user]="user"
-        [defaultCityName]="defaultCityName"
-        (refreshEvent)="reload()"
-      ></app-weather>
-      <app-finance [user]="user" (refreshEvent)="reload()"></app-finance>
+      <app-weather [user]="user"></app-weather>
+      <app-finance [user]="user"></app-finance>
     </div>
     <div class="center">
-      <app-tasks [user]="user" (refreshEvent)="reload()"></app-tasks>
+      <app-tasks [user]="user"></app-tasks>
     </div>
   </div>
 </div>

@@ -24,14 +24,14 @@ export class WeatherDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.weatherInfo = this.data.weatherInfo;
     this.index = this.data.index;
     this.getDayWeatherInfo();
     this.displayGraph();
   }
 
-  getDayWeatherInfo() {
+  getDayWeatherInfo(): void {
     this.dayWeatherInfo.time = [];
     this.dayWeatherInfo.precipitation = [];
     this.dayWeatherInfo.temperature_2m = [];
@@ -60,7 +60,7 @@ export class WeatherDialogComponent implements OnInit {
     }
   }
 
-  displayGraph() {
+  displayGraph(): void {
     const graph = document.getElementById(
       'weatherGraph'
     ) as HTMLCanvasElement | null;
@@ -91,7 +91,7 @@ export class WeatherDialogComponent implements OnInit {
     }
   }
 
-  close() {
+  close(): void {
     this.dialogRef.close(false);
   }
 }

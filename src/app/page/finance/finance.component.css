@@ -47,6 +47,10 @@
   width: 180px;
   height: 110px;
   margin: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   background-size: cover;
   overflow: hidden;
   cursor: pointer;
@@ -66,9 +70,10 @@
   align-items: center;
 }
 
-.header .subtitle {
+.subtitle {
   font-size: 18px;
   text-transform: uppercase;
+  margin-bottom: 5px;
 }
 
 .header .mastercard {
@@ -83,10 +88,13 @@
 
 .total {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
-  flex-direction: column;
-  height: 75px;
+  margin: 10px;
+}
+
+.total.no-margin {
+  margin: 0;
 }
 
 .content span {
@@ -113,7 +121,7 @@
   background-color: var(--color-text-primary);
   border-radius: 10px;
   transition: 0.5s ease;
-  color: var(--color-text-secondary);
+  color: var(--color-text-button);
   font-size: 17px;
   font-weight: 600;
 }

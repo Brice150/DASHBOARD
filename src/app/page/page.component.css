@@ -13,6 +13,7 @@
 .main-container .project-title {
   top: 20px;
   position: absolute;
+  z-index: 2;
 }
 
 .project-title span {
@@ -25,7 +26,11 @@
 .main-container .switch-container {
   top: 20px;
   position: absolute;
-  right: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 95%;
+  z-index: 1;
 }
 
 .switch-container a {
@@ -36,7 +41,8 @@
 }
 
 .switch-container a i {
-  font-size: 25px;
+  font-size: 30px;
+  color: var(--color-text-secondary);
 }
 
 .main-container .cards-container {
@@ -67,6 +73,21 @@ app-finance {
   margin: 10px;
   width: 100%;
   max-width: 1100px;
+}
+
+::ng-deep .mat-mdc-slide-toggle .mat-internal-form-field {
+  color: var(--color-text-secondary) !important;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  letter-spacing: 1px !important;
+}
+
+::ng-deep .mdc-switch .mdc-switch__track {
+  height: 28px !important;
+}
+
+::ng-deep .mdc-switch:enabled .mdc-switch__track::after {
+  background: var(--color-text-primary) !important;
 }
 
 @media screen and (max-width: 885px) {

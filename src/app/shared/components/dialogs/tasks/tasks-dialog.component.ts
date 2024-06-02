@@ -25,7 +25,7 @@ export class TasksDialogComponent implements OnInit {
     private toastr: ToastrService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.modifyMode = this.data.index || this.data.index === 0;
     this.user = this.data.user;
 
@@ -35,11 +35,11 @@ export class TasksDialogComponent implements OnInit {
     }
   }
 
-  close() {
+  close(): void {
     this.dialogRef.close(false);
   }
 
-  validate() {
+  validate(): void {
     if (this.title) {
       if (this.modifyMode) {
         this.user.tasks[this.data.index].title = this.title;

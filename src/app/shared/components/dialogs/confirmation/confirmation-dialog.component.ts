@@ -18,15 +18,15 @@ export class ConfirmationDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.user = this.data.user;
   }
 
-  cancel() {
+  cancel(): void {
     this.dialogRef.close(false);
   }
 
-  delete() {
+  delete(): void {
     this.user.tasks.splice(this.data.index, 1);
     localStorage.setItem('userDashboard', JSON.stringify(this.user));
     this.dialogRef.close(true);

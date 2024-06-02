@@ -15,11 +15,10 @@ import { CommonModule } from '@angular/common';
 })
 export class TasksComponent {
   @Input() user!: User;
-  @Output() refreshEvent: EventEmitter<void> = new EventEmitter<void>();
 
   constructor(public dialog: MatDialog, private toastr: ToastrService) {}
 
-  openTasksDialog(index?: number) {
+  openTasksDialog(index?: number): void {
     const dialogData = {
       user: this.user,
       index: index,
@@ -31,7 +30,6 @@ export class TasksComponent {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.reload();
         this.toastr.success('Task added/updated', 'Task', {
           positionClass: 'toast-top-center',
         });
@@ -39,7 +37,7 @@ export class TasksComponent {
     });
   }
 
-  openConfirmationDialog(index: number) {
+  openConfirmationDialog(index: number): void {
     const dialogData = {
       user: this.user,
       index: index,
@@ -51,15 +49,10 @@ export class TasksComponent {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.reload();
         this.toastr.success('Task deleted', 'Task', {
           positionClass: 'toast-top-center',
         });
       }
     });
-  }
-
-  reload() {
-    this.refreshEvent.emit();
   }
 }

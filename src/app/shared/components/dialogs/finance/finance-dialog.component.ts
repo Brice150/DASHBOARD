@@ -19,12 +19,12 @@ export class FinanceDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.financeInfo = this.data.financeInfo;
     this.displayGraph();
   }
 
-  displayGraph() {
+  displayGraph(): void {
     const graph = document.getElementById(
       'financeGraph'
     ) as HTMLCanvasElement | null;
@@ -32,15 +32,15 @@ export class FinanceDialogComponent implements OnInit {
       const financeGraph = new Chart(graph, {
         type: 'bar',
         data: {
-          labels: this.financeInfo.yearly.date,
+          labels: this.financeInfo.stockExchangeInfos.yearly.date,
           datasets: [
             {
               label: 'Invested',
-              data: this.financeInfo.yearly.invested,
+              data: this.financeInfo.stockExchangeInfos.yearly.invested,
             },
             {
               label: 'Interests',
-              data: this.financeInfo.yearly.interests,
+              data: this.financeInfo.stockExchangeInfos.yearly.interests,
             },
           ],
         },
@@ -59,7 +59,7 @@ export class FinanceDialogComponent implements OnInit {
     }
   }
 
-  close() {
+  close(): void {
     this.dialogRef.close(false);
   }
 }

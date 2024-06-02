@@ -1,7 +1,8 @@
 :root {
   --color-background: white;
-  --color-text-primary: #003c91;
+  --color-text-primary: #006aff;
   --color-text-secondary: black;
+  --color-text-button: white;
   --box-shadow-color: rgba(132, 139, 200, 0.18);
   --box-shadow: 0 2rem 3rem var(--box-shadow-color);
 
@@ -11,6 +12,7 @@
 
 .dark-theme-variables {
   --color-background: #181a1e;
+  --color-text-primary: #006aff;
   --color-text-secondary: white;
   --box-shadow-color: rgba(0, 0, 0, 0.4);
   --box-shadow: 0 2rem 3rem var(--box-shadow-color);
@@ -32,5 +34,11 @@ body {
   display: none;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

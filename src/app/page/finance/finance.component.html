@@ -6,11 +6,9 @@
     <div class="forecast">
       <div
         class="amount"
-        *ngFor="let index of indexToDisplay"
         [ngStyle]="{
           'background-image': 'url(' + imagePath + 'finance/gold.png)'
         }"
-        (click)="openFinanceDialog()"
         title="More Info"
       >
         <div class="header">
@@ -18,38 +16,103 @@
             class="mastercard"
             [src]="imagePath + 'finance/mastercard.png'"
           />
-          <span class="subtitle">{{
-            user.financeInfos.yearly.date[index] | year
-          }}</span>
           <img class="ship" [src]="imagePath + 'finance/ship.png'" />
         </div>
-        <div class="total">
-          <span
-            >{{
-              user.financeInfos.yearly.total[index]
-                | currency : "EUR" : "" : "1.0-0"
-            }}
-            €</span
-          >
-          <span *ngIf="index === 0"
-            >+
-            {{
-              user.financeInfos.moneyInput.amountPerMonth
-                | currency : "EUR" : "" : "1.0-0"
-            }}
-            € / Month</span
-          >
-          <span *ngIf="index !== 0"
-            >+ {{ user.financeInfos.moneyInput.percentage | number : "1.0-0" }}%
-            / Year</span
-          >
+        <span class="total no-margin">
+          +
+          {{
+            user.financeInfos.stockExchangeInfos.totalAmount
+              | currency : "EUR" : "" : "1.0-0"
+          }}
+          €
+        </span>
+        <span class="total no-margin">
+          -
+          {{
+            user.financeInfos.stockExchangeInfos.totalAmount
+              | currency : "EUR" : "" : "1.0-0"
+          }}
+          €
+        </span>
+        <span class="subtitle">Income & Expenses</span>
+      </div>
+      <div
+        class="amount"
+        [ngStyle]="{
+          'background-image': 'url(' + imagePath + 'finance/gold.png)'
+        }"
+        title="More Info"
+      >
+        <div class="header">
+          <img
+            class="mastercard"
+            [src]="imagePath + 'finance/mastercard.png'"
+          />
+          <img class="ship" [src]="imagePath + 'finance/ship.png'" />
         </div>
+        <span class="total">
+          +
+          {{
+            user.financeInfos.stockExchangeInfos.totalAmount
+              | currency : "EUR" : "" : "1.0-0"
+          }}
+          €
+        </span>
+        <span class="subtitle">Savings</span>
+      </div>
+      <div
+        class="amount"
+        [ngStyle]="{
+          'background-image': 'url(' + imagePath + 'finance/gold.png)'
+        }"
+        title="More Info"
+      >
+        <div class="header">
+          <img
+            class="mastercard"
+            [src]="imagePath + 'finance/mastercard.png'"
+          />
+          <img class="ship" [src]="imagePath + 'finance/ship.png'" />
+        </div>
+        <span class="total">
+          +
+          {{
+            user.financeInfos.stockExchangeInfos.totalAmount
+              | currency : "EUR" : "" : "1.0-0"
+          }}
+          €
+        </span>
+        <span class="subtitle">Stock Exchange</span>
+      </div>
+      <div
+        class="amount"
+        [ngStyle]="{
+          'background-image': 'url(' + imagePath + 'finance/gold.png)'
+        }"
+        title="More Info"
+      >
+        <div class="header">
+          <img
+            class="mastercard"
+            [src]="imagePath + 'finance/mastercard.png'"
+          />
+          <img class="ship" [src]="imagePath + 'finance/ship.png'" />
+        </div>
+        <span class="total">
+          +
+          {{
+            user.financeInfos.stockExchangeInfos.totalAmount
+              | currency : "EUR" : "" : "1.0-0"
+          }}
+          €
+        </span>
+        <span class="subtitle">Real Estate</span>
       </div>
     </div>
   </div>
   <div class="buttons">
     <a class="button" (click)="openStrategyDialog()" title="Change Strategy"
-      >Change Strategy</a
+      >Update</a
     >
   </div>
 </div>

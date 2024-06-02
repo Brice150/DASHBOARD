@@ -5,6 +5,8 @@ import { User } from '../../../../core/interfaces/user';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { CityGeolocation } from '../../../../core/interfaces/weatherInfos';
+import { cloneDeep } from 'lodash';
 
 @Component({
   selector: 'app-city-dialog',
@@ -15,39 +17,55 @@ import { FormsModule } from '@angular/forms';
 })
 export class CityDialogComponent implements OnInit {
   user!: User;
-  city!: string;
+  cities!: CityGeolocation[];
 
   constructor(
     public dialogRef: MatDialogRef<CityDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
+    @Inject(MAT_DIALOG_DATA) public data: { user: User },
     private toastr: ToastrService
   ) {}
 
-  ngOnInit() {
-    this.user = this.data.user;
-    this.city = this.user.city;
+  ngOnInit(): void {
+    this.cities = cloneDeep(this.data.user.weatherInfos.cities);
   }
 
-  close() {
+  close(): void {
     this.dialogRef.close(false);
   }
 
-  validate() {
-    if (
-      this.city &&
-      citiesGeolocation.some(
-        (cityGeolocation) =>
-          cityGeolocation.city.toLowerCase().trim() ===
-          this.city.toLowerCase().trim()
-      )
-    ) {
-      this.user.city = this.city.toLowerCase().trim();
-      localStorage.setItem('userDashboard', JSON.stringify(this.user));
-      this.dialogRef.close(true);
+  validate(): void {
+    if (this.isFormValid()) {
+      const citiesToSave: CityGeolocation[] = [];
+      this.cities.forEach((newCity: CityGeolocation) => {
+        const city: CityGeolocation | undefined = citiesGeolocation.find(
+          (city: CityGeolocation) =>
+            city.city.toLowerCase().trim() === newCity.city.toLowerCase().trim()
+        );
+        if (city) {
+          citiesToSave.push(city);
+        } else {
+          this.toastr.error(newCity.city + ' could not be found', 'Weather', {
+            positionClass: 'toast-top-center',
+          });
+        }
+      });
+      if (citiesToSave.length === 4) {
+        this.data.user.weatherInfos.cities = citiesToSave;
+        localStorage.setItem('userDashboard', JSON.stringify(this.data.user));
+        this.dialogRef.close(true);
+      }
     } else {
-      this.toastr.error('City is invalid', 'Weather', {
+      this.toastr.error('At least one city is missing', 'Weather', {
         positionClass: 'toast-top-center',
       });
     }
+  }
+
+  isFormValid(): boolean {
+    return (
+      this.cities &&
+      this.cities.length === 4 &&
+      !this.cities.some((city: CityGeolocation) => city.city === '')
+    );
   }
 }
