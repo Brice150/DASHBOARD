@@ -1,9 +1,12 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { User } from 'src/app/core/interfaces/user';
+import { User } from '../../../../core/interfaces/user';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-confirmation-dialog',
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './confirmation-dialog.component.html',
   styleUrls: ['./confirmation-dialog.component.css'],
 })

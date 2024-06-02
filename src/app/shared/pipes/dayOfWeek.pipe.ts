@@ -2,6 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
   name: 'dayOfWeek',
+  standalone: true,
 })
 export class DayOfWeekPipe implements PipeTransform {
   transform(date: string): string {

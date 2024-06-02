@@ -1,12 +1,14 @@
-import { DatePipe } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Chart } from 'chart.js/auto';
-import { Hourly, WeatherInfos } from 'src/app/core/interfaces/weatherInfos';
-import { DayOfWeekPipe } from 'src/app/shared/pipes/dayOfWeek.pipe';
+import { DayOfWeekPipe } from '../../../pipes/dayOfWeek.pipe';
+import { Hourly, WeatherInfos } from '../../../../core/interfaces/weatherInfos';
 
 @Component({
   selector: 'app-weather-dialog',
+  standalone: true,
+  imports: [CommonModule, DayOfWeekPipe],
   templateUrl: './weather-dialog.component.html',
   styleUrls: ['./weather-dialog.component.css'],
 })

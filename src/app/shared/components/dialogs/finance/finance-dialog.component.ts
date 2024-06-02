@@ -1,10 +1,13 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import Chart from 'chart.js/auto';
-import { FinanceInfos } from 'src/app/core/interfaces/financeInfos';
+import { FinanceInfos } from '../../../../core/interfaces/financeInfos';
+import { Chart } from 'chart.js';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-finance-dialog',
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './finance-dialog.component.html',
   styleUrls: ['./finance-dialog.component.css'],
 })

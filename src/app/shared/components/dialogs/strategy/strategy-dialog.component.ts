@@ -1,10 +1,14 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
-import { User } from 'src/app/core/interfaces/user';
+import { User } from '../../../../core/interfaces/user';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-strategy-dialog',
+  standalone: true,
+  imports: [CommonModule, FormsModule],
   templateUrl: './strategy-dialog.component.html',
   styleUrls: ['./strategy-dialog.component.css'],
 })
