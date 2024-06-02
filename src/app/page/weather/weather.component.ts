@@ -8,18 +8,21 @@ import {
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
-import { CityGeolocation } from 'src/app/core/interfaces/cityGeolocation';
-import { User } from 'src/app/core/interfaces/user';
-import { WeatherInfos } from 'src/app/core/interfaces/weatherInfos';
-import { WeatherService } from 'src/app/core/services/weather.service';
-import { CityDialogComponent } from 'src/app/shared/components/dialogs/city/city-dialog.component';
-import { WeatherDialogComponent } from 'src/app/shared/components/dialogs/weather/weather-dialog.component';
-import { citiesGeolocation } from 'src/app/shared/data/citiesGeolocation';
-import { DayOfWeekPipe } from 'src/app/shared/pipes/dayOfWeek.pipe';
-import { WeatherImagePipe } from 'src/app/shared/pipes/weatherImage.pipe';
+import { User } from '../../core/interfaces/user';
+import { DayOfWeekPipe } from '../../shared/pipes/dayOfWeek.pipe';
+import { WeatherImagePipe } from '../../shared/pipes/weatherImage.pipe';
+import { WeatherInfos } from '../../core/interfaces/weatherInfos';
+import { WeatherService } from '../../core/services/weather.service';
+import { citiesGeolocation } from '../../shared/data/citiesGeolocation';
+import { CityGeolocation } from '../../core/interfaces/cityGeolocation';
+import { WeatherDialogComponent } from '../../shared/components/dialogs/weather/weather-dialog.component';
+import { CityDialogComponent } from '../../shared/components/dialogs/city/city-dialog.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-weather',
+  standalone: true,
+  imports: [CommonModule, DayOfWeekPipe],
   templateUrl: './weather.component.html',
   styleUrls: ['./weather.component.css'],
 })

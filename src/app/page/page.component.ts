@@ -5,8 +5,14 @@ import {
   MoneyInput,
   Yearly,
 } from '../core/interfaces/financeInfos';
+import { WeatherComponent } from './weather/weather.component';
+import { FinanceComponent } from './finance/finance.component';
+import { TasksComponent } from './tasks/tasks.component';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-root',
+  standalone: true,
+  imports: [CommonModule, WeatherComponent, FinanceComponent, TasksComponent],
   templateUrl: './page.component.html',
   styleUrls: ['./page.component.css'],
 })

@@ -1,12 +1,15 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
-import { CityGeolocation } from 'src/app/core/interfaces/cityGeolocation';
-import { User } from 'src/app/core/interfaces/user';
-import { citiesGeolocation } from 'src/app/shared/data/citiesGeolocation';
+import { citiesGeolocation } from '../../../data/citiesGeolocation';
+import { User } from '../../../../core/interfaces/user';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-city-dialog',
+  standalone: true,
+  imports: [CommonModule, FormsModule],
   templateUrl: './city-dialog.component.html',
   styleUrls: ['./city-dialog.component.css'],
 })

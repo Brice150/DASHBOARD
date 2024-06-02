@@ -8,13 +8,17 @@ import {
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
-import { User } from 'src/app/core/interfaces/user';
-import { FinanceDialogComponent } from 'src/app/shared/components/dialogs/finance/finance-dialog.component';
-import { StrategyDialogComponent } from 'src/app/shared/components/dialogs/strategy/strategy-dialog.component';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../../environments/environment';
+import { User } from '../../core/interfaces/user';
+import { FinanceDialogComponent } from '../../shared/components/dialogs/finance/finance-dialog.component';
+import { StrategyDialogComponent } from '../../shared/components/dialogs/strategy/strategy-dialog.component';
+import { CommonModule } from '@angular/common';
+import { YearPipe } from '../../shared/pipes/year.pipe';
 
 @Component({
   selector: 'app-finance',
+  standalone: true,
+  imports: [CommonModule, YearPipe],
   templateUrl: './finance.component.html',
   styleUrls: ['./finance.component.css'],
 })

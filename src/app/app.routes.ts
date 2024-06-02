@@ -1,9 +1,7 @@
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 import { PageComponent } from './page/page.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   { path: '', component: PageComponent },
-  { path: '**', component: PageComponent },
+  { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
-
-export const appRouter = RouterModule.forRoot(routes);

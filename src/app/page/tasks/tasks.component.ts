@@ -1,13 +1,15 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
-import { Task } from 'src/app/core/interfaces/task';
-import { User } from 'src/app/core/interfaces/user';
-import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation/confirmation-dialog.component';
-import { TasksDialogComponent } from 'src/app/shared/components/dialogs/tasks/tasks-dialog.component';
+import { User } from '../../core/interfaces/user';
+import { TasksDialogComponent } from '../../shared/components/dialogs/tasks/tasks-dialog.component';
+import { ConfirmationDialogComponent } from '../../shared/components/dialogs/confirmation/confirmation-dialog.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-tasks',
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './tasks.component.html',
   styleUrls: ['./tasks.component.css'],
 })

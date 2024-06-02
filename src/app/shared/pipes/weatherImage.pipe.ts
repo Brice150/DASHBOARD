@@ -1,8 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../../environments/environment';
 
 @Pipe({
   name: 'weatherImage',
+  standalone: true,
 })
 export class WeatherImagePipe implements PipeTransform {
   imagePath: string = environment.imagePath;
