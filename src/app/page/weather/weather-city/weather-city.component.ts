@@ -4,11 +4,12 @@ import { User } from '../../../core/interfaces/user';
 import { Hourly } from '../../../core/interfaces/weatherInfos';
 import { DayOfWeekPipe } from '../../../shared/pipes/dayOfWeek.pipe';
 import { Chart } from 'chart.js/auto';
+import { WeatherImagePipe } from '../../../shared/pipes/weatherImage.pipe';
 
 @Component({
   selector: 'app-weather-city',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, DayOfWeekPipe, WeatherImagePipe],
   templateUrl: './weather-city.component.html',
   styleUrl: './weather-city.component.css',
 })

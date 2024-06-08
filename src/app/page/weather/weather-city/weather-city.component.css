@@ -28,6 +28,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   width: 100%;
 }
 
@@ -46,15 +47,76 @@
   border-radius: var(--strong-radius);
 }
 
-.graph span {
-  text-align: center;
-  font-size: 18px;
-  font-weight: 800;
-  letter-spacing: 1px;
+.content .forecast {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.content .forecast .day {
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  border-radius: var(--light-radius);
+  box-shadow: var(--box-shadow);
+  width: 180px;
+  margin: 10px;
+  background-size: cover;
+  overflow: hidden;
+  padding-bottom: 10px;
+  cursor: pointer;
+  transition: ease 0.5s;
+}
+
+.content .forecast .day:hover {
+  transform: scale(1.1);
+}
+
+.content .forecast .day .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 1;
+}
+
+.day-value {
+  position: relative;
+  margin-bottom: 12px;
   text-transform: uppercase;
   background-color: var(--color-text-secondary);
   width: 150px;
-  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  padding: 2px 0;
   border-radius: var(--light-radius);
-  margin-bottom: 10px;
+}
+
+.content .forecast .temperature-gap {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 60%;
+}
+
+.content span {
+  position: relative;
+  color: white;
+  font-size: 17px;
+  font-weight: 600;
+  z-index: 2;
+}
+
+.content .subtitle {
+  font-size: 18px;
+  color: var(--color-text-primary);
 }
