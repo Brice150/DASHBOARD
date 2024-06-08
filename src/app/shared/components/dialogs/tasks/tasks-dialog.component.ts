@@ -1,10 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
-import { User } from '../../../../core/interfaces/user';
-import { Task } from '../../../../core/interfaces/task';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { User } from '../../../../core/interfaces/user';
+import { Task } from '../../../../core/interfaces/task';
 
 @Component({
   selector: 'app-tasks-dialog',

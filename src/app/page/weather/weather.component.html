@@ -5,7 +5,7 @@
   <div class="content" *ngIf="user.weatherInfos.localWeathers">
     <div class="forecast">
       <div
-        class="day"
+        class="city"
         *ngFor="let useless of user.weatherInfos.cities; let index = index"
         [ngStyle]="{
           'background-image':
@@ -15,7 +15,7 @@
         title="More Info"
       >
         <div class="overlay"></div>
-        <div class="day-value">
+        <div class="city-value">
           <span class="subtitle">{{
             user.weatherInfos.cities[index].city
           }}</span>
@@ -55,6 +55,8 @@
     </div>
   </div>
   <div class="buttons">
-    <a class="button" (click)="openCityDialog()" title="Change City">Update</a>
+    <a class="button" (click)="openUpdateDialog()" title="Change City"
+      >Update</a
+    >
   </div>
 </div>

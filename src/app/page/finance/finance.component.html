@@ -18,27 +18,14 @@
           />
           <img class="ship" [src]="imagePath + 'finance/ship.png'" />
         </div>
-        @if (!user.perfersFinanceHidden) {
-        <span class="total no-margin">
-          +
+        <span class="total" [ngClass]="{ hidden: user.perfersFinanceHidden }">
           {{
-            user.financeInfos.stockExchangeInfos.totalAmount
+            user.financeInfos.spendingsInfos.totalAmount
               | currency : "EUR" : "" : "1.0-0"
           }}
           €
         </span>
-        <span class="total no-margin">
-          -
-          {{
-            user.financeInfos.stockExchangeInfos.totalAmount
-              | currency : "EUR" : "" : "1.0-0"
-          }}
-          €
-        </span>
-        } @else {
-        <span class="total"></span>
-        }
-        <span class="subtitle">Income & Expenses</span>
+        <span class="subtitle">Income</span>
       </div>
       <div
         class="amount"
@@ -54,18 +41,13 @@
           />
           <img class="ship" [src]="imagePath + 'finance/ship.png'" />
         </div>
-        @if (!user.perfersFinanceHidden) {
-        <span class="total">
-          +
+        <span class="total" [ngClass]="{ hidden: user.perfersFinanceHidden }">
           {{
-            user.financeInfos.stockExchangeInfos.totalAmount
+            user.financeInfos.savingsInfos.totalAmount
               | currency : "EUR" : "" : "1.0-0"
           }}
           €
         </span>
-        } @else {
-        <span class="total"></span>
-        }
         <span class="subtitle">Savings</span>
       </div>
       <div
@@ -82,18 +64,13 @@
           />
           <img class="ship" [src]="imagePath + 'finance/ship.png'" />
         </div>
-        @if (!user.perfersFinanceHidden) {
-        <span class="total">
-          +
+        <span class="total" [ngClass]="{ hidden: user.perfersFinanceHidden }">
           {{
             user.financeInfos.stockExchangeInfos.totalAmount
               | currency : "EUR" : "" : "1.0-0"
           }}
           €
         </span>
-        } @else {
-        <span class="total"></span>
-        }
         <span class="subtitle">Stock Exchange</span>
       </div>
       <div
@@ -110,24 +87,19 @@
           />
           <img class="ship" [src]="imagePath + 'finance/ship.png'" />
         </div>
-        @if (!user.perfersFinanceHidden) {
-        <span class="total">
-          +
+        <span class="total" [ngClass]="{ hidden: user.perfersFinanceHidden }">
           {{
-            user.financeInfos.stockExchangeInfos.totalAmount
+            user.financeInfos.realEstateInfos.totalAmount
               | currency : "EUR" : "" : "1.0-0"
           }}
           €
         </span>
-        } @else {
-        <span class="total"></span>
-        }
         <span class="subtitle">Real Estate</span>
       </div>
     </div>
   </div>
   <div class="buttons">
-    <a class="button" (click)="openStrategyDialog()" title="Change Strategy"
+    <a class="button" (click)="openUpdateDialog()" title="Change Strategy"
       >Update</a
     >
   </div>

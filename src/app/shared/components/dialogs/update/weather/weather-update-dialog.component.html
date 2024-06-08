@@ -1,0 +1,31 @@
+<div mat-dialog-content class="container">
+  <h1>Change Cities</h1>
+  <div class="weather">
+    <div class="info">
+      <div class="value-container">
+        <label for="city1">City 1</label>
+        <input [(ngModel)]="cities[0].city" type="text" name="city1" />
+      </div>
+      <div class="value-container">
+        <label for="city2">City 2</label>
+        <input [(ngModel)]="cities[1].city" type="text" name="city2" />
+      </div>
+      <div class="value-container">
+        <label for="city3">City 3</label>
+        <input [(ngModel)]="cities[2].city" type="text" name="city3" />
+      </div>
+      <div class="value-container">
+        <label for="city4">City 4</label>
+        <input [(ngModel)]="cities[3].city" type="text" name="city4" />
+      </div>
+    </div>
+  </div>
+  <div class="buttons">
+    <a class="close" title="Close" (click)="close()">
+      <span>Close</span>
+    </a>
+    <a class="validate" title="Validate" (click)="validate()">
+      <span>Validate</span>
+    </a>
+  </div>
+</div>

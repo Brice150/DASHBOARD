@@ -21,7 +21,7 @@ h1 {
   margin-bottom: 0;
 }
 
-.weather {
+.finance {
   border-radius: var(--light-radius);
   box-shadow: var(--box-shadow);
   width: 80%;
@@ -33,7 +33,7 @@ h1 {
   flex-direction: column;
 }
 
-.weather .info {
+.finance .info {
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -45,26 +45,27 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
+  flex-direction: column;
   margin: 5px 0;
 }
 
 .value-container label {
-  color: var(--color-text-secondary);
+  color: var(--color-text-primary);
   text-align: center;
   font-size: 17px;
   font-weight: 600;
 }
 
-.value-container textarea {
+.value-container input {
+  width: 150px;
   background-color: var(--color-background);
   color: var(--color-text-secondary);
   border: none;
   resize: none;
-  text-align: center;
   font-size: 17px;
   font-weight: 600;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  text-align: center;
 }
 
 .buttons {

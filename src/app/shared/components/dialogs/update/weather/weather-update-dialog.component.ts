@@ -1,26 +1,26 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { citiesGeolocation } from '../../../data/citiesGeolocation';
-import { User } from '../../../../core/interfaces/user';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { CityGeolocation } from '../../../../core/interfaces/weatherInfos';
 import { cloneDeep } from 'lodash';
+import { CityGeolocation } from '../../../../../core/interfaces/weatherInfos';
+import { User } from '../../../../../core/interfaces/user';
+import { citiesGeolocation } from '../../../../data/citiesGeolocation';
 
 @Component({
   selector: 'app-city-dialog',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './city-dialog.component.html',
-  styleUrls: ['./city-dialog.component.css'],
+  templateUrl: './weather-update-dialog.component.html',
+  styleUrls: ['./weather-update-dialog.component.css'],
 })
-export class CityDialogComponent implements OnInit {
+export class WeatherUpdateDialogComponent implements OnInit {
   user!: User;
   cities!: CityGeolocation[];
 
   constructor(
-    public dialogRef: MatDialogRef<CityDialogComponent>,
+    public dialogRef: MatDialogRef<WeatherUpdateDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { user: User },
     private toastr: ToastrService
   ) {}

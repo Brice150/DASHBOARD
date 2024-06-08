@@ -1,6 +1,6 @@
 export interface FinanceInfos {
   spendingsInfos: Spendings;
-  savingInfos: Savings;
+  savingsInfos: Savings;
   stockExchangeInfos: StockExchange;
   realEstateInfos: RealEstate;
 }

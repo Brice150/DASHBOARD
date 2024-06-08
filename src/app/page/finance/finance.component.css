@@ -74,6 +74,8 @@
   font-size: 18px;
   text-transform: uppercase;
   margin-bottom: 5px;
+  color: black;
+  text-shadow: 0 0 1px black;
 }
 
 .header .mastercard {
@@ -92,14 +94,14 @@
   align-items: center;
   margin: 12px;
   min-height: 24px;
+  color: white;
 }
 
-.total.no-margin {
-  margin: 0;
+.total.hidden {
+  filter: blur(5px);
 }
 
 .content span {
-  color: black;
   font-size: 17px;
   font-weight: 600;
 }

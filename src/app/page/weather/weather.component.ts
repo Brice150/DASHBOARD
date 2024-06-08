@@ -4,9 +4,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { User } from '../../core/interfaces/user';
 import { WeatherService } from '../../core/services/weather.service';
-import { CityDialogComponent } from '../../shared/components/dialogs/city/city-dialog.component';
 import { DayOfWeekPipe } from '../../shared/pipes/dayOfWeek.pipe';
 import { WeatherImagePipe } from '../../shared/pipes/weatherImage.pipe';
+import { WeatherUpdateDialogComponent } from '../../shared/components/dialogs/update/weather/weather-update-dialog.component';
 
 @Component({
   selector: 'app-weather',
@@ -50,12 +50,12 @@ export class WeatherComponent implements OnInit {
       );
   }
 
-  openCityDialog(): void {
+  openUpdateDialog(): void {
     const dialogData = {
       user: this.user,
     };
 
-    const dialogRef = this.dialog.open(CityDialogComponent, {
+    const dialogRef = this.dialog.open(WeatherUpdateDialogComponent, {
       data: dialogData,
     });
 

@@ -21,7 +21,7 @@ h1 {
   margin-bottom: 0;
 }
 
-.finance {
+.weather {
   border-radius: var(--light-radius);
   box-shadow: var(--box-shadow);
   width: 80%;
@@ -33,7 +33,7 @@ h1 {
   flex-direction: column;
 }
 
-.finance .info {
+.weather .info {
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -50,7 +50,7 @@ h1 {
 }
 
 .value-container label {
-  color: var(--color-text-secondary);
+  color: var(--color-text-primary);
   text-align: center;
   font-size: 17px;
   font-weight: 600;

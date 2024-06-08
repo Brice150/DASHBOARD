@@ -52,7 +52,7 @@ h1 {
 }
 
 .value-container label {
-  color: var(--color-text-secondary);
+  color: var(--color-text-primary);
   text-align: center;
   font-size: 17px;
   font-weight: 600;
