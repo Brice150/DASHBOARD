@@ -1,15 +1,14 @@
+:host {
+  width: 100%;
+}
+
 .card {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background-color: var(--color-background);
-  color: var(--color-text-primary);
-  box-shadow: var(--box-shadow);
-  border-radius: var(--strong-radius);
   width: 100%;
-  min-width: 540px;
 }
 
 .card .title {
@@ -25,9 +24,37 @@
 }
 
 .card .content {
-  margin-top: 70px;
+  margin-top: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
+}
+
+.graph {
+  width: 95%;
+  height: 45vh;
+  margin-top: 20px;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  box-shadow: var(--box-shadow);
+  border-radius: var(--strong-radius);
+}
+
+.graph span {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  background-color: var(--color-text-secondary);
+  width: 150px;
+  height: 25px;
+  border-radius: var(--light-radius);
+  margin-bottom: 10px;
 }
