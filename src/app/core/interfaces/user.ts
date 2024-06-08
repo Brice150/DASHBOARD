@@ -4,7 +4,7 @@ import { WeatherInfos } from './weatherInfos';
 
 export interface User {
   prefersDarkMode: boolean;
-  hidesFinanceInfos: boolean;
+  perfersFinanceHidden: boolean;
   financeInfos: FinanceInfos;
   weatherInfos: WeatherInfos;
   tasks: Task[];

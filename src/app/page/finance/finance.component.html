@@ -18,6 +18,7 @@
           />
           <img class="ship" [src]="imagePath + 'finance/ship.png'" />
         </div>
+        @if (!user.perfersFinanceHidden) {
         <span class="total no-margin">
           +
           {{
@@ -34,6 +35,9 @@
           }}
           €
         </span>
+        } @else {
+        <span class="total"></span>
+        }
         <span class="subtitle">Income & Expenses</span>
       </div>
       <div
@@ -50,6 +54,7 @@
           />
           <img class="ship" [src]="imagePath + 'finance/ship.png'" />
         </div>
+        @if (!user.perfersFinanceHidden) {
         <span class="total">
           +
           {{
@@ -58,6 +63,9 @@
           }}
           €
         </span>
+        } @else {
+        <span class="total"></span>
+        }
         <span class="subtitle">Savings</span>
       </div>
       <div
@@ -74,6 +82,7 @@
           />
           <img class="ship" [src]="imagePath + 'finance/ship.png'" />
         </div>
+        @if (!user.perfersFinanceHidden) {
         <span class="total">
           +
           {{
@@ -82,6 +91,9 @@
           }}
           €
         </span>
+        } @else {
+        <span class="total"></span>
+        }
         <span class="subtitle">Stock Exchange</span>
       </div>
       <div
@@ -98,6 +110,7 @@
           />
           <img class="ship" [src]="imagePath + 'finance/ship.png'" />
         </div>
+        @if (!user.perfersFinanceHidden) {
         <span class="total">
           +
           {{
@@ -106,6 +119,9 @@
           }}
           €
         </span>
+        } @else {
+        <span class="total"></span>
+        }
         <span class="subtitle">Real Estate</span>
       </div>
     </div>

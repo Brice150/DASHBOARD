@@ -13,6 +13,7 @@ import {
   StockExchange,
 } from '../core/interfaces/financeInfos';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -23,14 +24,13 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     FinanceComponent,
     TasksComponent,
     MatSlideToggleModule,
+    FormsModule,
   ],
   templateUrl: './page.component.html',
   styleUrls: ['./page.component.css'],
 })
 export class PageComponent implements OnInit {
   user: User = {} as User;
-
-  constructor() {}
 
   ngOnInit(): void {
     let storedUser: string | null = localStorage.getItem('userDashboard');
@@ -44,7 +44,7 @@ export class PageComponent implements OnInit {
 
   setDefaultUser(): void {
     this.user.prefersDarkMode = false;
-    this.user.hidesFinanceInfos = false;
+    this.user.perfersFinanceHidden = false;
     this.user.tasks = [];
     this.user.weatherInfos = {} as WeatherInfos;
     this.user.financeInfos = {} as FinanceInfos;
@@ -78,5 +78,8 @@ export class PageComponent implements OnInit {
     localStorage.setItem('userDashboard', JSON.stringify(this.user));
   }
 
-  hideFinance(): void {}
+  hideFinance(): void {
+    this.user.perfersFinanceHidden = !this.user.perfersFinanceHidden;
+    localStorage.setItem('userDashboard', JSON.stringify(this.user));
+  }
 }

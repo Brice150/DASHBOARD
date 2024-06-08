@@ -100,3 +100,13 @@ app-finance {
     max-width: none;
   }
 }
+
+@media screen and (max-width: 650px) {
+  .main-container .switch-container {
+    margin-top: 35px;
+  }
+
+  .main-container .cards-container {
+    margin-top: 90px;
+  }
+}
