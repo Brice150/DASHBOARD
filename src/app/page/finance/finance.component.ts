@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from '../../../environments/environment';
 import { User } from '../../core/interfaces/user';
 import { YearPipe } from '../../shared/pipes/year.pipe';
 import { FinanceUpdateDialogComponent } from '../../shared/components/dialogs/update/finance/finance-update-dialog.component';
-import { filter } from 'lodash';
+import { FinanceType } from '../../core/enums/finance-type.enum';
 
 @Component({
   selector: 'app-finance',
@@ -18,6 +18,9 @@ import { filter } from 'lodash';
 export class FinanceComponent {
   imagePath: string = environment.imagePath;
   @Input() user!: User;
+  @Output() onFinanceTypeSelected: EventEmitter<FinanceType> =
+    new EventEmitter<FinanceType>();
+  FinanceType = FinanceType;
 
   constructor(public dialog: MatDialog, private toastr: ToastrService) {}
 
@@ -38,5 +41,9 @@ export class FinanceComponent {
         });
       }
     });
+  }
+
+  selectFinanceType(type: FinanceType): void {
+    this.onFinanceTypeSelected.emit(type);
   }
 }

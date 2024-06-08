@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { User } from '../../core/interfaces/user';
@@ -17,6 +17,7 @@ import { WeatherUpdateDialogComponent } from '../../shared/components/dialogs/up
 })
 export class WeatherComponent implements OnInit {
   @Input() user!: User;
+  @Output() onCitySelected: EventEmitter<number> = new EventEmitter<number>();
   dayOfWeekPipe: DayOfWeekPipe = new DayOfWeekPipe();
   weatherImagePipe: WeatherImagePipe = new WeatherImagePipe();
 
@@ -68,5 +69,9 @@ export class WeatherComponent implements OnInit {
         });
       }
     });
+  }
+
+  selectCity(index: number): void {
+    this.onCitySelected.emit(index);
   }
 }

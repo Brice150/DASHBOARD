@@ -1,0 +1,33 @@
+.card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  box-shadow: var(--box-shadow);
+  border-radius: var(--strong-radius);
+  width: 100%;
+  min-width: 540px;
+}
+
+.card .title {
+  position: absolute;
+  top: 10px;
+}
+
+.card .title span {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.card .content {
+  margin-top: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
