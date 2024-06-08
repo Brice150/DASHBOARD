@@ -62,8 +62,9 @@ export class WeatherComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.getWeatherInfos();
-        this.toastr.success('City updated', 'Weather', {
+        this.toastr.success('Cities updated', 'Weather', {
           positionClass: 'toast-top-center',
+          toastClass: 'ngx-toastr custom',
         });
       }
     });

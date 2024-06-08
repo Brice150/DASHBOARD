@@ -32,6 +32,7 @@ export class TasksComponent {
       if (result) {
         this.toastr.success('Task added/updated', 'Task', {
           positionClass: 'toast-top-center',
+          toastClass: 'ngx-toastr custom',
         });
       }
     });
@@ -51,6 +52,7 @@ export class TasksComponent {
       if (result) {
         this.toastr.success('Task deleted', 'Task', {
           positionClass: 'toast-top-center',
+          toastClass: 'ngx-toastr custom',
         });
       }
     });

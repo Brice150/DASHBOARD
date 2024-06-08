@@ -32,8 +32,9 @@ export class FinanceComponent {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.toastr.success('Strategy updated', 'Finance', {
+        this.toastr.success('Total amounts updated', 'Finance', {
           positionClass: 'toast-top-center',
+          toastClass: 'ngx-toastr custom',
         });
       }
     });

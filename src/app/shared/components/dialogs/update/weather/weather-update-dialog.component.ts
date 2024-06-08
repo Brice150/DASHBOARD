@@ -46,6 +46,7 @@ export class WeatherUpdateDialogComponent implements OnInit {
         } else {
           this.toastr.error(newCity.city + ' could not be found', 'Weather', {
             positionClass: 'toast-top-center',
+            toastClass: 'ngx-toastr custom',
           });
         }
       });
@@ -57,6 +58,7 @@ export class WeatherUpdateDialogComponent implements OnInit {
     } else {
       this.toastr.error('At least one city is missing', 'Weather', {
         positionClass: 'toast-top-center',
+        toastClass: 'ngx-toastr custom',
       });
     }
   }

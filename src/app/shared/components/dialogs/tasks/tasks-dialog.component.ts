@@ -58,6 +58,7 @@ export class TasksDialogComponent implements OnInit {
     } else {
       this.toastr.error('Title is empty', 'Task', {
         positionClass: 'toast-top-center',
+        toastClass: 'ngx-toastr custom',
       });
     }
   }

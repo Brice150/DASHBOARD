@@ -34,6 +34,11 @@ body {
   display: none;
 }
 
+.toast-container .ngx-toastr.custom {
+  box-shadow: none;
+  border-radius: 10px;
+}
+
 html,
 body {
   height: 100%;
