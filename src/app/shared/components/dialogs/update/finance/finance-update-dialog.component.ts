@@ -6,7 +6,7 @@ import { User } from '../../../../../core/interfaces/user';
 import { cloneDeep } from 'lodash';
 
 @Component({
-  selector: 'app-strategy-dialog',
+  selector: 'app-finance-update-dialog',
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './finance-update-dialog.component.html',

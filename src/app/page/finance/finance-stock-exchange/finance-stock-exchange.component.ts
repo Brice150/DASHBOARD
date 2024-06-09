@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { User } from '../../../core/interfaces/user';
 
 @Component({
@@ -9,6 +9,8 @@ import { User } from '../../../core/interfaces/user';
   templateUrl: './finance-stock-exchange.component.html',
   styleUrl: './finance-stock-exchange.component.css',
 })
-export class FinanceStockExchangeComponent {
+export class FinanceStockExchangeComponent implements OnInit {
   @Input() user!: User;
+
+  ngOnInit(): void {}
 }

@@ -6,7 +6,7 @@ import { environment } from '../../../environments/environment';
 import { User } from '../../core/interfaces/user';
 import { YearPipe } from '../../shared/pipes/year.pipe';
 import { FinanceUpdateDialogComponent } from '../../shared/components/dialogs/update/finance/finance-update-dialog.component';
-import { FinanceType } from '../../core/enums/finance-type.enum';
+import { ActivePage } from '../../core/enums/active-page.enum';
 
 @Component({
   selector: 'app-finance',
@@ -18,9 +18,9 @@ import { FinanceType } from '../../core/enums/finance-type.enum';
 export class FinanceComponent {
   imagePath: string = environment.imagePath;
   @Input() user!: User;
-  @Output() onFinanceTypeSelected: EventEmitter<FinanceType> =
-    new EventEmitter<FinanceType>();
-  FinanceType = FinanceType;
+  @Output() onFinanceTypeSelected: EventEmitter<ActivePage> =
+    new EventEmitter<ActivePage>();
+  ActivePage = ActivePage;
 
   constructor(public dialog: MatDialog, private toastr: ToastrService) {}
 
@@ -43,7 +43,7 @@ export class FinanceComponent {
     });
   }
 
-  selectFinanceType(type: FinanceType): void {
+  selectActivePage(type: ActivePage): void {
     this.onFinanceTypeSelected.emit(type);
   }
 }

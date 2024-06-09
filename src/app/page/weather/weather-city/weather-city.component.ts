@@ -25,7 +25,7 @@ export class WeatherCityComponent implements OnInit {
     this.displayGraph();
   }
 
-  getDayWeatherInfo() {
+  getDayWeatherInfo(): void {
     this.dayWeatherInfo.time = [];
     this.dayWeatherInfo.precipitation = [];
     this.dayWeatherInfo.temperature_2m = [];
@@ -74,7 +74,7 @@ export class WeatherCityComponent implements OnInit {
     }
   }
 
-  displayGraph() {
+  displayGraph(): void {
     const graph = document.getElementById(
       'weatherGraph'
     ) as HTMLCanvasElement | null;
@@ -100,6 +100,7 @@ export class WeatherCityComponent implements OnInit {
         },
         options: {
           maintainAspectRatio: false,
+          color: '#006aff',
         },
       });
     }

@@ -9,7 +9,7 @@ import { User } from '../../../../../core/interfaces/user';
 import { citiesGeolocation } from '../../../../data/citiesGeolocation';
 
 @Component({
-  selector: 'app-city-dialog',
+  selector: 'app-weather-update-dialog',
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './weather-update-dialog.component.html',

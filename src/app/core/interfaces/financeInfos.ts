@@ -8,7 +8,6 @@ export interface FinanceInfos {
 export interface Spendings {
   totalAmount: number;
   spendings: MoneyInput[];
-  earnings: MoneyInput[];
 }
 
 export interface Savings {
@@ -29,6 +28,7 @@ export interface RealEstate {
 export interface MoneyInput {
   title: string;
   amount: number;
+  color: string;
 }
 
 export interface StockMoneyInput {

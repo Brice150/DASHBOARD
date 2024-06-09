@@ -1,4 +1,5 @@
-export enum FinanceType {
+export enum ActivePage {
+  WEATHER = 'Weather',
   INCOME = 'Income',
   SAVINGS = 'Savings',
   STOCKEXCHANGE = 'StockExchange',

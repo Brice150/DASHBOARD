@@ -10,7 +10,7 @@
       <i class="bx bxs-moon"></i>
       }
     </a>
-    @if (!isPageActive()) {
+    @if (!activePage) {
     <mat-slide-toggle
       (toggleChange)="hideFinance()"
       [(ngModel)]="user.perfersFinanceHidden"
@@ -23,7 +23,7 @@
     }
   </div>
   <div class="cards-container">
-    @if (!isPageActive()) {
+    @if (!activePage) {
     <div class="flex">
       <app-weather
         [user]="user"
@@ -31,21 +31,23 @@
       ></app-weather>
       <app-finance
         [user]="user"
-        (onFinanceTypeSelected)="onFinanceTypeSelected($event)"
+        (onFinanceTypeSelected)="onPageSelected($event)"
       ></app-finance>
     </div>
     <div class="center">
       <app-tasks [user]="user"></app-tasks>
     </div>
-    } @else if (isWeatherPageActive) {
+    } @else if (activePage === ActivePage.WEATHER) {
     <app-weather-city [user]="user" [index]="indexSelected"></app-weather-city>
-    } @else if (isIncomePageActive) {
-    <app-finance-income [user]="user"></app-finance-income>
-    } @else if (isSavingsPageActive) {
-    <app-finance-savings [user]="user"></app-finance-savings>
-    } @else if (isStockExchangePageActive) {
+    } @else if (activePage === ActivePage.INCOME || activePage ===
+    ActivePage.SAVINGS) {
+    <app-finance-income-savings
+      [user]="user"
+      [activePage]="activePage"
+    ></app-finance-income-savings>
+    } @else if (activePage === ActivePage.STOCKEXCHANGE) {
     <app-finance-stock-exchange [user]="user"></app-finance-stock-exchange>
-    } @else if (isRealEstatePageActive) {
+    } @else if (activePage === ActivePage.REALESTATE) {
     <app-finance-real-estate [user]="user"></app-finance-real-estate>
     }
   </div>

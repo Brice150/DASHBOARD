@@ -1,0 +1,17 @@
+<div class="card">
+  <div class="content">
+    <div class="title">
+      @if (activePage === ActivePage.INCOME) {
+      <span>Expenses</span>
+      } @else if (activePage === ActivePage.SAVINGS) {
+      <span>Savings</span>
+      }
+    </div>
+    <div class="graph">
+      <canvas id="doughnutGraph"></canvas>
+    </div>
+    <div class="buttons">
+      <a class="button" (click)="openUpdateDialog()" title="Update">Update</a>
+    </div>
+  </div>
+</div>
