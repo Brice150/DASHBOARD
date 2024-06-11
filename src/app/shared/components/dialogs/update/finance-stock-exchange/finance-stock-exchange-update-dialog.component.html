@@ -1,0 +1,27 @@
+<div mat-dialog-content class="container">
+  <h1>Update Amounts</h1>
+  <div class="finance">
+    <div class="info">
+      <div class="value-container">
+        <label for="total">Total amount</label>
+        <input [(ngModel)]="totalAmount" name="total" type="number" />
+      </div>
+      <div class="value-container">
+        <label for="amount">Amount per month</label>
+        <input [(ngModel)]="amountPerMonth" name="amount" type="number" />
+      </div>
+      <div class="value-container">
+        <label for="percentage">Percentage</label>
+        <input [(ngModel)]="percentage" name="percentage" type="number" />
+      </div>
+    </div>
+  </div>
+  <div class="buttons">
+    <a class="close" title="Close" (click)="close()">
+      <span>Close</span>
+    </a>
+    <a class="validate" title="Validate" (click)="validate()">
+      <span>Validate</span>
+    </a>
+  </div>
+</div>

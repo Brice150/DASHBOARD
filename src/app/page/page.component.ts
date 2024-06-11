@@ -11,6 +11,7 @@ import {
   Savings,
   Spendings,
   StockExchange,
+  Yearly,
 } from '../core/interfaces/financeInfos';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { FormsModule } from '@angular/forms';
@@ -75,6 +76,7 @@ export class PageComponent implements OnInit {
     this.user.financeInfos.savingsInfos.savings = [];
     this.user.financeInfos.stockExchangeInfos = {} as StockExchange;
     this.user.financeInfos.stockExchangeInfos.totalAmount = 0;
+    this.user.financeInfos.stockExchangeInfos.yearly = {} as Yearly;
     this.user.financeInfos.realEstateInfos = {} as RealEstate;
     this.user.financeInfos.realEstateInfos.totalAmount = 0;
   }

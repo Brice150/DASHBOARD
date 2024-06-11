@@ -1,6 +1,13 @@
 <div class="card">
-  <div class="title">
-    <span>Stock Exchange</span>
+  <div class="content">
+    <div class="title">
+      <span>Stock Exchange</span>
+    </div>
+    <div class="graph">
+      <canvas id="barGraph"></canvas>
+    </div>
+    <div class="buttons">
+      <a class="button" (click)="openUpdateDialog()" title="Update">Update</a>
+    </div>
   </div>
-  <div class="content">Compound interests simulation graph + update</div>
 </div>

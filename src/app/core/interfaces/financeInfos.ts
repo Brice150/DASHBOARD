@@ -17,7 +17,8 @@ export interface Savings {
 
 export interface StockExchange {
   totalAmount: number;
-  stockMoneyInput: StockMoneyInput;
+  amountPerMonth: number;
+  percentage: number;
   yearly: Yearly;
 }
 
@@ -29,12 +30,6 @@ export interface MoneyInput {
   title: string;
   amount: number;
   color: string;
-}
-
-export interface StockMoneyInput {
-  amountPerMonth: number;
-  initialAmount: number;
-  percentage: number;
 }
 
 export interface Yearly {
