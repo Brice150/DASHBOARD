@@ -32,10 +32,15 @@ export class FinanceIncomeSavingsComponent implements OnInit {
   }
 
   displayIncomeGraph(): void {
-    this.updateResidue(
-      this.user.financeInfos.spendingsInfos.spendings,
-      this.user.financeInfos.spendingsInfos.totalAmount
-    );
+    if (
+      this.user.financeInfos.spendingsInfos.totalAmount &&
+      this.user.financeInfos.spendingsInfos.totalAmount !== 0
+    ) {
+      this.updateResidue(
+        this.user.financeInfos.spendingsInfos.spendings,
+        this.user.financeInfos.spendingsInfos.totalAmount
+      );
+    }
     const graph = document.getElementById(
       'doughnutGraph'
     ) as HTMLCanvasElement | null;
@@ -73,10 +78,15 @@ export class FinanceIncomeSavingsComponent implements OnInit {
   }
 
   displaySavingsGraph(): void {
-    this.updateResidue(
-      this.user.financeInfos.savingsInfos.savings,
-      this.user.financeInfos.savingsInfos.totalAmount
-    );
+    if (
+      this.user.financeInfos.savingsInfos.totalAmount &&
+      this.user.financeInfos.savingsInfos.totalAmount !== 0
+    ) {
+      this.updateResidue(
+        this.user.financeInfos.savingsInfos.savings,
+        this.user.financeInfos.savingsInfos.totalAmount
+      );
+    }
     const graph = document.getElementById(
       'doughnutGraph'
     ) as HTMLCanvasElement | null;

@@ -1,15 +1,13 @@
+:host {
+  width: 100%;
+}
+
 .card {
-  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background-color: var(--color-background);
-  color: var(--color-text-primary);
-  box-shadow: var(--box-shadow);
-  border-radius: var(--strong-radius);
   width: 100%;
-  min-width: 540px;
 }
 
 .card .title {
@@ -25,9 +23,16 @@
 }
 
 .card .content {
-  margin-top: 70px;
+  position: relative;
+  margin-top: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  flex-direction: column;
+  width: 95%;
+  height: 70vh;
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  box-shadow: var(--box-shadow);
+  border-radius: var(--strong-radius);
 }

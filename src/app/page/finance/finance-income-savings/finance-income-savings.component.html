@@ -11,7 +11,15 @@
       <canvas id="doughnutGraph"></canvas>
     </div>
     <div class="buttons">
+      @if ((activePage === ActivePage.INCOME &&
+      user.financeInfos.spendingsInfos.totalAmount !== 0) || (activePage ===
+      ActivePage.SAVINGS && user.financeInfos.savingsInfos.totalAmount !== 0)) {
       <a class="button" (click)="openUpdateDialog()" title="Update">Update</a>
+      } @else if ((activePage === ActivePage.INCOME &&
+      user.financeInfos.spendingsInfos.totalAmount === 0) || (activePage ===
+      ActivePage.SAVINGS && user.financeInfos.savingsInfos.totalAmount === 0)) {
+      <a class="button green" (click)="openUpdateDialog()" title="Add">Add</a>
+      }
     </div>
   </div>
 </div>

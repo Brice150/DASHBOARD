@@ -7,7 +7,16 @@
       <canvas id="barGraph"></canvas>
     </div>
     <div class="buttons">
+      @if ((user.financeInfos.stockExchangeInfos.totalAmount &&
+      user.financeInfos.stockExchangeInfos.totalAmount !== 0) ||
+      (user.financeInfos.stockExchangeInfos.amountPerMonth &&
+      user.financeInfos.stockExchangeInfos.amountPerMonth !== 0)) {
       <a class="button" (click)="openUpdateDialog()" title="Update">Update</a>
+      } @else {
+      <a class="button green" (click)="openUpdateDialog()" title="Update"
+        >Add</a
+      >
+      }
     </div>
   </div>
 </div>

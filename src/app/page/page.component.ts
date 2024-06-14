@@ -76,6 +76,8 @@ export class PageComponent implements OnInit {
     this.user.financeInfos.savingsInfos.savings = [];
     this.user.financeInfos.stockExchangeInfos = {} as StockExchange;
     this.user.financeInfos.stockExchangeInfos.totalAmount = 0;
+    this.user.financeInfos.stockExchangeInfos.amountPerMonth = 0;
+    this.user.financeInfos.stockExchangeInfos.percentage = 0;
     this.user.financeInfos.stockExchangeInfos.yearly = {} as Yearly;
     this.user.financeInfos.realEstateInfos = {} as RealEstate;
     this.user.financeInfos.realEstateInfos.totalAmount = 0;

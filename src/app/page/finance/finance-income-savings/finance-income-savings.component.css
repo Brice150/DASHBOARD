@@ -73,6 +73,10 @@
   font-weight: 600;
 }
 
+.buttons .button.green {
+  background-color: green;
+}
+
 .buttons .button:hover {
   transform: scale(1.1);
 }
