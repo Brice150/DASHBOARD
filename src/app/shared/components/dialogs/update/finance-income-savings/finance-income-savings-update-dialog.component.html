@@ -11,7 +11,12 @@
       </div>
       <div class="value-container">
         <label for="amount">Amount</label>
-        <input [(ngModel)]="moneyInput.amount" name="amount" type="number" />
+        <input
+          [(ngModel)]="moneyInput.amount"
+          name="amount"
+          type="number"
+          min="0"
+        />
       </div>
       <div class="value-container">
         <label for="color">Color</label>

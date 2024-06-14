@@ -66,7 +66,7 @@ export class FinanceUpdateDialogComponent implements OnInit {
       this.dialogRef.close(true);
     } else {
       this.toastr.error(
-        'At least one element is missing or is equal to 0',
+        'At least one number is missing or is negative',
         'Finance',
         {
           positionClass: 'toast-top-center',

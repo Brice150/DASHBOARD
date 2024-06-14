@@ -4,15 +4,25 @@
     <div class="info">
       <div class="value-container">
         <label for="total">Total amount</label>
-        <input [(ngModel)]="totalAmount" name="total" type="number" />
+        <input [(ngModel)]="totalAmount" name="total" type="number" min="0" />
       </div>
       <div class="value-container">
         <label for="amount">Amount per month</label>
-        <input [(ngModel)]="amountPerMonth" name="amount" type="number" />
+        <input
+          [(ngModel)]="amountPerMonth"
+          name="amount"
+          type="number"
+          min="0"
+        />
       </div>
       <div class="value-container">
         <label for="percentage">Percentage</label>
-        <input [(ngModel)]="percentage" name="percentage" type="number" />
+        <input
+          [(ngModel)]="percentage"
+          name="percentage"
+          type="number"
+          min="0"
+        />
       </div>
     </div>
   </div>
