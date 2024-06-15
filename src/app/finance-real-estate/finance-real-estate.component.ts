@@ -56,7 +56,8 @@ export class FinanceRealEstateComponent implements OnInit {
 
   calculateMonthlyPayments(): void {
     if (this.user.financeInfos.realEstateInfos.financing.duration !== 0) {
-      const C = this.user.financeInfos.realEstateInfos.financing.totalBorrowed;
+      const cost =
+        this.user.financeInfos.realEstateInfos.financing.totalBorrowed;
       const annualLoanRate =
         this.user.financeInfos.realEstateInfos.financing.loanRate;
       const annualInsuranceRate =
@@ -68,8 +69,8 @@ export class FinanceRealEstateComponent implements OnInit {
       const n = years * 12;
 
       const monthlyPaymentWithoutInsurance =
-        (C * monthlyLoanRate) / (1 - Math.pow(1 + monthlyLoanRate, -n));
-      const monthlyInsurancePayment = C * monthlyInsuranceRate;
+        (cost * monthlyLoanRate) / (1 - Math.pow(1 + monthlyLoanRate, -n));
+      const monthlyInsurancePayment = cost * monthlyInsuranceRate;
       const totalMonthlyPayment =
         monthlyPaymentWithoutInsurance + monthlyInsurancePayment;
 
