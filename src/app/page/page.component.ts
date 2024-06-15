@@ -50,7 +50,7 @@ export class PageComponent implements OnInit {
   }
 
   onCitySelected(index: number): void {
-    this.router.navigate(['/weather/' + index], { state: { user: this.user } });
+    this.router.navigate(['/weather/' + index]);
   }
 
   onFinanceTypeSelected(type: string): void {
@@ -59,9 +59,9 @@ export class PageComponent implements OnInit {
         state: { user: this.user },
       });
     } else if (type === ActivePage.STOCKEXCHANGE) {
-      this.router.navigate(['/stock-exchange'], { state: { user: this.user } });
+      this.router.navigate(['/stock-exchange']);
     } else {
-      this.router.navigate(['/real-estate'], { state: { user: this.user } });
+      this.router.navigate(['/real-estate']);
     }
   }
 

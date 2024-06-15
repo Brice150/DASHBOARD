@@ -33,7 +33,7 @@ export class FinanceIncomeSavingsComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params: Params) => {
-      this.user = history.state['user'];
+      this.user = this.userService.getUser();
       this.type = params['type'];
       if (this.isSpendingsFinanceType()) {
         this.displayIncomeGraph();

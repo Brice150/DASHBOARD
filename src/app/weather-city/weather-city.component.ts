@@ -7,6 +7,7 @@ import { Hourly } from '../core/interfaces/weatherInfos';
 import { HeaderComponent } from '../header/header.component';
 import { DayOfWeekPipe } from '../shared/pipes/dayOfWeek.pipe';
 import { WeatherImagePipe } from '../shared/pipes/weatherImage.pipe';
+import { UserService } from '../core/services/user.service';
 
 @Component({
   selector: 'app-weather-city',
@@ -22,11 +23,14 @@ export class WeatherCityComponent implements OnInit {
   dayOfWeekPipe: DayOfWeekPipe = new DayOfWeekPipe();
   datePipe: DatePipe = new DatePipe('en-FR');
 
-  constructor(private activatedRoute: ActivatedRoute) {}
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private userService: UserService
+  ) {}
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params: Params) => {
-      this.user = history.state['user'];
+      this.user = this.userService.getUser();
       this.index = params['index'];
       this.getDayWeatherInfo();
       this.displayGraph();

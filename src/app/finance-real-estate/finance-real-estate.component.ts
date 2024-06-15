@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { User } from '../core/interfaces/user';
 import { HeaderComponent } from '../header/header.component';
+import { UserService } from '../core/services/user.service';
 
 @Component({
   selector: 'app-finance-real-estate',
@@ -14,7 +15,9 @@ import { HeaderComponent } from '../header/header.component';
 export class FinanceRealEstateComponent implements OnInit {
   user!: User;
 
+  constructor(private userService: UserService) {}
+
   ngOnInit(): void {
-    this.user = history.state['user'];
+    this.user = this.userService.getUser();
   }
 }

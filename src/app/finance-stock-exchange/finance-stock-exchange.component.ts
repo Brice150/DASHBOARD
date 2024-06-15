@@ -28,7 +28,7 @@ export class FinanceStockExchangeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.user = history.state['user'];
+    this.user = this.userService.getUser();
     this.calculateAmounts();
     this.displayStockExchangeGraph();
   }
