@@ -34,11 +34,13 @@ export class HeaderComponent implements OnInit {
 
   changeMode(): void {
     document.body.classList.toggle('dark-theme-variables');
+    this.user = this.userService.getUser();
     this.user.prefersDarkMode = !this.user.prefersDarkMode;
     this.userService.saveUser(this.user);
   }
 
   hideFinance(): void {
+    this.user = this.userService.getUser();
     this.user.perfersFinanceHidden = !this.user.perfersFinanceHidden;
     this.userService.saveUser(this.user);
     this.onHideFinance.emit();
