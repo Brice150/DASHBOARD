@@ -28,7 +28,7 @@
             user.financeInfos.realEstateInfos.results.totalRents
               | currency : "EUR" : "" : "1.0-0"
           }}
-          €</span
+          € / M</span
         >
       </div>
       <div class="value-container">
@@ -41,7 +41,7 @@
             user.financeInfos.realEstateInfos.results.totalCharges
               | currency : "EUR" : "" : "1.0-0"
           }}
-          €</span
+          € / M</span
         >
       </div>
       <div class="value-container">
@@ -50,7 +50,8 @@
           <span>Gross Yield</span>
         </div>
         <span class="number">{{
-          user.financeInfos.realEstateInfos.results.grossYield | percent
+          user.financeInfos.realEstateInfos.results.grossYield
+            | percent : "1.1-1"
         }}</span>
       </div>
       <div class="value-container">
@@ -59,7 +60,7 @@
           <span>Net Yield</span>
         </div>
         <span class="number">{{
-          user.financeInfos.realEstateInfos.results.netYield | percent
+          user.financeInfos.realEstateInfos.results.netYield | percent : "1.1-1"
         }}</span>
       </div>
       <div class="value-container">
@@ -72,7 +73,7 @@
             user.financeInfos.realEstateInfos.results.cashFlow
               | currency : "EUR" : "" : "1.0-0"
           }}
-          €</span
+          € / M</span
         >
       </div>
     </div>
@@ -93,6 +94,7 @@
               type="number"
               min="0"
               [(ngModel)]="user.financeInfos.realEstateInfos.purchase.price"
+              (ngModelChange)="calculateAmounts()"
             />
           </div>
           <div class="value-container">
@@ -104,6 +106,7 @@
               [(ngModel)]="
                 user.financeInfos.realEstateInfos.purchase.notaryFees
               "
+              (ngModelChange)="calculateAmounts()"
             />
           </div>
         </div>
@@ -119,6 +122,7 @@
               type="number"
               min="0"
               [(ngModel)]="user.financeInfos.realEstateInfos.renovation.price"
+              (ngModelChange)="calculateAmounts()"
             />
           </div>
           <div class="value-container">
@@ -130,6 +134,7 @@
               [(ngModel)]="
                 user.financeInfos.realEstateInfos.renovation.furnitureBudget
               "
+              (ngModelChange)="calculateAmounts()"
             />
           </div>
         </div>
@@ -148,6 +153,7 @@
             [(ngModel)]="
               user.financeInfos.realEstateInfos.financing.downPayment
             "
+            (ngModelChange)="calculateAmounts()"
           />
         </div>
         <div class="value-container">
@@ -157,6 +163,7 @@
             type="number"
             min="0"
             [(ngModel)]="user.financeInfos.realEstateInfos.financing.loanRate"
+            (ngModelChange)="calculateAmounts()"
           />
         </div>
         <div class="value-container">
@@ -168,6 +175,7 @@
             [(ngModel)]="
               user.financeInfos.realEstateInfos.financing.insuranceRate
             "
+            (ngModelChange)="calculateAmounts()"
           />
         </div>
         <div class="value-container">
@@ -177,31 +185,28 @@
             type="number"
             min="0"
             [(ngModel)]="user.financeInfos.realEstateInfos.financing.duration"
+            (ngModelChange)="calculateAmounts()"
           />
         </div>
         <div class="value-container">
           <label for="borrowed">Total borrowed</label>
-          <input
-            name="borrowed"
-            type="number"
-            disabled
-            [(ngModel)]="
+          <span class="disabled" name="monthly"
+            >{{
               user.financeInfos.realEstateInfos.financing.totalBorrowed
-            "
-            class="disabled"
-          />
+                | currency : "EUR" : "" : "1.0-0"
+            }}
+            €</span
+          >
         </div>
         <div class="value-container">
           <label for="monthly">Monthly payments</label>
-          <input
-            name="monthly"
-            type="number"
-            disabled
-            [(ngModel)]="
+          <span class="disabled" name="monthly"
+            >{{
               user.financeInfos.realEstateInfos.financing.monthlyPayments
-            "
-            class="disabled"
-          />
+                | currency : "EUR" : "" : "1.0-0"
+            }}
+            €</span
+          >
         </div>
       </div>
       <div class="subform">
@@ -218,6 +223,7 @@
             [(ngModel)]="
               user.financeInfos.realEstateInfos.annualExpenses.propertyTax
             "
+            (ngModelChange)="calculateAmounts()"
           />
         </div>
         <div class="value-container">
@@ -229,6 +235,7 @@
             [(ngModel)]="
               user.financeInfos.realEstateInfos.annualExpenses.pnoInsurance
             "
+            (ngModelChange)="calculateAmounts()"
           />
         </div>
         <div class="value-container">
@@ -241,6 +248,7 @@
               user.financeInfos.realEstateInfos.annualExpenses
                 .coownershipCharges
             "
+            (ngModelChange)="calculateAmounts()"
           />
         </div>
         <div class="value-container">
@@ -252,6 +260,7 @@
             [(ngModel)]="
               user.financeInfos.realEstateInfos.annualExpenses.otherCharges
             "
+            (ngModelChange)="calculateAmounts()"
           />
         </div>
       </div>
@@ -267,6 +276,7 @@
             type="number"
             min="0"
             [(ngModel)]="user.financeInfos.realEstateInfos.rent.lotsNumber"
+            (ngModelChange)="calculateAmounts()"
           />
         </div>
         <div class="value-container">
@@ -276,6 +286,7 @@
             type="number"
             min="0"
             [(ngModel)]="user.financeInfos.realEstateInfos.rent.rentPerLot"
+            (ngModelChange)="calculateAmounts()"
           />
         </div>
       </div>

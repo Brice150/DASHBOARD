@@ -106,9 +106,12 @@
   text-align: center;
 }
 
-.value-container input.disabled {
+.value-container .disabled {
   background-color: green;
   border-radius: var(--strong-radius);
+  width: 200px;
+  text-align: center;
+  color: var(--color-text-secondary);
 }
 
 .subtitle {
