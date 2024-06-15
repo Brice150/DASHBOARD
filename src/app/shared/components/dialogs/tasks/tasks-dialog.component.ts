@@ -40,7 +40,7 @@ export class TasksDialogComponent implements OnInit {
   }
 
   validate(): void {
-    if (this.title) {
+    if (this.title && this.title.trim() !== '') {
       if (this.modifyMode) {
         this.user.tasks[this.data.index].title = this.title;
         this.user.tasks[this.data.index].description = this.description;

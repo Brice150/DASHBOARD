@@ -52,7 +52,7 @@ export class FinanceIncomeSavingsUpdateDialogComponent implements OnInit {
       !this.financeArray.some(
         (moneyInput: MoneyInput) =>
           (!moneyInput.title ||
-            moneyInput.title === '' ||
+            moneyInput.title.trim() === '' ||
             moneyInput.amount === undefined ||
             moneyInput.amount < 0) &&
           moneyInput.title !== 'Residue'
@@ -67,7 +67,7 @@ export class FinanceIncomeSavingsUpdateDialogComponent implements OnInit {
       this.dialogRef.close(true);
     } else {
       this.toastr.error(
-        'At least one number is missing or is negative',
+        'At least one element is missing or is negative',
         'Finance',
         {
           positionClass: 'toast-top-center',
