@@ -42,7 +42,7 @@ export class FinanceStockExchangeUpdateDialogComponent implements OnInit {
   }
 
   close(): void {
-    this.dialogRef.close(false);
+    this.dialogRef.close(null);
   }
 
   validate(): void {
@@ -58,8 +58,7 @@ export class FinanceStockExchangeUpdateDialogComponent implements OnInit {
       this.user.financeInfos.stockExchangeInfos.amountPerMonth =
         this.amountPerMonth;
       this.user.financeInfos.stockExchangeInfos.percentage = this.percentage;
-      localStorage.setItem('userDashboard', JSON.stringify(this.user));
-      this.dialogRef.close(true);
+      this.dialogRef.close(this.user);
     } else {
       this.toastr.error(
         'At least one number is missing or is negative',

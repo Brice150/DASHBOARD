@@ -7,6 +7,8 @@ import { User } from '../../core/interfaces/user';
 import { YearPipe } from '../../shared/pipes/year.pipe';
 import { FinanceUpdateDialogComponent } from '../../shared/components/dialogs/update/finance/finance-update-dialog.component';
 import { ActivePage } from '../../core/enums/active-page.enum';
+import { UserService } from '../../core/services/user.service';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-finance',
@@ -22,7 +24,11 @@ export class FinanceComponent {
     new EventEmitter<ActivePage>();
   ActivePage = ActivePage;
 
-  constructor(public dialog: MatDialog, private toastr: ToastrService) {}
+  constructor(
+    public dialog: MatDialog,
+    private toastr: ToastrService,
+    private userService: UserService
+  ) {}
 
   openUpdateDialog(): void {
     const dialogData = {
@@ -33,14 +39,17 @@ export class FinanceComponent {
       data: dialogData,
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
+    dialogRef
+      .afterClosed()
+      .pipe(filter((user: User) => !!user))
+      .subscribe((user: User) => {
+        this.userService.saveUser(user);
+        this.user = this.userService.getUser();
         this.toastr.success('Total amounts updated', 'Finance', {
           positionClass: 'toast-top-center',
           toastClass: 'ngx-toastr custom',
         });
-      }
-    });
+      });
   }
 
   selectActivePage(type: ActivePage): void {

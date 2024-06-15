@@ -2,7 +2,13 @@
   <div class="title">
     <span>Weather</span>
   </div>
-  <div class="content" *ngIf="user.weatherInfos.localWeathers">
+  <div
+    class="content"
+    *ngIf="
+      user.weatherInfos.localWeathers &&
+      user.weatherInfos.localWeathers.length !== 0
+    "
+  >
     <div class="forecast">
       <div
         class="city"

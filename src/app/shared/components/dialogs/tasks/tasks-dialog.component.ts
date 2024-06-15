@@ -52,8 +52,6 @@ export class TasksDialogComponent implements OnInit {
         };
         this.user.tasks.push(newTask);
       }
-
-      localStorage.setItem('userDashboard', JSON.stringify(this.user));
       this.dialogRef.close(true);
     } else {
       this.toastr.error('Title is empty', 'Task', {

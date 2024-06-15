@@ -28,7 +28,6 @@ export class ConfirmationDialogComponent implements OnInit {
 
   delete(): void {
     this.user.tasks.splice(this.data.index, 1);
-    localStorage.setItem('userDashboard', JSON.stringify(this.user));
     this.dialogRef.close(true);
   }
 }

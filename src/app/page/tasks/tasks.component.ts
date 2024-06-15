@@ -5,6 +5,8 @@ import { ToastrService } from 'ngx-toastr';
 import { User } from '../../core/interfaces/user';
 import { ConfirmationDialogComponent } from '../../shared/components/dialogs/confirmation/confirmation-dialog.component';
 import { TasksDialogComponent } from '../../shared/components/dialogs/tasks/tasks-dialog.component';
+import { UserService } from '../../core/services/user.service';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-tasks',
@@ -16,7 +18,11 @@ import { TasksDialogComponent } from '../../shared/components/dialogs/tasks/task
 export class TasksComponent {
   @Input() user!: User;
 
-  constructor(public dialog: MatDialog, private toastr: ToastrService) {}
+  constructor(
+    public dialog: MatDialog,
+    private toastr: ToastrService,
+    private userService: UserService
+  ) {}
 
   openTasksDialog(index?: number): void {
     const dialogData = {
@@ -28,14 +34,17 @@ export class TasksComponent {
       data: dialogData,
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
+    dialogRef
+      .afterClosed()
+      .pipe(filter((user: User) => !!user))
+      .subscribe((user: User) => {
+        this.userService.saveUser(user);
+        this.user = this.userService.getUser();
         this.toastr.success('Task added/updated', 'Task', {
           positionClass: 'toast-top-center',
           toastClass: 'ngx-toastr custom',
         });
-      }
-    });
+      });
   }
 
   openConfirmationDialog(index: number): void {
@@ -48,13 +57,16 @@ export class TasksComponent {
       data: dialogData,
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
+    dialogRef
+      .afterClosed()
+      .pipe(filter((user: User) => !!user))
+      .subscribe((user: User) => {
+        this.userService.saveUser(user);
+        this.user = this.userService.getUser();
         this.toastr.success('Task deleted', 'Task', {
           positionClass: 'toast-top-center',
           toastClass: 'ngx-toastr custom',
         });
-      }
-    });
+      });
   }
 }

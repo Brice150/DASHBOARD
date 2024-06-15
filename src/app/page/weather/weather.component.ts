@@ -7,6 +7,8 @@ import { WeatherService } from '../../core/services/weather.service';
 import { DayOfWeekPipe } from '../../shared/pipes/dayOfWeek.pipe';
 import { WeatherImagePipe } from '../../shared/pipes/weatherImage.pipe';
 import { WeatherUpdateDialogComponent } from '../../shared/components/dialogs/update/weather/weather-update-dialog.component';
+import { UserService } from '../../core/services/user.service';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-weather',
@@ -24,7 +26,8 @@ export class WeatherComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private toastr: ToastrService,
-    private weatherService: WeatherService
+    private weatherService: WeatherService,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
@@ -32,23 +35,34 @@ export class WeatherComponent implements OnInit {
   }
 
   getWeatherInfos(): void {
-    this.weatherService
-      .getWeatherInfo(this.user)
-      .subscribe(
-        ([
-          firstWeatherInfo,
-          secondWeatherInfo,
-          thirdWeatherInfo,
-          lastWeatherInfo,
-        ]) => {
-          this.user.weatherInfos.localWeathers = [];
-          this.user.weatherInfos.localWeathers[0] = firstWeatherInfo;
-          this.user.weatherInfos.localWeathers[1] = secondWeatherInfo;
-          this.user.weatherInfos.localWeathers[2] = thirdWeatherInfo;
-          this.user.weatherInfos.localWeathers[3] = lastWeatherInfo;
-          localStorage.setItem('userDashboard', JSON.stringify(this.user));
-        }
-      );
+    if (!this.isToday())
+      this.weatherService
+        .getWeatherInfo(this.user)
+        .subscribe(
+          ([
+            firstWeatherInfo,
+            secondWeatherInfo,
+            thirdWeatherInfo,
+            lastWeatherInfo,
+          ]) => {
+            this.user.weatherInfos.localWeathers[0] = firstWeatherInfo;
+            this.user.weatherInfos.localWeathers[1] = secondWeatherInfo;
+            this.user.weatherInfos.localWeathers[2] = thirdWeatherInfo;
+            this.user.weatherInfos.localWeathers[3] = lastWeatherInfo;
+            this.userService.saveUser(this.user);
+          }
+        );
+  }
+
+  isToday(): boolean {
+    return (
+      this.user.weatherInfos.localWeathers.length !== 0 &&
+      this.user.weatherInfos.localWeathers[0].daily &&
+      this.user.weatherInfos.localWeathers[0].daily.time[0] !== undefined &&
+      this.dayOfWeekPipe.transform(
+        this.user.weatherInfos.localWeathers[0].daily.time[0]
+      ) === 'Today'
+    );
   }
 
   openUpdateDialog(): void {
@@ -60,15 +74,18 @@ export class WeatherComponent implements OnInit {
       data: dialogData,
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
+    dialogRef
+      .afterClosed()
+      .pipe(filter((user: User) => !!user))
+      .subscribe((user: User) => {
+        this.userService.saveUser(user);
+        this.user = this.userService.getUser();
         this.getWeatherInfos();
         this.toastr.success('Cities updated', 'Weather', {
           positionClass: 'toast-top-center',
           toastClass: 'ngx-toastr custom',
         });
-      }
-    });
+      });
   }
 
   selectCity(index: number): void {

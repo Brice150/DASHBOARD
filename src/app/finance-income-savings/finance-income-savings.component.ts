@@ -9,6 +9,8 @@ import { MoneyInput } from '../core/interfaces/financeInfos';
 import { User } from '../core/interfaces/user';
 import { HeaderComponent } from '../header/header.component';
 import { FinanceIncomeSavingsUpdateDialogComponent } from '../shared/components/dialogs/update/finance-income-savings/finance-income-savings-update-dialog.component';
+import { UserService } from '../core/services/user.service';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-finance-income-savings',
@@ -25,7 +27,8 @@ export class FinanceIncomeSavingsComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private toastr: ToastrService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
@@ -162,7 +165,7 @@ export class FinanceIncomeSavingsComponent implements OnInit {
         this.user.financeInfos.savingsInfos.totalAmount = newTotal;
       }
       totalAmount = newTotal;
-      localStorage.setItem('userDashboard', JSON.stringify(this.user));
+      this.userService.saveUser(this.user);
     }
 
     let residue: number = totalAmount;
@@ -251,8 +254,12 @@ export class FinanceIncomeSavingsComponent implements OnInit {
       }
     );
 
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
+    dialogRef
+      .afterClosed()
+      .pipe(filter((user: User) => !!user))
+      .subscribe((user: User) => {
+        this.userService.saveUser(user);
+        this.user = this.userService.getUser();
         if (this.isSpendingsFinanceType()) {
           this.updateIncomeGraph();
           this.toastr.success('Expenses updated', 'Finance', {
@@ -266,7 +273,6 @@ export class FinanceIncomeSavingsComponent implements OnInit {
             toastClass: 'ngx-toastr custom',
           });
         }
-      }
-    });
+      });
   }
 }

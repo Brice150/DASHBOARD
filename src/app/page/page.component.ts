@@ -3,8 +3,14 @@ import { Component, OnInit } from '@angular/core';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { Router } from '@angular/router';
 import {
+  AnnualExpenses,
   FinanceInfos,
+  Financing,
+  Purchase,
   RealEstate,
+  Renovation,
+  Rent,
+  Results,
   Savings,
   Spendings,
   StockExchange,
@@ -17,6 +23,7 @@ import { FinanceComponent } from './finance/finance.component';
 import { TasksComponent } from './tasks/tasks.component';
 import { WeatherComponent } from './weather/weather.component';
 import { ActivePage } from '../core/enums/active-page.enum';
+import { UserService } from '../core/services/user.service';
 
 @Component({
   selector: 'app-root',
@@ -33,46 +40,13 @@ import { ActivePage } from '../core/enums/active-page.enum';
   styleUrls: ['./page.component.css'],
 })
 export class PageComponent implements OnInit {
-  appVersion: number = 2.0;
   user: User = {} as User;
   indexSelected: number = 0;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private userService: UserService) {}
 
   ngOnInit(): void {
-    let storedUser: string | null = localStorage.getItem('userDashboard');
-    if (storedUser !== null) {
-      const user: User = JSON.parse(storedUser);
-      if (user.appVersion === this.appVersion) {
-        this.user = user;
-      } else {
-        this.setDefaultUser();
-      }
-    } else {
-      this.setDefaultUser();
-    }
-  }
-
-  setDefaultUser(): void {
-    this.user.appVersion = this.appVersion;
-    this.user.prefersDarkMode = false;
-    this.user.perfersFinanceHidden = false;
-    this.user.tasks = [];
-    this.user.weatherInfos = {} as WeatherInfos;
-    this.user.financeInfos = {} as FinanceInfos;
-    this.user.financeInfos.spendingsInfos = {} as Spendings;
-    this.user.financeInfos.spendingsInfos.totalAmount = 0;
-    this.user.financeInfos.spendingsInfos.spendings = [];
-    this.user.financeInfos.savingsInfos = {} as Savings;
-    this.user.financeInfos.savingsInfos.totalAmount = 0;
-    this.user.financeInfos.savingsInfos.savings = [];
-    this.user.financeInfos.stockExchangeInfos = {} as StockExchange;
-    this.user.financeInfos.stockExchangeInfos.totalAmount = 0;
-    this.user.financeInfos.stockExchangeInfos.amountPerMonth = 0;
-    this.user.financeInfos.stockExchangeInfos.percentage = 0;
-    this.user.financeInfos.stockExchangeInfos.yearly = {} as Yearly;
-    this.user.financeInfos.realEstateInfos = {} as RealEstate;
-    this.user.financeInfos.realEstateInfos.totalAmount = 0;
+    this.user = this.userService.getUser();
   }
 
   onCitySelected(index: number): void {

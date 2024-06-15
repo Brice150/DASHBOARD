@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { Router, RouterModule } from '@angular/router';
 import { User } from '../core/interfaces/user';
+import { UserService } from '../core/services/user.service';
 
 @Component({
   selector: 'app-header',
@@ -13,16 +14,13 @@ import { User } from '../core/interfaces/user';
   styleUrl: './header.component.css',
 })
 export class HeaderComponent implements OnInit {
-  user!: User;
+  user: User = {} as User;
   @Output() onHideFinance: EventEmitter<void> = new EventEmitter<void>();
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private userService: UserService) {}
 
   ngOnInit(): void {
-    let storedUser: string | null = localStorage.getItem('userDashboard');
-    if (storedUser !== null) {
-      this.user = JSON.parse(storedUser);
-    }
+    this.user = this.userService.getUser();
     this.handleMode();
   }
 
@@ -37,12 +35,12 @@ export class HeaderComponent implements OnInit {
   changeMode(): void {
     document.body.classList.toggle('dark-theme-variables');
     this.user.prefersDarkMode = !this.user.prefersDarkMode;
-    localStorage.setItem('userDashboard', JSON.stringify(this.user));
+    this.userService.saveUser(this.user);
   }
 
   hideFinance(): void {
     this.user.perfersFinanceHidden = !this.user.perfersFinanceHidden;
-    localStorage.setItem('userDashboard', JSON.stringify(this.user));
+    this.userService.saveUser(this.user);
     this.onHideFinance.emit();
   }
 

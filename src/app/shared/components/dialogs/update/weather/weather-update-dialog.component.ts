@@ -30,7 +30,7 @@ export class WeatherUpdateDialogComponent implements OnInit {
   }
 
   close(): void {
-    this.dialogRef.close(false);
+    this.dialogRef.close(null);
   }
 
   validate(): void {
@@ -52,8 +52,7 @@ export class WeatherUpdateDialogComponent implements OnInit {
       });
       if (citiesToSave.length === 4) {
         this.data.user.weatherInfos.cities = citiesToSave;
-        localStorage.setItem('userDashboard', JSON.stringify(this.data.user));
-        this.dialogRef.close(true);
+        this.dialogRef.close(this.user);
       }
     } else {
       this.toastr.error('At least one city is missing', 'Weather', {

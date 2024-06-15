@@ -7,6 +7,8 @@ import { Yearly } from '../core/interfaces/financeInfos';
 import { User } from '../core/interfaces/user';
 import { HeaderComponent } from '../header/header.component';
 import { FinanceStockExchangeUpdateDialogComponent } from '../shared/components/dialogs/update/finance-stock-exchange/finance-stock-exchange-update-dialog.component';
+import { UserService } from '../core/services/user.service';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-finance-stock-exchange',
@@ -19,7 +21,11 @@ export class FinanceStockExchangeComponent implements OnInit {
   user!: User;
   barGraph?: Chart<'bar', number[], string>;
 
-  constructor(public dialog: MatDialog, private toastr: ToastrService) {}
+  constructor(
+    public dialog: MatDialog,
+    private toastr: ToastrService,
+    private userService: UserService
+  ) {}
 
   ngOnInit(): void {
     this.user = history.state['user'];
@@ -142,7 +148,7 @@ export class FinanceStockExchangeComponent implements OnInit {
     };
 
     this.user.financeInfos.stockExchangeInfos.yearly = yearly;
-    localStorage.setItem('userDashboard', JSON.stringify(this.user));
+    this.userService.saveUser(this.user);
   }
 
   openUpdateDialog(): void {
@@ -157,15 +163,18 @@ export class FinanceStockExchangeComponent implements OnInit {
       }
     );
 
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
+    dialogRef
+      .afterClosed()
+      .pipe(filter((user: User) => !!user))
+      .subscribe((user: User) => {
+        this.userService.saveUser(user);
+        this.user = this.userService.getUser();
         this.calculateAmounts();
         this.updateStockExchangeGraph();
         this.toastr.success('Stock exchange updated', 'Finance', {
           positionClass: 'toast-top-center',
           toastClass: 'ngx-toastr custom',
         });
-      }
-    });
+      });
   }
 }

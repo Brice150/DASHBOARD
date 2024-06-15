@@ -44,7 +44,7 @@ export class FinanceIncomeSavingsUpdateDialogComponent implements OnInit {
   }
 
   close(): void {
-    this.dialogRef.close(false);
+    this.dialogRef.close(null);
   }
 
   validate(): void {
@@ -63,8 +63,7 @@ export class FinanceIncomeSavingsUpdateDialogComponent implements OnInit {
       } else if (this.activePage === ActivePage.SAVINGS) {
         this.user.financeInfos.savingsInfos.savings = this.financeArray;
       }
-      localStorage.setItem('userDashboard', JSON.stringify(this.user));
-      this.dialogRef.close(true);
+      this.dialogRef.close(this.user);
     } else {
       this.toastr.error(
         'At least one element is missing or is negative',

@@ -43,7 +43,7 @@ export class FinanceUpdateDialogComponent implements OnInit {
   }
 
   close(): void {
-    this.dialogRef.close(false);
+    this.dialogRef.close(null);
   }
 
   validate(): void {
@@ -62,8 +62,7 @@ export class FinanceUpdateDialogComponent implements OnInit {
       this.user.financeInfos.stockExchangeInfos.totalAmount =
         this.totalStockExchange;
       this.user.financeInfos.realEstateInfos.totalAmount = this.totalRealEstate;
-      localStorage.setItem('userDashboard', JSON.stringify(this.user));
-      this.dialogRef.close(true);
+      this.dialogRef.close(this.user);
     } else {
       this.toastr.error(
         'At least one number is missing or is negative',
