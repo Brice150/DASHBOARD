@@ -38,10 +38,12 @@ export class FinanceStockExchangeComponent implements OnInit {
             {
               label: 'Invested',
               data: this.user.financeInfos.stockExchangeInfos.yearly.invested,
+              backgroundColor: '#0009d7',
             },
             {
               label: 'Interests',
               data: this.user.financeInfos.stockExchangeInfos.yearly.interests,
+              backgroundColor: '#cf0000',
             },
           ],
         },
@@ -50,6 +52,12 @@ export class FinanceStockExchangeComponent implements OnInit {
           plugins: {
             legend: {
               position: 'bottom',
+              labels: {
+                padding: 20,
+                font: {
+                  size: 16,
+                },
+              },
             },
           },
           color: '#006aff',
@@ -74,10 +82,12 @@ export class FinanceStockExchangeComponent implements OnInit {
         {
           label: 'Invested',
           data: this.user.financeInfos.stockExchangeInfos.yearly.invested,
+          backgroundColor: '#0009d7',
         },
         {
           label: 'Interests',
           data: this.user.financeInfos.stockExchangeInfos.yearly.interests,
+          backgroundColor: '#cf0000',
         },
       ];
       this.barGraph.update();

@@ -22,17 +22,134 @@
   letter-spacing: 1px;
 }
 
+.card .inter span {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: green;
+  text-transform: uppercase;
+}
+
 .card .content {
   position: relative;
   margin-top: 30px;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   flex-direction: column;
   width: 95%;
-  height: 70vh;
+  min-height: 70vh;
   background-color: var(--color-background);
   color: var(--color-text-primary);
   box-shadow: var(--box-shadow);
   border-radius: var(--strong-radius);
+}
+
+.card .content .results {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-top: 40px;
+}
+
+.value-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 5px 0;
+}
+
+.card .content .results .value-container {
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  box-shadow: var(--box-shadow);
+  border-radius: var(--strong-radius);
+  padding: 20px;
+  margin: 10px;
+}
+
+.card .content .results .value-container .number {
+  margin-top: 10px;
+  font-size: 20px;
+  font-weight: 500;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  text-align: center;
+}
+
+.value-container label {
+  color: var(--color-text-primary);
+  text-align: center;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.value-container input {
+  background-color: var(--color-background);
+  color: var(--color-text-secondary);
+  border: none;
+  resize: none;
+  font-size: 17px;
+  font-weight: 500;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  text-align: center;
+}
+
+.subtitle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.subtitle span {
+  margin-left: 10px;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-text-secondary);
+}
+
+.subtitle i {
+  font-size: 40px;
+  color: var(--color-text-secondary);
+}
+
+.card .content .form {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.card .content .form .combined {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+}
+
+.card .content .form .subform {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+}
+
+.card .content .form .subform {
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  box-shadow: var(--box-shadow);
+  border-radius: var(--strong-radius);
+  padding: 10px;
+  margin: 10px;
+}
+
+.card .content .form .subform .value-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }

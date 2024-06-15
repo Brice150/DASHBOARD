@@ -3,6 +3,150 @@
     <div class="title">
       <span>Real Estate</span>
     </div>
-    Work in progress...
+    <div class="results">
+      <div class="value-container">
+        <div class="subtitle">
+          <i class="bx bxs-credit-card-alt"></i>
+          <span>Total Cost</span>
+        </div>
+        <span class="number">{{ 0 | currency : "EUR" : "" : "1.0-0" }}</span>
+      </div>
+      <div class="value-container">
+        <div class="subtitle">
+          <i class="bx bxs-dollar-circle"></i>
+          <span>Total Rents</span>
+        </div>
+        <span class="number">{{ 0 | currency : "EUR" : "" : "1.0-0" }}</span>
+      </div>
+      <div class="value-container">
+        <div class="subtitle">
+          <i class="bx bxs-cog"></i>
+          <span>Total Charges</span>
+        </div>
+        <span class="number">{{ 0 | currency : "EUR" : "" : "1.0-0" }}</span>
+      </div>
+      <div class="value-container">
+        <div class="subtitle">
+          <i class="bx bx-sort-up"></i>
+          <span>Gross Yield</span>
+        </div>
+        <span class="number">{{ 0 | percent }}</span>
+      </div>
+      <div class="value-container">
+        <div class="subtitle">
+          <i class="bx bx-sort-down"></i>
+          <span>Net Yield</span>
+        </div>
+        <span class="number">{{ 0 | percent }}</span>
+      </div>
+      <div class="value-container">
+        <div class="subtitle">
+          <i class="bx bxs-coin-stack"></i>
+          <span>Cash Flow</span>
+        </div>
+        <span class="number">{{ 0 | currency : "EUR" : "" : "1.0-0" }}</span>
+      </div>
+    </div>
+    <div class="inter">
+      <span>Simulator</span>
+    </div>
+    <div class="form">
+      <div class="combined">
+        <div class="subform">
+          <div class="subtitle">
+            <i class="bx bxs-building-house"></i>
+            <span>Purchase</span>
+          </div>
+          <div class="value-container">
+            <label for="purchase">Purchase price</label>
+            <input name="purchase" type="number" min="0" value="0" />
+          </div>
+          <div class="value-container">
+            <label for="notary">Notary fees</label>
+            <input name="notary" type="number" min="0" value="0" />
+          </div>
+        </div>
+        <div class="subform">
+          <div class="subtitle">
+            <i class="bx bxs-hard-hat"></i>
+            <span>Renovation</span>
+          </div>
+          <div class="value-container">
+            <label for="renovation">Amount for renovation</label>
+            <input name="renovation" type="number" min="0" value="0" />
+          </div>
+          <div class="value-container">
+            <label for="furniture">Furniture budget</label>
+            <input name="furniture" type="number" min="0" value="0" />
+          </div>
+        </div>
+      </div>
+      <div class="subform">
+        <div class="subtitle">
+          <i class="bx bxs-bank"></i>
+          <span>Financing</span>
+        </div>
+        <div class="value-container">
+          <label for="down">Down payment</label>
+          <input name="down" type="number" min="0" value="0" />
+        </div>
+        <div class="value-container">
+          <label for="loan">Loan rate</label>
+          <input name="loan" type="number" min="0" value="0" />
+        </div>
+        <div class="value-container">
+          <label for="insurance">Insurance rate</label>
+          <input name="insurance" type="number" min="0" value="0" />
+        </div>
+        <div class="value-container">
+          <label for="purchase">Duration</label>
+          <input name="purchase" type="number" min="0" value="0" />
+        </div>
+        <div class="value-container">
+          <label for="borrowed">Total borrowed</label>
+          <input name="borrowed" type="number" readonly value="0" />
+        </div>
+        <div class="value-container">
+          <label for="monthly">Monthly payments</label>
+          <input name="monthly" type="number" readonly value="0" />
+        </div>
+      </div>
+      <div class="subform">
+        <div class="subtitle">
+          <i class="bx bxs-credit-card-alt"></i>
+          <span>Annual Expenses</span>
+        </div>
+        <div class="value-container">
+          <label for="property">Property tax</label>
+          <input name="property" type="number" min="0" value="0" />
+        </div>
+        <div class="value-container">
+          <label for="pno">PNO insurance</label>
+          <input name="pno" type="number" min="0" value="0" />
+        </div>
+        <div class="value-container">
+          <label for="ownership">Co-ownership charges</label>
+          <input name="ownership" type="number" min="0" value="0" />
+        </div>
+        <div class="value-container">
+          <label for="other">Other charges</label>
+          <input name="other" type="number" min="0" value="0" />
+        </div>
+      </div>
+      <div class="subform">
+        <div class="subtitle">
+          <i class="bx bxs-home-heart"></i>
+          <span>Rent</span>
+        </div>
+        <div class="value-container">
+          <label for="lots">Number of lots</label>
+          <input name="lots" type="number" min="0" value="0" />
+        </div>
+        <div class="value-container">
+          <label for="rent">Rent per lot</label>
+          <input name="rent" type="number" min="0" value="0" />
+        </div>
+      </div>
+    </div>
   </div>
 </div>

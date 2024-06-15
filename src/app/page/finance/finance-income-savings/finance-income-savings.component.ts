@@ -69,6 +69,12 @@ export class FinanceIncomeSavingsComponent implements OnInit {
           plugins: {
             legend: {
               position: 'bottom',
+              labels: {
+                padding: 20,
+                font: {
+                  size: 16,
+                },
+              },
             },
           },
           color: '#006aff',
@@ -114,6 +120,12 @@ export class FinanceIncomeSavingsComponent implements OnInit {
           plugins: {
             legend: {
               position: 'bottom',
+              labels: {
+                padding: 20,
+                font: {
+                  size: 16,
+                },
+              },
             },
           },
           color: '#006aff',
@@ -155,7 +167,7 @@ export class FinanceIncomeSavingsComponent implements OnInit {
       moneyInputs.push({
         title: 'Residue',
         amount: residue,
-        color: '#818100',
+        color: '#a600bb',
       });
     } else {
       const residueIndex: number = moneyInputs.findIndex(
