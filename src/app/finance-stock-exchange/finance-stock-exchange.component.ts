@@ -1,26 +1,28 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
-import { User } from '../../../core/interfaces/user';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ToastrService } from 'ngx-toastr';
-import { FinanceStockExchangeUpdateDialogComponent } from '../../../shared/components/dialogs/update/finance-stock-exchange/finance-stock-exchange-update-dialog.component';
 import { Chart } from 'chart.js';
-import { Yearly } from '../../../core/interfaces/financeInfos';
+import { ToastrService } from 'ngx-toastr';
+import { Yearly } from '../core/interfaces/financeInfos';
+import { User } from '../core/interfaces/user';
+import { HeaderComponent } from '../header/header.component';
+import { FinanceStockExchangeUpdateDialogComponent } from '../shared/components/dialogs/update/finance-stock-exchange/finance-stock-exchange-update-dialog.component';
 
 @Component({
   selector: 'app-finance-stock-exchange',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, HeaderComponent],
   templateUrl: './finance-stock-exchange.component.html',
   styleUrl: './finance-stock-exchange.component.css',
 })
 export class FinanceStockExchangeComponent implements OnInit {
-  @Input() user!: User;
+  user!: User;
   barGraph?: Chart<'bar', number[], string>;
 
   constructor(public dialog: MatDialog, private toastr: ToastrService) {}
 
   ngOnInit(): void {
+    this.user = history.state['user'];
     this.calculateAmounts();
     this.displayStockExchangeGraph();
   }

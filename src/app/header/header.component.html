@@ -1,0 +1,23 @@
+<div class="project-title">
+  <span routerLink="/" title="Home">Dashboard</span>
+</div>
+<div class="switch-container">
+  <a (click)="changeMode()" title="Change Mode">
+    @if (user.prefersDarkMode) {
+    <i class="bx bxs-sun"></i>
+    } @else {
+    <i class="bx bxs-moon"></i>
+    }
+  </a>
+  @if (isHomePage()) {
+  <mat-slide-toggle
+    (toggleChange)="hideFinance()"
+    [(ngModel)]="user.perfersFinanceHidden"
+    >Hide Finance</mat-slide-toggle
+  >
+  } @else {
+  <a routerLink="/" title="Back">
+    <i class="bx bx-arrow-back"></i>
+  </a>
+  }
+</div>

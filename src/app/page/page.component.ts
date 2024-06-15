@@ -1,10 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { User } from '../core/interfaces/user';
-import { FinanceComponent } from './finance/finance.component';
-import { TasksComponent } from './tasks/tasks.component';
-import { WeatherComponent } from './weather/weather.component';
-import { WeatherInfos } from '../core/interfaces/weatherInfos';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { Router } from '@angular/router';
 import {
   FinanceInfos,
   RealEstate,
@@ -13,12 +10,12 @@ import {
   StockExchange,
   Yearly,
 } from '../core/interfaces/financeInfos';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { FormsModule } from '@angular/forms';
-import { WeatherCityComponent } from './weather/weather-city/weather-city.component';
-import { FinanceIncomeSavingsComponent } from './finance/finance-income-savings/finance-income-savings.component';
-import { FinanceStockExchangeComponent } from './finance/finance-stock-exchange/finance-stock-exchange.component';
-import { FinanceRealEstateComponent } from './finance/finance-real-estate/finance-real-estate.component';
+import { User } from '../core/interfaces/user';
+import { WeatherInfos } from '../core/interfaces/weatherInfos';
+import { HeaderComponent } from '../header/header.component';
+import { FinanceComponent } from './finance/finance.component';
+import { TasksComponent } from './tasks/tasks.component';
+import { WeatherComponent } from './weather/weather.component';
 import { ActivePage } from '../core/enums/active-page.enum';
 
 @Component({
@@ -30,11 +27,7 @@ import { ActivePage } from '../core/enums/active-page.enum';
     FinanceComponent,
     TasksComponent,
     MatSlideToggleModule,
-    FormsModule,
-    WeatherCityComponent,
-    FinanceIncomeSavingsComponent,
-    FinanceStockExchangeComponent,
-    FinanceRealEstateComponent,
+    HeaderComponent,
   ],
   templateUrl: './page.component.html',
   styleUrls: ['./page.component.css'],
@@ -42,9 +35,9 @@ import { ActivePage } from '../core/enums/active-page.enum';
 export class PageComponent implements OnInit {
   appVersion: number = 2.0;
   user: User = {} as User;
-  activePage?: ActivePage;
   indexSelected: number = 0;
-  ActivePage = ActivePage;
+
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
     let storedUser: string | null = localStorage.getItem('userDashboard');
@@ -58,7 +51,6 @@ export class PageComponent implements OnInit {
     } else {
       this.setDefaultUser();
     }
-    this.handleMode();
   }
 
   setDefaultUser(): void {
@@ -83,42 +75,26 @@ export class PageComponent implements OnInit {
     this.user.financeInfos.realEstateInfos.totalAmount = 0;
   }
 
-  handleMode(): void {
-    if (this.user.prefersDarkMode) {
-      document.body.classList.add('dark-theme-variables');
-    } else {
-      document.body.classList.remove('dark-theme-variables');
-    }
-    this.user.prefersDarkMode = document.body.classList.contains(
-      'dark-theme-variables'
-    );
-    localStorage.setItem('userDashboard', JSON.stringify(this.user));
-  }
-
-  changeMode(): void {
-    document.body.classList.toggle('dark-theme-variables');
-    this.user.prefersDarkMode = document.body.classList.contains(
-      'dark-theme-variables'
-    );
-    localStorage.setItem('userDashboard', JSON.stringify(this.user));
-  }
-
-  hideFinance(): void {
-    this.user.perfersFinanceHidden = !this.user.perfersFinanceHidden;
-    localStorage.setItem('userDashboard', JSON.stringify(this.user));
-  }
-
   onCitySelected(index: number): void {
-    this.indexSelected = index;
-    this.onPageSelected(ActivePage.WEATHER);
+    this.router.navigate(['/weather/' + index], { state: { user: this.user } });
   }
 
-  onPageSelected(type?: ActivePage): void {
-    this.activePage = type;
+  onFinanceTypeSelected(type: string): void {
+    if (type === ActivePage.INCOME || type === ActivePage.SAVINGS) {
+      this.router.navigate(['/finance/' + type], {
+        state: { user: this.user },
+      });
+    } else if (type === ActivePage.STOCKEXCHANGE) {
+      this.router.navigate(['/stock-exchange'], { state: { user: this.user } });
+    } else {
+      this.router.navigate(['/real-estate'], { state: { user: this.user } });
+    }
   }
 
-  back(): void {
-    this.indexSelected = 0;
-    this.onPageSelected(undefined);
+  onHideFinance(): void {
+    let storedUser: string | null = localStorage.getItem('userDashboard');
+    if (storedUser !== null) {
+      this.user = JSON.parse(storedUser);
+    }
   }
 }

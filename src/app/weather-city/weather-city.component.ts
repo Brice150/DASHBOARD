@@ -1,28 +1,36 @@
 import { CommonModule, DatePipe } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
-import { User } from '../../../core/interfaces/user';
-import { Hourly } from '../../../core/interfaces/weatherInfos';
-import { DayOfWeekPipe } from '../../../shared/pipes/dayOfWeek.pipe';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
 import { Chart } from 'chart.js/auto';
-import { WeatherImagePipe } from '../../../shared/pipes/weatherImage.pipe';
+import { User } from '../core/interfaces/user';
+import { Hourly } from '../core/interfaces/weatherInfos';
+import { HeaderComponent } from '../header/header.component';
+import { DayOfWeekPipe } from '../shared/pipes/dayOfWeek.pipe';
+import { WeatherImagePipe } from '../shared/pipes/weatherImage.pipe';
 
 @Component({
   selector: 'app-weather-city',
   standalone: true,
-  imports: [CommonModule, DayOfWeekPipe, WeatherImagePipe],
+  imports: [CommonModule, DayOfWeekPipe, WeatherImagePipe, HeaderComponent],
   templateUrl: './weather-city.component.html',
   styleUrl: './weather-city.component.css',
 })
 export class WeatherCityComponent implements OnInit {
-  @Input() user!: User;
-  @Input() index!: number;
+  user: User = {} as User;
+  index: number = 0;
   dayWeatherInfo: Hourly = {} as Hourly;
   dayOfWeekPipe: DayOfWeekPipe = new DayOfWeekPipe();
   datePipe: DatePipe = new DatePipe('en-FR');
 
+  constructor(private activatedRoute: ActivatedRoute) {}
+
   ngOnInit(): void {
-    this.getDayWeatherInfo();
-    this.displayGraph();
+    this.activatedRoute.params.subscribe((params: Params) => {
+      this.user = history.state['user'];
+      this.index = params['index'];
+      this.getDayWeatherInfo();
+      this.displayGraph();
+    });
   }
 
   getDayWeatherInfo(): void {
@@ -100,6 +108,17 @@ export class WeatherCityComponent implements OnInit {
         },
         options: {
           maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: 'bottom',
+              labels: {
+                padding: 20,
+                font: {
+                  size: 16,
+                },
+              },
+            },
+          },
           color: '#006aff',
         },
       });

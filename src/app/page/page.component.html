@@ -1,29 +1,6 @@
 <div class="main-container">
-  <div class="project-title">
-    <span (click)="back()" title="Home">Dashboard</span>
-  </div>
-  <div class="switch-container">
-    <a (click)="changeMode()" title="Change Mode">
-      @if (user.prefersDarkMode) {
-      <i class="bx bxs-sun"></i>
-      } @else {
-      <i class="bx bxs-moon"></i>
-      }
-    </a>
-    @if (!activePage) {
-    <mat-slide-toggle
-      (toggleChange)="hideFinance()"
-      [(ngModel)]="user.perfersFinanceHidden"
-      >Hide Finance</mat-slide-toggle
-    >
-    } @else {
-    <a (click)="back()" title="Back">
-      <i class="bx bx-arrow-back"></i>
-    </a>
-    }
-  </div>
+  <app-header (onHideFinance)="onHideFinance()"></app-header>
   <div class="cards-container">
-    @if (!activePage) {
     <div class="flex">
       <app-weather
         [user]="user"
@@ -31,24 +8,11 @@
       ></app-weather>
       <app-finance
         [user]="user"
-        (onFinanceTypeSelected)="onPageSelected($event)"
+        (onFinanceTypeSelected)="onFinanceTypeSelected($event)"
       ></app-finance>
     </div>
     <div class="center">
       <app-tasks [user]="user"></app-tasks>
     </div>
-    } @else if (activePage === ActivePage.WEATHER) {
-    <app-weather-city [user]="user" [index]="indexSelected"></app-weather-city>
-    } @else if (activePage === ActivePage.INCOME || activePage ===
-    ActivePage.SAVINGS) {
-    <app-finance-income-savings
-      [user]="user"
-      [activePage]="activePage"
-    ></app-finance-income-savings>
-    } @else if (activePage === ActivePage.STOCKEXCHANGE) {
-    <app-finance-stock-exchange [user]="user"></app-finance-stock-exchange>
-    } @else if (activePage === ActivePage.REALESTATE) {
-    <app-finance-real-estate [user]="user"></app-finance-real-estate>
-    }
   </div>
 </div>

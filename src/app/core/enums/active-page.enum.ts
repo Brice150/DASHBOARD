@@ -1,7 +1,7 @@
 export enum ActivePage {
-  WEATHER = 'Weather',
-  INCOME = 'Income',
-  SAVINGS = 'Savings',
-  STOCKEXCHANGE = 'StockExchange',
-  REALESTATE = 'RealEstate',
+  WEATHER = 'weather',
+  INCOME = 'income',
+  SAVINGS = 'savings',
+  STOCKEXCHANGE = 'stock-exchange',
+  REALESTATE = 'real-estate',
 }

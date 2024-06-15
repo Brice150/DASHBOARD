@@ -1,16 +1,19 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
-import { User } from '../../../core/interfaces/user';
+import { Component, OnInit } from '@angular/core';
+import { User } from '../core/interfaces/user';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-finance-real-estate',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, HeaderComponent],
   templateUrl: './finance-real-estate.component.html',
   styleUrl: './finance-real-estate.component.css',
 })
 export class FinanceRealEstateComponent implements OnInit {
-  @Input() user!: User;
+  user!: User;
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.user = history.state['user'];
+  }
 }

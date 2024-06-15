@@ -10,44 +10,8 @@
   position: relative;
 }
 
-.main-container .project-title {
-  top: 20px;
-  position: absolute;
-  z-index: 2;
-  cursor: pointer;
-}
-
-.project-title span {
-  font-size: 30px;
-  font-weight: 700;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-}
-
-.main-container .switch-container {
-  top: 20px;
-  position: absolute;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 95%;
-  z-index: 1;
-}
-
-.switch-container a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-}
-
-.switch-container a i {
-  font-size: 30px;
-  color: var(--color-text-secondary);
-}
-
 .main-container .cards-container {
-  margin-top: 70px;
+  margin-top: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -76,21 +40,6 @@ app-finance {
   max-width: 1100px;
 }
 
-::ng-deep .mat-mdc-slide-toggle .mat-internal-form-field {
-  color: var(--color-text-secondary) !important;
-  font-size: 18px !important;
-  font-weight: 700 !important;
-  letter-spacing: 1px !important;
-}
-
-::ng-deep .mdc-switch .mdc-switch__track {
-  height: 28px !important;
-}
-
-::ng-deep .mdc-switch:enabled .mdc-switch__track::after {
-  background: var(--color-text-primary) !important;
-}
-
 @media screen and (max-width: 885px) {
   .flex {
     flex-wrap: wrap;
@@ -99,15 +48,5 @@ app-finance {
   .flex app-weather,
   app-finance {
     max-width: none;
-  }
-}
-
-@media screen and (max-width: 650px) {
-  .main-container .switch-container {
-    margin-top: 35px;
-  }
-
-  .main-container .cards-container {
-    margin-top: 90px;
   }
 }

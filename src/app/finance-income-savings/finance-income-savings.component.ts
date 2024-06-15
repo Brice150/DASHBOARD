@@ -1,34 +1,47 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
-import { User } from '../../../core/interfaces/user';
-import { Chart } from 'chart.js';
-import { MoneyInput } from '../../../core/interfaces/financeInfos';
-import { ToastrService } from 'ngx-toastr';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivePage } from '../../../core/enums/active-page.enum';
-import { FinanceIncomeSavingsUpdateDialogComponent } from '../../../shared/components/dialogs/update/finance-income-savings/finance-income-savings-update-dialog.component';
+import { ActivatedRoute, Params } from '@angular/router';
+import { Chart } from 'chart.js';
+import { ToastrService } from 'ngx-toastr';
+import { ActivePage } from '../core/enums/active-page.enum';
+import { MoneyInput } from '../core/interfaces/financeInfos';
+import { User } from '../core/interfaces/user';
+import { HeaderComponent } from '../header/header.component';
+import { FinanceIncomeSavingsUpdateDialogComponent } from '../shared/components/dialogs/update/finance-income-savings/finance-income-savings-update-dialog.component';
 
 @Component({
   selector: 'app-finance-income-savings',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, HeaderComponent],
   templateUrl: './finance-income-savings.component.html',
   styleUrl: './finance-income-savings.component.css',
 })
 export class FinanceIncomeSavingsComponent implements OnInit {
-  @Input() user!: User;
-  @Input() activePage!: ActivePage;
+  user!: User;
+  type: string = ActivePage.INCOME;
   doughnutGraph?: Chart<'doughnut', number[], string>;
-  ActivePage = ActivePage;
 
-  constructor(public dialog: MatDialog, private toastr: ToastrService) {}
+  constructor(
+    public dialog: MatDialog,
+    private toastr: ToastrService,
+    private activatedRoute: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    if (this.activePage === ActivePage.INCOME) {
-      this.displayIncomeGraph();
-    } else if (this.activePage === ActivePage.SAVINGS) {
-      this.displaySavingsGraph();
-    }
+    this.activatedRoute.params.subscribe((params: Params) => {
+      this.user = history.state['user'];
+      this.type = params['type'];
+      if (this.isSpendingsFinanceType()) {
+        this.displayIncomeGraph();
+      } else {
+        this.displaySavingsGraph();
+      }
+    });
+  }
+
+  isSpendingsFinanceType(): boolean {
+    return this.type === ActivePage.INCOME;
   }
 
   displayIncomeGraph(): void {
@@ -143,9 +156,9 @@ export class FinanceIncomeSavingsComponent implements OnInit {
     });
 
     if (newTotal > totalAmount) {
-      if (this.activePage === ActivePage.INCOME) {
+      if (this.isSpendingsFinanceType()) {
         this.user.financeInfos.spendingsInfos.totalAmount = newTotal;
-      } else if (this.activePage === ActivePage.SAVINGS) {
+      } else {
         this.user.financeInfos.savingsInfos.totalAmount = newTotal;
       }
       totalAmount = newTotal;
@@ -226,7 +239,9 @@ export class FinanceIncomeSavingsComponent implements OnInit {
   openUpdateDialog(): void {
     const dialogData = {
       user: this.user,
-      activePage: this.activePage,
+      activePage: this.isSpendingsFinanceType()
+        ? ActivePage.INCOME
+        : ActivePage.SAVINGS,
     };
 
     const dialogRef = this.dialog.open(
@@ -238,13 +253,13 @@ export class FinanceIncomeSavingsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        if (this.activePage === ActivePage.INCOME) {
+        if (this.isSpendingsFinanceType()) {
           this.updateIncomeGraph();
           this.toastr.success('Expenses updated', 'Finance', {
             positionClass: 'toast-top-center',
             toastClass: 'ngx-toastr custom',
           });
-        } else if (this.activePage === ActivePage.SAVINGS) {
+        } else {
           this.updateSavingsGraph();
           this.toastr.success('Savings updated', 'Finance', {
             positionClass: 'toast-top-center',
