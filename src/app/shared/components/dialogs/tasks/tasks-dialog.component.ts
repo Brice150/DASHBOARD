@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { User } from '../../../../core/interfaces/user';
 import { Task } from '../../../../core/interfaces/task';
+import { cloneDeep } from 'lodash';
 
 @Component({
   selector: 'app-tasks-dialog',
@@ -27,7 +28,7 @@ export class TasksDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.modifyMode = this.data.index || this.data.index === 0;
-    this.user = this.data.user;
+    this.user = cloneDeep(this.data.user);
 
     if (this.modifyMode) {
       this.title = this.user.tasks[this.data.index].title;
@@ -36,7 +37,7 @@ export class TasksDialogComponent implements OnInit {
   }
 
   close(): void {
-    this.dialogRef.close(false);
+    this.dialogRef.close(null);
   }
 
   validate(): void {
@@ -52,7 +53,7 @@ export class TasksDialogComponent implements OnInit {
         };
         this.user.tasks.push(newTask);
       }
-      this.dialogRef.close(true);
+      this.dialogRef.close(this.user);
     } else {
       this.toastr.error('Title is empty', 'Task', {
         positionClass: 'toast-top-center',

@@ -29,7 +29,7 @@ export class FinanceStockExchangeUpdateDialogComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.user = this.data.user;
+    this.user = cloneDeep(this.data.user);
     this.totalAmount = cloneDeep(
       this.user.financeInfos.stockExchangeInfos.totalAmount
     );

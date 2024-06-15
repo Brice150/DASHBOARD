@@ -26,6 +26,7 @@ export class WeatherUpdateDialogComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.user = cloneDeep(this.data.user);
     this.cities = cloneDeep(this.data.user.weatherInfos.cities);
   }
 
@@ -51,7 +52,7 @@ export class WeatherUpdateDialogComponent implements OnInit {
         }
       });
       if (citiesToSave.length === 4) {
-        this.data.user.weatherInfos.cities = citiesToSave;
+        this.user.weatherInfos.cities = citiesToSave;
         this.dialogRef.close(this.user);
       }
     } else {

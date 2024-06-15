@@ -35,34 +35,22 @@ export class WeatherComponent implements OnInit {
   }
 
   getWeatherInfos(): void {
-    if (!this.isToday())
-      this.weatherService
-        .getWeatherInfo(this.user)
-        .subscribe(
-          ([
-            firstWeatherInfo,
-            secondWeatherInfo,
-            thirdWeatherInfo,
-            lastWeatherInfo,
-          ]) => {
-            this.user.weatherInfos.localWeathers[0] = firstWeatherInfo;
-            this.user.weatherInfos.localWeathers[1] = secondWeatherInfo;
-            this.user.weatherInfos.localWeathers[2] = thirdWeatherInfo;
-            this.user.weatherInfos.localWeathers[3] = lastWeatherInfo;
-            this.userService.saveUser(this.user);
-          }
-        );
-  }
-
-  isToday(): boolean {
-    return (
-      this.user.weatherInfos.localWeathers.length !== 0 &&
-      this.user.weatherInfos.localWeathers[0].daily &&
-      this.user.weatherInfos.localWeathers[0].daily.time[0] !== undefined &&
-      this.dayOfWeekPipe.transform(
-        this.user.weatherInfos.localWeathers[0].daily.time[0]
-      ) === 'Today'
-    );
+    this.weatherService
+      .getWeatherInfo(this.user)
+      .subscribe(
+        ([
+          firstWeatherInfo,
+          secondWeatherInfo,
+          thirdWeatherInfo,
+          lastWeatherInfo,
+        ]) => {
+          this.user.weatherInfos.localWeathers[0] = firstWeatherInfo;
+          this.user.weatherInfos.localWeathers[1] = secondWeatherInfo;
+          this.user.weatherInfos.localWeathers[2] = thirdWeatherInfo;
+          this.user.weatherInfos.localWeathers[3] = lastWeatherInfo;
+          this.userService.saveUser(this.user);
+        }
+      );
   }
 
   openUpdateDialog(): void {

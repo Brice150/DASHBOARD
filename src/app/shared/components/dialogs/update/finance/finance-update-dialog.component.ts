@@ -27,7 +27,7 @@ export class FinanceUpdateDialogComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.user = this.data.user;
+    this.user = cloneDeep(this.data.user);
     this.totalIncome = cloneDeep(
       this.user.financeInfos.spendingsInfos.totalAmount
     );

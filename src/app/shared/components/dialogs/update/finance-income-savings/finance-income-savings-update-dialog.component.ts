@@ -30,8 +30,8 @@ export class FinanceIncomeSavingsUpdateDialogComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.user = this.data.user;
-    this.activePage = this.data.activePage;
+    this.user = cloneDeep(this.data.user);
+    this.activePage = cloneDeep(this.data.activePage);
     if (this.activePage === ActivePage.INCOME) {
       this.financeArray = cloneDeep(
         this.user.financeInfos.spendingsInfos.spendings
