@@ -13,9 +13,9 @@ export class WeatherImagePipe implements PipeTransform {
       return `url(${this.imagePath}weather/sun.png)`;
     } else if (weathercode < 20) {
       return `url(${this.imagePath}weather/sun.png)`;
-    } else if (weathercode > 20 && weathercode < 52) {
+    } else if (weathercode > 40 && weathercode < 60) {
       return `url(${this.imagePath}weather/cloud.png)`;
-    } else if (weathercode > 52 && weathercode < 70) {
+    } else if (weathercode > 60 && weathercode < 80) {
       return `url(${this.imagePath}weather/rain.png)`;
     }
     return `url(${this.imagePath}weather/thunder.png)`;

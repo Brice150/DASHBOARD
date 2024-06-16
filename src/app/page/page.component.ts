@@ -1,113 +1,74 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { User } from '../core/interfaces/user';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { Router } from '@angular/router';
 import {
+  AnnualExpenses,
   FinanceInfos,
-  MoneyInput,
+  Financing,
+  Purchase,
+  RealEstate,
+  Renovation,
+  Rent,
+  Results,
+  Savings,
+  Spendings,
+  StockExchange,
   Yearly,
 } from '../core/interfaces/financeInfos';
-import { WeatherComponent } from './weather/weather.component';
+import { User } from '../core/interfaces/user';
+import { WeatherInfos } from '../core/interfaces/weatherInfos';
+import { HeaderComponent } from '../header/header.component';
 import { FinanceComponent } from './finance/finance.component';
 import { TasksComponent } from './tasks/tasks.component';
-import { CommonModule } from '@angular/common';
+import { WeatherComponent } from './weather/weather.component';
+import { ActivePage } from '../core/enums/active-page.enum';
+import { UserService } from '../core/services/user.service';
+
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, WeatherComponent, FinanceComponent, TasksComponent],
+  imports: [
+    CommonModule,
+    WeatherComponent,
+    FinanceComponent,
+    TasksComponent,
+    MatSlideToggleModule,
+    HeaderComponent,
+  ],
   templateUrl: './page.component.html',
   styleUrls: ['./page.component.css'],
 })
 export class PageComponent implements OnInit {
   user: User = {} as User;
-  defaultCityName: string = 'Paris';
+  indexSelected: number = 0;
 
-  constructor() {}
+  constructor(private router: Router, private userService: UserService) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
+    this.user = this.userService.getUser();
+  }
+
+  onCitySelected(index: number): void {
+    this.router.navigate(['/weather/' + index]);
+  }
+
+  onFinanceTypeSelected(type: string): void {
+    if (type === ActivePage.INCOME || type === ActivePage.SAVINGS) {
+      this.router.navigate(['/finance/' + type], {
+        state: { user: this.user },
+      });
+    } else if (type === ActivePage.STOCKEXCHANGE) {
+      this.router.navigate(['/stock-exchange']);
+    } else {
+      this.router.navigate(['/real-estate']);
+    }
+  }
+
+  onHideFinance(): void {
     let storedUser: string | null = localStorage.getItem('userDashboard');
     if (storedUser !== null) {
       this.user = JSON.parse(storedUser);
-    } else {
-      this.generateDefaultUser();
-      localStorage.setItem('userDashboard', JSON.stringify(this.user));
     }
-    this.handleMode();
-  }
-
-  generateDefaultUser() {
-    const moneyInput: MoneyInput = {
-      amountPerMonth: 100,
-      initialAmount: 1000,
-      percentage: 8,
-    };
-
-    const yearly: Yearly = {
-      date: [
-        '0',
-        '1',
-        '2',
-        '3',
-        '4',
-        '5',
-        '6',
-        '7',
-        '8',
-        '9',
-        '10',
-        '11',
-        '12',
-        '13',
-        '14',
-        '15',
-        '16',
-        '17',
-        '18',
-        '19',
-        '20',
-        '21',
-        '22',
-        '23',
-        '24',
-        '25',
-      ],
-      invested: [moneyInput.initialAmount],
-      interests: [0],
-      total: [moneyInput.initialAmount],
-    };
-
-    const financeInfos: FinanceInfos = {
-      moneyInput: moneyInput,
-      yearly: yearly,
-    };
-
-    this.user = {
-      prefersDarkMode: false,
-      city: this.defaultCityName,
-      financeInfos: financeInfos,
-      tasks: [],
-    };
-  }
-
-  handleMode() {
-    if (this.user.prefersDarkMode) {
-      document.body.classList.add('dark-theme-variables');
-    } else {
-      document.body.classList.remove('dark-theme-variables');
-    }
-    this.user.prefersDarkMode = document.body.classList.contains(
-      'dark-theme-variables'
-    );
-    localStorage.setItem('userDashboard', JSON.stringify(this.user));
-  }
-
-  changeMode() {
-    document.body.classList.toggle('dark-theme-variables');
-    this.user.prefersDarkMode = document.body.classList.contains(
-      'dark-theme-variables'
-    );
-    localStorage.setItem('userDashboard', JSON.stringify(this.user));
-  }
-
-  reload() {
-    this.ngOnInit();
   }
 }

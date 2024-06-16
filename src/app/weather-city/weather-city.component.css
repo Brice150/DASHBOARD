@@ -1,16 +1,23 @@
+:host {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 0;
+  min-height: 100vh;
+  width: 100%;
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  position: relative;
+}
+
 .card {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background-color: var(--color-background);
-  color: var(--color-text-primary);
-  box-shadow: var(--box-shadow);
-  border-radius: var(--strong-radius);
   width: 100%;
-  max-width: 540px;
-  min-height: 400px;
+  margin-top: 10px;
 }
 
 .card .title {
@@ -26,43 +33,60 @@
 }
 
 .card .content {
+  margin-top: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   width: 100%;
+}
+
+.graph {
+  width: 95%;
+  height: 45vh;
+  margin-top: 20px;
+  padding: 10px 10px 30px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  box-shadow: var(--box-shadow);
+  border-radius: var(--strong-radius);
 }
 
 .content .forecast {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
   flex-wrap: wrap;
   width: 100%;
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
-.content .forecast .city {
+.content .forecast .day {
   position: relative;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   flex-direction: column;
   border-radius: var(--light-radius);
   box-shadow: var(--box-shadow);
   width: 180px;
-  height: 110px;
   margin: 10px;
   background-size: cover;
   overflow: hidden;
+  padding-bottom: 10px;
   cursor: pointer;
   transition: ease 0.5s;
 }
 
-.content .forecast .city:hover {
+.content .forecast .day:hover {
   transform: scale(1.1);
 }
 
-.content .forecast .city .overlay {
+.content .forecast .day .overlay {
   position: absolute;
   top: 0;
   left: 0;
@@ -72,17 +96,17 @@
   z-index: 1;
 }
 
-.city .city-value {
+.day-value {
   position: relative;
+  margin-bottom: 12px;
   text-transform: uppercase;
   background-color: var(--color-text-secondary);
   width: 150px;
-  height: 25px;
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 2;
-  margin-bottom: 10px;
+  padding: 2px 0;
   border-radius: var(--light-radius);
 }
 
@@ -104,47 +128,4 @@
 .content .subtitle {
   font-size: 18px;
   color: var(--color-text-primary);
-}
-
-.buttons {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 20px;
-}
-
-.buttons .button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-decoration: none;
-  cursor: pointer;
-  padding: 12px;
-  background-color: var(--color-text-primary);
-  border-radius: 10px;
-  transition: 0.5s ease;
-  color: var(--color-text-button);
-  font-size: 17px;
-  font-weight: 600;
-}
-
-.buttons .button:hover {
-  transform: scale(1.1);
-}
-
-@media screen and (max-width: 885px) {
-  .card {
-    max-width: none;
-  }
-}
-
-@media screen and (max-width: 443px) {
-  .content .forecast {
-    margin-top: 40px;
-  }
-
-  .buttons {
-    margin-bottom: 20px;
-  }
 }

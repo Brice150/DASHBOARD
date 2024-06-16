@@ -1,22 +1,28 @@
 <div mat-dialog-content class="container">
-  <h1>Change Strategy</h1>
+  <h1>Update Amounts</h1>
   <div class="finance">
     <div class="info">
       <div class="value-container">
-        <label for="initialAmount">Initial amount</label>
-        <input [(ngModel)]="initialAmount" type="number" name="initialAmount" />
+        <label for="total">Total amount</label>
+        <input [(ngModel)]="totalAmount" name="total" type="number" min="0" />
       </div>
       <div class="value-container">
-        <label for="amountPerMonth">Amount / Month</label>
+        <label for="amount">Amount per month</label>
         <input
           [(ngModel)]="amountPerMonth"
+          name="amount"
           type="number"
-          name="amountPerMonth"
+          min="0"
         />
       </div>
       <div class="value-container">
         <label for="percentage">Percentage</label>
-        <input [(ngModel)]="percentage" type="number" name="percentage" />
+        <input
+          [(ngModel)]="percentage"
+          name="percentage"
+          type="number"
+          min="0"
+        />
       </div>
     </div>
   </div>

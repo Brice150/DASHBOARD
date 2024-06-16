@@ -1,0 +1,73 @@
+<app-header></app-header>
+<div class="card">
+  <div class="title">
+    <span>{{ user.weatherInfos.cities[index].city }}</span>
+  </div>
+  <div class="content">
+    <div class="graph">
+      <div class="day-value">
+        <span class="subtitle">Today</span>
+      </div>
+      <canvas id="weatherGraph"></canvas>
+    </div>
+    <div class="forecast">
+      <div
+        class="day"
+        *ngFor="
+          let date of user.weatherInfos.localWeathers[index].daily.time;
+          let dayIndex = index
+        "
+        [ngStyle]="{
+          'background-image':
+            user.weatherInfos.localWeathers[index].daily.weathercode[dayIndex]
+            | weatherImage
+        }"
+      >
+        <div class="overlay"></div>
+        <div class="day-value">
+          <span class="subtitle">{{
+            user.weatherInfos.localWeathers[index].daily.time[dayIndex]
+              | dayOfWeek
+          }}</span>
+        </div>
+        <div class="temperature-gap">
+          <span
+            >{{
+              user.weatherInfos.localWeathers[index].daily.temperature_2m_min[
+                dayIndex
+              ] | number : "1.0-0"
+            }}°C</span
+          >
+          <span>-</span>
+          <span
+            >{{
+              user.weatherInfos.localWeathers[index].daily.temperature_2m_max[
+                dayIndex
+              ] | number : "1.0-0"
+            }}°C</span
+          >
+        </div>
+        <div class="precipitation">
+          <span
+            >{{
+              user.weatherInfos.localWeathers[index].daily.precipitation_sum[
+                dayIndex
+              ]
+            }}
+            mm</span
+          >
+        </div>
+        <div class="windspeed">
+          <span
+            >{{
+              user.weatherInfos.localWeathers[index].daily.windspeed_10m_max[
+                dayIndex
+              ]
+            }}
+            km/h</span
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

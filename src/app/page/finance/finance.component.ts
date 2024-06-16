@@ -1,19 +1,14 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnChanges,
-  OnInit,
-  Output,
-} from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from '../../../environments/environment';
 import { User } from '../../core/interfaces/user';
-import { FinanceDialogComponent } from '../../shared/components/dialogs/finance/finance-dialog.component';
-import { StrategyDialogComponent } from '../../shared/components/dialogs/strategy/strategy-dialog.component';
-import { CommonModule } from '@angular/common';
 import { YearPipe } from '../../shared/pipes/year.pipe';
+import { FinanceUpdateDialogComponent } from '../../shared/components/dialogs/update/finance/finance-update-dialog.component';
+import { ActivePage } from '../../core/enums/active-page.enum';
+import { UserService } from '../../core/services/user.service';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-finance',
@@ -22,79 +17,42 @@ import { YearPipe } from '../../shared/pipes/year.pipe';
   templateUrl: './finance.component.html',
   styleUrls: ['./finance.component.css'],
 })
-export class FinanceComponent implements OnInit, OnChanges {
+export class FinanceComponent {
   imagePath: string = environment.imagePath;
-  indexToDisplay: number[] = [0, 1, 10, 25];
   @Input() user!: User;
-  @Output() refreshEvent: EventEmitter<void> = new EventEmitter<void>();
+  @Output() onFinanceTypeSelected: EventEmitter<ActivePage> =
+    new EventEmitter<ActivePage>();
+  ActivePage = ActivePage;
 
-  constructor(public dialog: MatDialog, private toastr: ToastrService) {}
+  constructor(
+    public dialog: MatDialog,
+    private toastr: ToastrService,
+    private userService: UserService
+  ) {}
 
-  ngOnInit() {
-    this.calculateAmounts();
-  }
-
-  ngOnChanges() {
-    this.ngOnInit();
-  }
-
-  calculateAmounts() {
-    this.user.financeInfos.yearly.invested[0] =
-      this.user.financeInfos.moneyInput.initialAmount;
-    this.user.financeInfos.yearly.interests[0] = 0;
-    this.user.financeInfos.yearly.total[0] =
-      this.user.financeInfos.moneyInput.initialAmount;
-
-    for (
-      let index = 1;
-      index < this.user.financeInfos.yearly.date.length;
-      index++
-    ) {
-      let invested: number = this.user.financeInfos.yearly.invested[index - 1];
-      let interests: number =
-        this.user.financeInfos.yearly.interests[index - 1];
-
-      invested += this.user.financeInfos.moneyInput.amountPerMonth * 12;
-      interests +=
-        (invested + interests) *
-        (this.user.financeInfos.moneyInput.percentage / 100);
-
-      this.user.financeInfos.yearly.invested[index] = invested;
-      this.user.financeInfos.yearly.interests[index] = interests;
-      this.user.financeInfos.yearly.total[index] = invested + interests;
-    }
-  }
-
-  openFinanceDialog() {
-    const dialogData = {
-      financeInfo: this.user.financeInfos,
-    };
-
-    this.dialog.open(FinanceDialogComponent, {
-      data: dialogData,
-    });
-  }
-
-  openStrategyDialog() {
+  openUpdateDialog(): void {
     const dialogData = {
       user: this.user,
     };
 
-    const dialogRef = this.dialog.open(StrategyDialogComponent, {
+    const dialogRef = this.dialog.open(FinanceUpdateDialogComponent, {
       data: dialogData,
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        this.reload();
-        this.toastr.success('Strategy updated', 'Finance', {
+    dialogRef
+      .afterClosed()
+      .pipe(filter((user: User) => !!user))
+      .subscribe((user: User) => {
+        this.userService.saveUser(user);
+        this.user = this.userService.getUser();
+        this.toastr.success('Total amounts updated', 'Finance', {
           positionClass: 'toast-top-center',
+          toastClass: 'ngx-toastr custom',
         });
-      }
-    });
+      });
   }
 
-  reload() {
-    this.refreshEvent.emit();
+  selectActivePage(type: ActivePage): void {
+    this.onFinanceTypeSelected.emit(type);
   }
 }
