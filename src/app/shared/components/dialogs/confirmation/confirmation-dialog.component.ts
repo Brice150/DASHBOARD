@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { User } from '../../../../core/interfaces/user';
 import { CommonModule } from '@angular/common';
+import { cloneDeep } from 'lodash';
 
 @Component({
   selector: 'app-confirmation-dialog',
@@ -15,20 +16,19 @@ export class ConfirmationDialogComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<ConfirmationDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: { user: User; index: number }
   ) {}
 
-  ngOnInit() {
-    this.user = this.data.user;
+  ngOnInit(): void {
+    this.user = cloneDeep(this.data.user);
   }
 
-  cancel() {
-    this.dialogRef.close(false);
+  cancel(): void {
+    this.dialogRef.close(null);
   }
 
-  delete() {
+  delete(): void {
     this.user.tasks.splice(this.data.index, 1);
-    localStorage.setItem('userDashboard', JSON.stringify(this.user));
-    this.dialogRef.close(true);
+    this.dialogRef.close(this.user);
   }
 }

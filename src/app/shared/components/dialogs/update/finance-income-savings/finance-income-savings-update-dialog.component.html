@@ -1,0 +1,55 @@
+<div mat-dialog-content class="container">
+  <h1>Update Amounts</h1>
+  <div class="finance">
+    <div
+      class="info"
+      *ngFor="let moneyInput of financeArray; let index = index"
+    >
+      <div class="value-container">
+        <label for="title">Title</label>
+        <input [(ngModel)]="moneyInput.title" name="title" type="text" />
+      </div>
+      <div class="value-container">
+        <label for="amount">Amount</label>
+        <input
+          [(ngModel)]="moneyInput.amount"
+          name="amount"
+          type="number"
+          min="0"
+        />
+      </div>
+      <div class="value-container">
+        <label for="color">Color</label>
+        <input
+          class="color-picker"
+          [(colorPicker)]="moneyInput.color"
+          [style.background]="moneyInput.color"
+          [cpPosition]="'left'"
+          [cpDisableInput]="true"
+          readonly
+          name="color"
+        />
+      </div>
+      <a class="delete" title="Delete" (click)="delete(index)">
+        <span>Delete</span>
+      </a>
+    </div>
+    @if (activePage === ActivePage.INCOME) {
+    <a class="add" title="Add Expense" (click)="add()">
+      <span>Add Expense</span>
+    </a>
+    } @else if (activePage === ActivePage.SAVINGS) {
+    <a class="add" title="Add Saving" (click)="add()">
+      <span>Add Saving</span>
+    </a>
+    }
+  </div>
+  <div class="buttons">
+    <a class="close" title="Close" (click)="close()">
+      <span>Close</span>
+    </a>
+    <a class="validate" title="Validate" (click)="validate()">
+      <span>Validate</span>
+    </a>
+  </div>
+</div>

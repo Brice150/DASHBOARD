@@ -1,116 +1,82 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnChanges,
-  OnInit,
-  Output,
-} from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { User } from '../../core/interfaces/user';
+import { WeatherService } from '../../core/services/weather.service';
 import { DayOfWeekPipe } from '../../shared/pipes/dayOfWeek.pipe';
 import { WeatherImagePipe } from '../../shared/pipes/weatherImage.pipe';
-import { WeatherInfos } from '../../core/interfaces/weatherInfos';
-import { WeatherService } from '../../core/services/weather.service';
-import { citiesGeolocation } from '../../shared/data/citiesGeolocation';
-import { CityGeolocation } from '../../core/interfaces/cityGeolocation';
-import { WeatherDialogComponent } from '../../shared/components/dialogs/weather/weather-dialog.component';
-import { CityDialogComponent } from '../../shared/components/dialogs/city/city-dialog.component';
-import { CommonModule } from '@angular/common';
+import { WeatherUpdateDialogComponent } from '../../shared/components/dialogs/update/weather/weather-update-dialog.component';
+import { UserService } from '../../core/services/user.service';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-weather',
   standalone: true,
-  imports: [CommonModule, DayOfWeekPipe],
+  imports: [CommonModule, DayOfWeekPipe, WeatherImagePipe],
   templateUrl: './weather.component.html',
   styleUrls: ['./weather.component.css'],
 })
-export class WeatherComponent implements OnInit, OnChanges {
+export class WeatherComponent implements OnInit {
   @Input() user!: User;
-  @Input() defaultCityName!: string;
-  @Output() refreshEvent: EventEmitter<void> = new EventEmitter<void>();
-  weatherInfo!: WeatherInfos;
+  @Output() onCitySelected: EventEmitter<number> = new EventEmitter<number>();
   dayOfWeekPipe: DayOfWeekPipe = new DayOfWeekPipe();
   weatherImagePipe: WeatherImagePipe = new WeatherImagePipe();
 
   constructor(
     public dialog: MatDialog,
     private toastr: ToastrService,
-    private weatherService: WeatherService
+    private weatherService: WeatherService,
+    private userService: UserService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.getWeatherInfos();
   }
 
-  ngOnChanges() {
-    this.ngOnInit();
-  }
-
-  getWeatherInfos() {
-    let city: CityGeolocation | undefined = citiesGeolocation.find(
-      (cityGeolocation) => {
-        return (
-          cityGeolocation.city.toLowerCase().trim() ===
-          this.user.city.toLowerCase().trim()
-        );
-      }
-    );
-    if (!city) {
-      city = citiesGeolocation.find((cityGeolocation) => {
-        return (
-          cityGeolocation.city.toLowerCase().trim() ===
-          this.defaultCityName.toLowerCase().trim()
-        );
-      });
-    }
+  getWeatherInfos(): void {
     this.weatherService
-      .getWeatherInfo(city!)
-      .subscribe((response: WeatherInfos) => {
-        this.weatherInfo = response;
-        const transformedImage: string[] = [];
-
-        for (let index = 0; index < 4; index++) {
-          transformedImage.push(
-            this.weatherImagePipe.transform(response.daily.weathercode[index])
-          );
+      .getWeatherInfo(this.user)
+      .subscribe(
+        ([
+          firstWeatherInfo,
+          secondWeatherInfo,
+          thirdWeatherInfo,
+          lastWeatherInfo,
+        ]) => {
+          this.user.weatherInfos.localWeathers[0] = firstWeatherInfo;
+          this.user.weatherInfos.localWeathers[1] = secondWeatherInfo;
+          this.user.weatherInfos.localWeathers[2] = thirdWeatherInfo;
+          this.user.weatherInfos.localWeathers[3] = lastWeatherInfo;
+          this.userService.saveUser(this.user);
         }
-        this.weatherInfo.daily.image = transformedImage;
-      });
+      );
   }
 
-  openWeatherDialog(index: number) {
-    const dialogData = {
-      weatherInfo: this.weatherInfo,
-      index: index,
-    };
-
-    this.dialog.open(WeatherDialogComponent, {
-      data: dialogData,
-    });
-  }
-
-  openCityDialog() {
+  openUpdateDialog(): void {
     const dialogData = {
       user: this.user,
     };
 
-    const dialogRef = this.dialog.open(CityDialogComponent, {
+    const dialogRef = this.dialog.open(WeatherUpdateDialogComponent, {
       data: dialogData,
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        this.reload();
-        this.toastr.success('City updated', 'Weather', {
+    dialogRef
+      .afterClosed()
+      .pipe(filter((user: User) => !!user))
+      .subscribe((user: User) => {
+        this.userService.saveUser(user);
+        this.user = this.userService.getUser();
+        this.getWeatherInfos();
+        this.toastr.success('Cities updated', 'Weather', {
           positionClass: 'toast-top-center',
+          toastClass: 'ngx-toastr custom',
         });
-      }
-    });
+      });
   }
 
-  reload() {
-    this.refreshEvent.emit();
+  selectCity(index: number): void {
+    this.onCitySelected.emit(index);
   }
 }

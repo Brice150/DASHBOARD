@@ -38,7 +38,7 @@ h1 {
   background-color: var(--color-text-primary);
   border-radius: 10px;
   transition: 0.5s ease;
-  color: var(--color-text-secondary);
+  color: var(--color-text-button);
   font-size: 17px;
   font-weight: 600;
 }

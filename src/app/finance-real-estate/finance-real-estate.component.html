@@ -1,0 +1,295 @@
+<app-header></app-header>
+<div class="card">
+  <div class="content">
+    <div class="title">
+      <span>Real Estate</span>
+    </div>
+    <div class="results">
+      <div class="value-container">
+        <div class="subtitle">
+          <i class="bx bxs-credit-card-alt"></i>
+          <span>Total Cost</span>
+        </div>
+        <span class="number"
+          >{{
+            user.financeInfos.realEstateInfos.results.totalCost
+              | currency : "EUR" : "" : "1.0-0"
+          }}
+          €</span
+        >
+      </div>
+      <div class="value-container">
+        <div class="subtitle">
+          <i class="bx bxs-dollar-circle"></i>
+          <span>Total Rents</span>
+        </div>
+        <span class="number"
+          >{{
+            user.financeInfos.realEstateInfos.results.totalRents
+              | currency : "EUR" : "" : "1.0-0"
+          }}
+          € / M</span
+        >
+      </div>
+      <div class="value-container">
+        <div class="subtitle">
+          <i class="bx bxs-cog"></i>
+          <span>Total Charges</span>
+        </div>
+        <span class="number"
+          >{{
+            user.financeInfos.realEstateInfos.results.totalCharges
+              | currency : "EUR" : "" : "1.0-0"
+          }}
+          € / M</span
+        >
+      </div>
+      <div class="value-container">
+        <div class="subtitle">
+          <i class="bx bx-sort-up"></i>
+          <span>Gross Yield</span>
+        </div>
+        <span class="number">{{
+          user.financeInfos.realEstateInfos.results.grossYield
+            | percent : "1.1-1"
+        }}</span>
+      </div>
+      <div class="value-container">
+        <div class="subtitle">
+          <i class="bx bx-sort-down"></i>
+          <span>Net Yield</span>
+        </div>
+        <span class="number">{{
+          user.financeInfos.realEstateInfos.results.netYield | percent : "1.1-1"
+        }}</span>
+      </div>
+      <div class="value-container">
+        <div class="subtitle">
+          <i class="bx bxs-coin-stack"></i>
+          <span>Cash Flow</span>
+        </div>
+        <span class="number"
+          >{{
+            user.financeInfos.realEstateInfos.results.cashFlow
+              | currency : "EUR" : "" : "1.0-0"
+          }}
+          € / M</span
+        >
+      </div>
+    </div>
+    <div class="inter">
+      <span>Simulator</span>
+    </div>
+    <div class="form">
+      <div class="combined">
+        <div class="subform">
+          <div class="subtitle">
+            <i class="bx bxs-building-house"></i>
+            <span>Purchase</span>
+          </div>
+          <div class="value-container">
+            <label for="purchase">Price</label>
+            <input
+              name="purchase"
+              type="number"
+              min="0"
+              [(ngModel)]="user.financeInfos.realEstateInfos.purchase.price"
+              (ngModelChange)="calculateAmounts()"
+            />
+          </div>
+          <div class="value-container">
+            <label for="notary">Notary fees</label>
+            <input
+              name="notary"
+              type="number"
+              min="0"
+              [(ngModel)]="
+                user.financeInfos.realEstateInfos.purchase.notaryFees
+              "
+              (ngModelChange)="calculateAmounts()"
+            />
+          </div>
+        </div>
+        <div class="subform">
+          <div class="subtitle">
+            <i class="bx bxs-hard-hat"></i>
+            <span>Renovation</span>
+          </div>
+          <div class="value-container">
+            <label for="renovation">Price</label>
+            <input
+              name="renovation"
+              type="number"
+              min="0"
+              [(ngModel)]="user.financeInfos.realEstateInfos.renovation.price"
+              (ngModelChange)="calculateAmounts()"
+            />
+          </div>
+          <div class="value-container">
+            <label for="furniture">Furniture budget</label>
+            <input
+              name="furniture"
+              type="number"
+              min="0"
+              [(ngModel)]="
+                user.financeInfos.realEstateInfos.renovation.furnitureBudget
+              "
+              (ngModelChange)="calculateAmounts()"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="subform">
+        <div class="subtitle">
+          <i class="bx bxs-bank"></i>
+          <span>Financing</span>
+        </div>
+        <div class="value-container">
+          <label for="down">Down payment</label>
+          <input
+            name="down"
+            type="number"
+            min="0"
+            [(ngModel)]="
+              user.financeInfos.realEstateInfos.financing.downPayment
+            "
+            (ngModelChange)="calculateAmounts()"
+          />
+        </div>
+        <div class="value-container">
+          <label for="loan">Loan rate</label>
+          <input
+            name="loan"
+            type="number"
+            min="0"
+            [(ngModel)]="user.financeInfos.realEstateInfos.financing.loanRate"
+            (ngModelChange)="calculateAmounts()"
+          />
+        </div>
+        <div class="value-container">
+          <label for="insurance">Insurance rate</label>
+          <input
+            name="insurance"
+            type="number"
+            min="0"
+            [(ngModel)]="
+              user.financeInfos.realEstateInfos.financing.insuranceRate
+            "
+            (ngModelChange)="calculateAmounts()"
+          />
+        </div>
+        <div class="value-container">
+          <label for="purchase">Duration</label>
+          <input
+            name="purchase"
+            type="number"
+            min="0"
+            [(ngModel)]="user.financeInfos.realEstateInfos.financing.duration"
+            (ngModelChange)="calculateAmounts()"
+          />
+        </div>
+        <div class="value-container">
+          <label for="borrowed">Total borrowed</label>
+          <span class="disabled" name="monthly"
+            >{{
+              user.financeInfos.realEstateInfos.financing.totalBorrowed
+                | currency : "EUR" : "" : "1.0-0"
+            }}
+            €</span
+          >
+        </div>
+        <div class="value-container">
+          <label for="monthly">Monthly payments</label>
+          <span class="disabled" name="monthly"
+            >{{
+              user.financeInfos.realEstateInfos.financing.monthlyPayments
+                | currency : "EUR" : "" : "1.0-0"
+            }}
+            €</span
+          >
+        </div>
+      </div>
+      <div class="subform">
+        <div class="subtitle">
+          <i class="bx bxs-credit-card-alt"></i>
+          <span>Annual Expenses</span>
+        </div>
+        <div class="value-container">
+          <label for="property">Property tax</label>
+          <input
+            name="property"
+            type="number"
+            min="0"
+            [(ngModel)]="
+              user.financeInfos.realEstateInfos.annualExpenses.propertyTax
+            "
+            (ngModelChange)="calculateAmounts()"
+          />
+        </div>
+        <div class="value-container">
+          <label for="pno">PNO insurance</label>
+          <input
+            name="pno"
+            type="number"
+            min="0"
+            [(ngModel)]="
+              user.financeInfos.realEstateInfos.annualExpenses.pnoInsurance
+            "
+            (ngModelChange)="calculateAmounts()"
+          />
+        </div>
+        <div class="value-container">
+          <label for="ownership">Co-ownership charges</label>
+          <input
+            name="ownership"
+            type="number"
+            min="0"
+            [(ngModel)]="
+              user.financeInfos.realEstateInfos.annualExpenses
+                .coownershipCharges
+            "
+            (ngModelChange)="calculateAmounts()"
+          />
+        </div>
+        <div class="value-container">
+          <label for="other">Other charges</label>
+          <input
+            name="other"
+            type="number"
+            min="0"
+            [(ngModel)]="
+              user.financeInfos.realEstateInfos.annualExpenses.otherCharges
+            "
+            (ngModelChange)="calculateAmounts()"
+          />
+        </div>
+      </div>
+      <div class="subform">
+        <div class="subtitle">
+          <i class="bx bxs-home-heart"></i>
+          <span>Rent</span>
+        </div>
+        <div class="value-container">
+          <label for="lots">Number of lots</label>
+          <input
+            name="lots"
+            type="number"
+            min="0"
+            [(ngModel)]="user.financeInfos.realEstateInfos.rent.lotsNumber"
+            (ngModelChange)="calculateAmounts()"
+          />
+        </div>
+        <div class="value-container">
+          <label for="rent">Rent per lot</label>
+          <input
+            name="rent"
+            type="number"
+            min="0"
+            [(ngModel)]="user.financeInfos.realEstateInfos.rent.rentPerLot"
+            (ngModelChange)="calculateAmounts()"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

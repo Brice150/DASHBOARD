@@ -1,0 +1,73 @@
+:host {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 0;
+  width: 100%;
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  position: relative;
+  min-height: 50px;
+}
+
+.project-title {
+  top: 20px;
+  position: absolute;
+  z-index: 2;
+  cursor: pointer;
+}
+
+.project-title span {
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.switch-container {
+  top: 20px;
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 95%;
+  z-index: 1;
+}
+
+.switch-container a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.switch-container a i {
+  font-size: 30px;
+  color: var(--color-text-secondary);
+}
+
+::ng-deep .mat-mdc-slide-toggle .mat-internal-form-field {
+  color: var(--color-text-secondary) !important;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  letter-spacing: 1px !important;
+}
+
+::ng-deep .mdc-switch .mdc-switch__track {
+  height: 28px !important;
+}
+
+::ng-deep .mdc-switch:enabled .mdc-switch__track::after {
+  background: var(--color-text-primary) !important;
+}
+
+@media screen and (max-width: 650px) {
+  .switch-container {
+    margin-top: 35px;
+  }
+
+  :host {
+    min-height: 80px;
+  }
+}

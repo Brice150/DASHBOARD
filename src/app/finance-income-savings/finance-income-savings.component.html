@@ -1,0 +1,28 @@
+<app-header></app-header>
+<div class="card">
+  <div class="content">
+    <div class="title">
+      @if (isSpendingsFinanceType()) {
+      <span>Expenses</span>
+      } @else {
+      <span>Savings</span>
+      }
+    </div>
+    <div class="graph">
+      <canvas id="doughnutGraph"></canvas>
+    </div>
+    <div class="buttons">
+      @if ((isSpendingsFinanceType() &&
+      user.financeInfos.spendingsInfos.totalAmount !== 0) ||
+      (!isSpendingsFinanceType() && user.financeInfos.savingsInfos.totalAmount
+      !== 0)) {
+      <a class="button" (click)="openUpdateDialog()" title="Update">Update</a>
+      } @else if ((isSpendingsFinanceType() &&
+      user.financeInfos.spendingsInfos.totalAmount === 0) ||
+      (!isSpendingsFinanceType() && user.financeInfos.savingsInfos.totalAmount
+      === 0)) {
+      <a class="button green" (click)="openUpdateDialog()" title="Add">Add</a>
+      }
+    </div>
+  </div>
+</div>

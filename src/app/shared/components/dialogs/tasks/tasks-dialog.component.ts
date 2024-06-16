@@ -1,10 +1,11 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
-import { User } from '../../../../core/interfaces/user';
-import { Task } from '../../../../core/interfaces/task';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { User } from '../../../../core/interfaces/user';
+import { Task } from '../../../../core/interfaces/task';
+import { cloneDeep } from 'lodash';
 
 @Component({
   selector: 'app-tasks-dialog',
@@ -25,9 +26,9 @@ export class TasksDialogComponent implements OnInit {
     private toastr: ToastrService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.modifyMode = this.data.index || this.data.index === 0;
-    this.user = this.data.user;
+    this.user = cloneDeep(this.data.user);
 
     if (this.modifyMode) {
       this.title = this.user.tasks[this.data.index].title;
@@ -35,12 +36,12 @@ export class TasksDialogComponent implements OnInit {
     }
   }
 
-  close() {
-    this.dialogRef.close(false);
+  close(): void {
+    this.dialogRef.close(null);
   }
 
-  validate() {
-    if (this.title) {
+  validate(): void {
+    if (this.title && this.title.trim() !== '') {
       if (this.modifyMode) {
         this.user.tasks[this.data.index].title = this.title;
         this.user.tasks[this.data.index].description = this.description;
@@ -52,12 +53,11 @@ export class TasksDialogComponent implements OnInit {
         };
         this.user.tasks.push(newTask);
       }
-
-      localStorage.setItem('userDashboard', JSON.stringify(this.user));
-      this.dialogRef.close(true);
+      this.dialogRef.close(this.user);
     } else {
       this.toastr.error('Title is empty', 'Task', {
         positionClass: 'toast-top-center',
+        toastClass: 'ngx-toastr custom',
       });
     }
   }

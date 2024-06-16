@@ -50,21 +50,22 @@ h1 {
 }
 
 .value-container label {
-  color: var(--color-text-secondary);
+  color: var(--color-text-primary);
   text-align: center;
   font-size: 17px;
   font-weight: 600;
 }
 
-.value-container textarea {
+.value-container input {
+  width: 150px;
   background-color: var(--color-background);
   color: var(--color-text-secondary);
   border: none;
   resize: none;
-  text-align: center;
   font-size: 17px;
   font-weight: 600;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  text-align: center;
 }
 
 .buttons {
@@ -84,7 +85,7 @@ h1 {
   background-color: var(--color-text-primary);
   border-radius: 10px;
   transition: 0.5s ease;
-  color: var(--color-text-secondary);
+  color: var(--color-text-button);
   font-size: 17px;
   font-weight: 600;
 }

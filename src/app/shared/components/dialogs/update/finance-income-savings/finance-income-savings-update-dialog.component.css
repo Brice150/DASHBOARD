@@ -18,12 +18,10 @@ h1 {
   text-align: center;
   font-size: 23px;
   font-weight: 600;
-  margin-bottom: 30px;
-  text-transform: capitalize;
   margin-bottom: 0;
 }
 
-.task {
+.finance {
   border-radius: var(--light-radius);
   box-shadow: var(--box-shadow);
   width: 80%;
@@ -35,7 +33,7 @@ h1 {
   flex-direction: column;
 }
 
-.task .info {
+.finance .info {
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -58,15 +56,16 @@ h1 {
   font-weight: 600;
 }
 
-.value-container textarea {
+.value-container input {
+  width: 150px;
   background-color: var(--color-background);
   color: var(--color-text-secondary);
   border: none;
   resize: none;
-  text-align: center;
   font-size: 17px;
   font-weight: 600;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  text-align: center;
 }
 
 .buttons {
@@ -76,7 +75,7 @@ h1 {
   justify-content: space-around;
 }
 
-.buttons a {
+a {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -91,10 +90,48 @@ h1 {
   font-weight: 600;
 }
 
-.buttons .validate {
+.validate {
   background-color: green;
 }
 
-.buttons a:hover {
+.delete {
+  background-color: red;
+}
+
+.add {
+  margin-top: 10px;
+}
+
+a:hover {
   transform: scale(1.1);
+}
+
+.value-container input.color-picker {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 700px) {
+  .finance {
+    max-height: 400px;
+    overflow-y: auto;
+  }
+
+  .finance .info:nth-child(1) {
+    margin-top: 300px;
+  }
+}
+
+@media screen and (max-width: 667px) {
+  .finance .info:nth-child(1) {
+    margin-top: 880px;
+  }
+}
+
+@media screen and (max-width: 426px) {
+  .finance .info:nth-child(1) {
+    margin-top: 1400px;
+  }
 }

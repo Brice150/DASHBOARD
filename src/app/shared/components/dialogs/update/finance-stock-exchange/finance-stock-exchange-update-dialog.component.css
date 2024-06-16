@@ -24,7 +24,7 @@ h1 {
 .finance {
   border-radius: var(--light-radius);
   box-shadow: var(--box-shadow);
-  width: 95%;
+  width: 80%;
   margin: 10px;
   padding: 10px;
   display: flex;
@@ -39,17 +39,43 @@ h1 {
   align-items: center;
   flex-wrap: wrap;
   width: 100%;
-  min-height: 50vh;
+}
+
+.info .value-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 5px 0;
+}
+
+.value-container label {
+  color: var(--color-text-primary);
+  text-align: center;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.value-container input {
+  width: 150px;
+  background-color: var(--color-background);
+  color: var(--color-text-secondary);
+  border: none;
+  resize: none;
+  font-size: 17px;
+  font-weight: 600;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  text-align: center;
 }
 
 .buttons {
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
 }
 
-.buttons a {
+a {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -59,11 +85,15 @@ h1 {
   background-color: var(--color-text-primary);
   border-radius: 10px;
   transition: 0.5s ease;
-  color: var(--color-text-secondary);
+  color: var(--color-text-button);
   font-size: 17px;
   font-weight: 600;
 }
 
-.buttons a:hover {
+.validate {
+  background-color: green;
+}
+
+a:hover {
   transform: scale(1.1);
 }
