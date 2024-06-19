@@ -1,5 +1,4 @@
 import { FinanceInfos } from './financeInfos';
-import { Task } from './task';
 import { WeatherInfos } from './weatherInfos';
 
 export interface User {
@@ -9,4 +8,9 @@ export interface User {
   financeInfos: FinanceInfos;
   weatherInfos: WeatherInfos;
   tasks: Task[];
+}
+
+export interface Task {
+  name: string;
+  subtasks: string[];
 }

@@ -1,11 +1,9 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { ToastrService } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { User } from '../../../../core/interfaces/user';
-import { Task } from '../../../../core/interfaces/task';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { cloneDeep } from 'lodash';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-tasks-dialog',
@@ -15,25 +13,16 @@ import { cloneDeep } from 'lodash';
   styleUrls: ['./tasks-dialog.component.css'],
 })
 export class TasksDialogComponent implements OnInit {
-  user!: User;
-  title!: string;
-  description!: string;
-  modifyMode: boolean = true;
+  taskName!: string;
 
   constructor(
     public dialogRef: MatDialogRef<TasksDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
+    @Inject(MAT_DIALOG_DATA) public data: { taskName: string },
     private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
-    this.modifyMode = this.data.index || this.data.index === 0;
-    this.user = cloneDeep(this.data.user);
-
-    if (this.modifyMode) {
-      this.title = this.user.tasks[this.data.index].title;
-      this.description = this.user.tasks[this.data.index].description;
-    }
+    this.taskName = cloneDeep(this.data.taskName);
   }
 
   close(): void {
@@ -41,21 +30,10 @@ export class TasksDialogComponent implements OnInit {
   }
 
   validate(): void {
-    if (this.title && this.title.trim() !== '') {
-      if (this.modifyMode) {
-        this.user.tasks[this.data.index].title = this.title;
-        this.user.tasks[this.data.index].description = this.description;
-      } else {
-        const newTask: Task = {
-          title: this.title,
-          description: this.description,
-          date: new Date(),
-        };
-        this.user.tasks.push(newTask);
-      }
-      this.dialogRef.close(this.user);
+    if (this.taskName && this.taskName.trim() !== '') {
+      this.dialogRef.close(this.taskName);
     } else {
-      this.toastr.error('Title is empty', 'Task', {
+      this.toastr.error('Task is empty', 'Task', {
         positionClass: 'toast-top-center',
         toastClass: 'ngx-toastr custom',
       });

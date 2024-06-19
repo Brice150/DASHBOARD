@@ -42,24 +42,16 @@
 }
 
 .content .forecast .task {
-  border-radius: var(--light-radius);
-  box-shadow: var(--box-shadow);
-  width: 80%;
-  margin: 10px;
-  padding: 10px;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
+  margin: 5px;
 }
 
 .task .info {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  flex-wrap: wrap;
-  width: 100%;
-  margin-bottom: 20px;
+  margin-right: 10px;
+  width: 300px;
 }
 
 .content span {
@@ -68,27 +60,6 @@
   font-size: 17px;
   font-weight: 600;
   z-index: 2;
-}
-
-.content .task-title {
-  width: 30%;
-  min-width: 100px;
-  text-align: center;
-  margin: 5px 0;
-}
-
-.content .task-description {
-  width: 30%;
-  min-width: 220px;
-  text-align: center;
-  margin: 5px 0;
-}
-
-.content .task-date {
-  width: 30%;
-  min-width: 100px;
-  text-align: center;
-  margin: 5px 0;
 }
 
 .buttons {
@@ -103,16 +74,27 @@
 .task-buttons {
   display: flex;
   align-items: center;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  width: 100%;
+  justify-content: center;
 }
 
-.task-buttons a {
-  margin-bottom: 20px;
+.task-buttons .menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-text-primary);
+  border-radius: 10px;
+  width: 50px;
+  transition: 0.5s ease;
+  text-decoration: none;
+  cursor: pointer;
 }
 
-a {
+.task-buttons i {
+  font-size: 35px;
+  color: var(--color-text-button);
+}
+
+a:not(.menu) {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -127,6 +109,11 @@ a {
   font-weight: 600;
 }
 
+.delete,
+.modify {
+  color: var(--color-text-secondary);
+}
+
 .modify {
   background-color: green;
 }
@@ -135,6 +122,19 @@ a {
   background-color: red;
 }
 
+.delete:hover,
+.modify:hover {
+  color: var(--color-text-primary);
+}
+
 a:hover {
   transform: scale(1.1);
+}
+
+.task-buttons .menu:hover {
+  transform: scale(1.1);
+}
+
+::ng-deep .mat-mdc-menu-content {
+  padding: 0 !important;
 }

@@ -1,16 +1,8 @@
 <div mat-dialog-content class="container">
-  <h1 *ngIf="modifyMode">Modify Task</h1>
-  <h1 *ngIf="!modifyMode">Add Task</h1>
+  <h1>Modify Task</h1>
   <div class="task">
-    <div class="info">
-      <div class="value-container">
-        <label for="title">Title</label>
-        <textarea [(ngModel)]="title" name="title"></textarea>
-      </div>
-      <div class="value-container">
-        <label for="description">Description</label>
-        <textarea [(ngModel)]="description" name="description"></textarea>
-      </div>
+    <div class="value-container">
+      <textarea [(ngModel)]="taskName" name="taskName"></textarea>
     </div>
   </div>
   <div class="buttons">
