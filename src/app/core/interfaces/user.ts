@@ -12,5 +12,6 @@ export interface User {
 
 export interface Task {
   name: string;
-  subtasks: string[];
+  id: number;
+  subtasks?: Task[];
 }

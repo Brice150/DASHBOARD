@@ -34,24 +34,44 @@
 }
 
 .content .forecast {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.forecast mat-tree {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   width: 100%;
+  background-color: var(--color-background);
 }
 
-.content .forecast .task {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 5px;
+mat-tree .mat-tree-node {
+  color: var(--color-text-secondary);
+  min-height: 40px;
 }
 
-.task .info {
-  margin-right: 10px;
+mat-tree .mat-tree-node .name {
+  font-size: 18px;
+  font-weight: 500;
   width: 300px;
+  text-align: justify;
+}
+
+mat-tree .mat-tree-node .name.parent {
+  width: 260px;
+}
+
+mat-tree .mat-tree-node .name.son {
+  width: 220px;
+}
+
+mat-tree .mat-tree-node .mat-icon-rtl-mirror {
+  color: var(--color-text-secondary);
 }
 
 .content span {
@@ -75,6 +95,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-left: 20px;
 }
 
 .task-buttons .menu {
@@ -114,14 +135,22 @@ a:not(.menu) {
   color: var(--color-text-secondary);
 }
 
+.add {
+  background-color: var(--color-text-primary);
+  color: white;
+}
+
 .modify {
   background-color: green;
+  color: white;
 }
 
 .delete {
   background-color: red;
+  color: white;
 }
 
+.add:hover,
 .delete:hover,
 .modify:hover {
   color: var(--color-text-primary);
@@ -137,4 +166,37 @@ a:hover {
 
 ::ng-deep .mat-mdc-menu-content {
   padding: 0 !important;
+}
+
+.tree-invisible {
+  display: none;
+}
+
+.tree ul,
+.tree li {
+  margin-top: 0;
+  margin-bottom: 0;
+  list-style-type: none;
+}
+
+.tree .mat-nested-tree-node div[role="group"] {
+  padding-left: 40px;
+}
+
+.tree div[role="group"] > .mat-tree-node {
+  padding-left: 40px;
+}
+
+@media screen and (max-width: 442px) {
+  mat-tree .mat-tree-node .name {
+    width: 200px;
+  }
+
+  mat-tree .mat-tree-node .name.parent {
+    width: 160px;
+  }
+
+  mat-tree .mat-tree-node .name.son {
+    width: 120px;
+  }
 }
