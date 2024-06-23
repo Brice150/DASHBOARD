@@ -92,7 +92,7 @@ export class TasksComponent implements OnInit {
       .subscribe((taskName: string) => {
         this.user.tasks.forEach((task: Task) => {
           const index = task.subtasks?.findIndex(
-            (subtask: Task) => (subtask.id = node.id)
+            (subtask: Task) => subtask.id === node.id
           );
           if (index !== undefined && index !== -1) {
             task.subtasks![index].name = taskName;
@@ -237,7 +237,7 @@ export class TasksComponent implements OnInit {
       .subscribe(() => {
         this.user.tasks.forEach((task: Task) => {
           const index = task.subtasks?.findIndex(
-            (subtask: Task) => (subtask.id = node.id)
+            (subtask: Task) => subtask.id === node.id
           );
           if (index !== undefined && index !== -1) {
             task.subtasks!.splice(index, 1);
