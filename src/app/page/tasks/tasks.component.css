@@ -130,18 +130,22 @@ a:not(.menu) {
   font-weight: 600;
 }
 
+.buttons .button {
+  background-color: green;
+}
+
 .delete,
-.modify {
+.update {
   color: var(--color-text-secondary);
 }
 
 .add {
-  background-color: var(--color-text-primary);
+  background-color: green;
   color: white;
 }
 
-.modify {
-  background-color: green;
+.update {
+  background-color: var(--color-text-primary);
   color: white;
 }
 
@@ -152,7 +156,7 @@ a:not(.menu) {
 
 .add:hover,
 .delete:hover,
-.modify:hover {
+.update:hover {
   color: var(--color-text-primary);
 }
 

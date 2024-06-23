@@ -2,7 +2,13 @@
 <div class="card">
   <div class="content">
     <div class="title">
-      <span>Stock Exchange</span>
+      <span
+        >Stock Exchange ({{
+          user.financeInfos.stockExchangeInfos.totalAmount
+            | currency : "EUR" : "" : "1.0-0"
+        }}
+        €)</span
+      >
     </div>
     <div class="graph">
       <canvas id="barGraph"></canvas>

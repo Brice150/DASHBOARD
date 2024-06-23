@@ -50,7 +50,7 @@ export class TasksComponent implements OnInit {
     return !!this.user.tasks.find((task: Task) => task.id === node.id);
   }
 
-  modifyTask(node: Task): void {
+  updateTask(node: Task): void {
     const dialogData = {
       taskName: node.name,
     };
@@ -77,7 +77,7 @@ export class TasksComponent implements OnInit {
       });
   }
 
-  modifySubtask(node: Task): void {
+  updateSubtask(node: Task): void {
     const dialogData = {
       taskName: node.name,
     };

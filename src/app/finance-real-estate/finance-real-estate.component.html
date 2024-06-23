@@ -2,7 +2,13 @@
 <div class="card">
   <div class="content">
     <div class="title">
-      <span>Real Estate</span>
+      <span
+        >Real Estate ({{
+          user.financeInfos.realEstateInfos.totalAmount
+            | currency : "EUR" : "" : "1.0-0"
+        }}
+        €)</span
+      >
     </div>
     <div class="results">
       <div class="value-container">

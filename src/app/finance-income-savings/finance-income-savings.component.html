@@ -3,9 +3,21 @@
   <div class="content">
     <div class="title">
       @if (isSpendingsFinanceType()) {
-      <span>Expenses</span>
+      <span
+        >Expenses ({{
+          user.financeInfos.spendingsInfos.totalAmount
+            | currency : "EUR" : "" : "1.0-0"
+        }}
+        €)</span
+      >
       } @else {
-      <span>Savings</span>
+      <span
+        >Savings ({{
+          user.financeInfos.savingsInfos.totalAmount
+            | currency : "EUR" : "" : "1.0-0"
+        }}
+        €)</span
+      >
       }
     </div>
     <div class="graph">

@@ -14,7 +14,7 @@
             node.name
           }}</span>
           <div class="task-buttons">
-            <a [matMenuTriggerFor]="menu" class="menu">
+            <a [matMenuTriggerFor]="menu" class="menu" title="Update">
               <i class="bx bx-dots-horizontal-rounded"></i>
             </a>
             <mat-menu #menu="matMenu">
@@ -29,11 +29,11 @@
               </button>
               <button
                 mat-menu-item
-                class="modify"
-                title="Modify"
-                (click)="isTask(node) ? modifyTask(node) : modifySubtask(node)"
+                class="update"
+                title="Update"
+                (click)="isTask(node) ? updateTask(node) : updateSubtask(node)"
               >
-                Modify
+                Update
               </button>
               <button
                 mat-menu-item
@@ -63,7 +63,7 @@
             </button>
             <span class="name parent">{{ parentNode.name }}</span>
             <div class="task-buttons">
-              <a [matMenuTriggerFor]="menu" class="menu">
+              <a [matMenuTriggerFor]="menu" class="menu" title="Update">
                 <i class="bx bx-dots-horizontal-rounded"></i>
               </a>
               <mat-menu #menu="matMenu">
@@ -77,11 +77,11 @@
                 </button>
                 <button
                   mat-menu-item
-                  class="modify"
-                  title="Modify"
-                  (click)="modifyTask(parentNode)"
+                  class="update"
+                  title="Update"
+                  (click)="updateTask(parentNode)"
                 >
-                  Modify
+                  Update
                 </button>
                 <button
                   mat-menu-item
