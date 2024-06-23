@@ -7,10 +7,10 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatTreeModule, MatTreeNestedDataSource } from '@angular/material/tree';
 import { ToastrService } from 'ngx-toastr';
 import { filter } from 'rxjs';
-import { Task, User } from '../../core/interfaces/user';
-import { UserService } from '../../core/services/user.service';
-import { ConfirmationDialogComponent } from '../../shared/components/dialogs/confirmation/confirmation-dialog.component';
-import { TasksDialogComponent } from '../../shared/components/dialogs/tasks/tasks-dialog.component';
+import { Task, User } from '../../../core/interfaces/user';
+import { UserService } from '../../../core/services/user.service';
+import { ConfirmationDialogComponent } from '../../../shared/components/dialogs/confirmation/confirmation-dialog.component';
+import { TasksDialogComponent } from '../../../shared/components/dialogs/tasks/tasks-dialog.component';
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { random } from 'lodash';
 

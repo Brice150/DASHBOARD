@@ -1,47 +1,21 @@
-.card {
-  position: relative;
+:host {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   flex-direction: column;
-  background-color: var(--color-background);
-  color: var(--color-text-primary);
-  box-shadow: var(--box-shadow);
-  border-radius: var(--strong-radius);
-  width: 100%;
-  max-width: 1100px;
+  min-height: 200px;
 }
 
-.card .title {
-  position: absolute;
-  top: 10px;
-}
-
-.card .title span {
-  text-align: center;
-  font-size: 22px;
-  font-weight: 800;
-  letter-spacing: 1px;
-}
-
-.card .content {
+.container {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   width: 100%;
-  margin-top: 40px;
+  margin-bottom: 70px;
 }
 
-.content .forecast {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
-.forecast mat-tree {
+.container mat-tree {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -74,7 +48,7 @@ mat-tree .mat-tree-node .mat-icon-rtl-mirror {
   color: var(--color-text-secondary);
 }
 
-.content span {
+.container span {
   position: relative;
   color: var(--color-text-secondary);
   font-size: 17px;
@@ -83,12 +57,12 @@ mat-tree .mat-tree-node .mat-icon-rtl-mirror {
 }
 
 .buttons {
+  position: absolute;
+  bottom: 10px;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 20px;
-  margin-bottom: 30px;
 }
 
 .task-buttons {
