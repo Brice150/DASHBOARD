@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { User } from '../../../../core/interfaces/user';
 
 @Component({
   selector: 'app-confirmation-dialog',
@@ -10,13 +9,17 @@ import { User } from '../../../../core/interfaces/user';
   templateUrl: './confirmation-dialog.component.html',
   styleUrls: ['./confirmation-dialog.component.css'],
 })
-export class ConfirmationDialogComponent {
-  user!: User;
+export class ConfirmationDialogComponent implements OnInit {
+  title!: string;
 
   constructor(
     public dialogRef: MatDialogRef<ConfirmationDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: { title: string }
   ) {}
+
+  ngOnInit(): void {
+    this.title = this.data.title;
+  }
 
   cancel(): void {
     this.dialogRef.close(false);

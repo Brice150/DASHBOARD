@@ -22,13 +22,14 @@ import { defaultCities } from '../../shared/data/defaultCities';
 })
 export class UserService {
   private user: User = {} as User;
-  private appVersion: number = 2.0;
+  private appVersion: number = 2.1;
 
   setDefaultUser(): void {
     this.user.appVersion = this.appVersion;
     this.user.prefersDarkMode = false;
     this.user.perfersFinanceHidden = false;
     this.user.tasks = [];
+    this.user.trips = [];
     this.user.weatherInfos = {} as WeatherInfos;
     this.user.weatherInfos.cities = defaultCities;
     this.user.weatherInfos.localWeathers = [];

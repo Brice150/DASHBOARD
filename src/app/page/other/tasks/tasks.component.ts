@@ -197,7 +197,7 @@ export class TasksComponent implements OnInit {
 
   deleteTask(node: Task): void {
     const dialogData = {
-      user: this.user,
+      title: 'task',
     };
 
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
@@ -224,7 +224,7 @@ export class TasksComponent implements OnInit {
 
   deleteSubtask(node: Task): void {
     const dialogData = {
-      user: this.user,
+      title: 'subtask',
     };
 
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {

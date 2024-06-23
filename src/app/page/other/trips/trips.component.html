@@ -1,1 +1,24 @@
-<div class="container"></div>
+<div class="container">
+  <google-map [center]="center" [zoom]="zoom" (mapClick)="addMarker($event)">
+    <map-marker
+      #markerElement="mapMarker"
+      *ngFor="let marker of user.trips"
+      [position]="marker.position"
+      icon="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAARdJREFUSEvtVtsRgjAQ3HQinUglaiVKJWIl0ol0EtnxmGEykD1BBz643yS3t5e9R8BKFlbChRs4AmcABxFoA6ANQKsIuYAj8ARwVM7svOqc3tRdCRw/LF/KUXJeKNYeYDIl42+sDADTPmmbBmaqKSzaKSMwCuph9+rFqR7mSoisCUDp/Q+Z6h04U897qrM6c4vLOhgbyVS/Zjmxccg+zYhcwDYg7s5SuQSgVnezwMaSgN4B0eOxXTKASfYKmFPmqqKfOM8y/ydwdjxuFpjDwSuqNOPZ0ShVHceFxZLqA6o68aWzV64/EnhMOBZMvxzIoT/mYwd2l2y0BTAAhfvR4OKsVPN9tBXWs8r+7I/nMEzfzGa8FHw14DdFHFAfd/nwtQAAAABJRU5ErkJggg=="
+      (mapClick)="openInfoWindow(markerElement, marker)"
+    ></map-marker>
+    <map-info-window
+      #infoWindow="mapInfoWindow"
+      (closeclick)="closeInfoWindow()"
+    >
+      <div class="window-container">
+        <input type="text" [(ngModel)]="marker.title" />
+        <a (click)="deleteMarker(marker)">Delete</a>
+      </div>
+    </map-info-window>
+  </google-map>
+  <div class="total">
+    <i class="bx bxs-pin" style="color: #ff0000"></i>
+    <span>Total : {{ user.trips.length }}</span>
+  </div>
+</div>
