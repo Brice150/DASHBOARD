@@ -1,0 +1,62 @@
+<form class="country" [ngClass]="{ modifyMode: modifyMode }">
+  <div class="content">
+    @if (!modifyMode) {
+    <div class="flag">
+      <img [src]="flagApi" />
+    </div>
+    }
+    <mat-form-field class="subtitle">
+      @if (modifyMode) {
+      <mat-label>Country</mat-label>
+      }
+      <mat-select
+        [(ngModel)]="country.name"
+        [disabled]="!modifyMode"
+        [title]="country.name"
+        name="name"
+        (click)="$event.stopPropagation()"
+      >
+        @for (countryToSelect of countries; track countryToSelect) {
+        <mat-option [value]="countryToSelect.name">{{
+          countryToSelect.name
+        }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+    @if (!modifyMode) {
+    <div class="stats">
+      @if (visited && toVisit) {
+      <pre><span class="visited">{{ visited }}</span>, <span class="to-visit">{{ toVisit }}</span></pre>
+      } @else if (visited) {
+      <pre class="visited">{{ visited }}</pre>
+      } @else if (toVisit) {
+      <pre class="to-visit">{{ toVisit }}</pre>
+      }
+    </div>
+    }
+  </div>
+  @if (canBeModified) {
+  <div class="buttons-container">
+    <a
+      (click)="$event.stopPropagation(); toggleModifyMode()"
+      class="mode"
+      [title]="modifyMode ? 'Update Country' : 'Edit Country'"
+    >
+      @if (!modifyMode) {
+      <i class="bx bxs-edit"></i>
+      } @else {
+      <i class="bx bx-check"></i>
+      }
+    </a>
+    @if (modifyMode) {
+    <a
+      (click)="$event.stopPropagation(); deleteCountry()"
+      class="delete"
+      title="Delete Country"
+    >
+      <i class="bx bx-x"></i>
+    </a>
+    }
+  </div>
+  }
+</form>

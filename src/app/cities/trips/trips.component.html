@@ -1,0 +1,65 @@
+<div class="main-container">
+  <app-header></app-header>
+  <div class="cards-container">
+    <div class="title">
+      <span>Trips</span>
+    </div>
+    <div class="buttons-container">
+      <a
+        (click)="filterVisited()"
+        [title]="!filterVisitedActive ? 'Filter Visited' : 'Cancel Filter'"
+        class="visited"
+        [ngClass]="{ active: filterVisitedActive }"
+        >Visited</a
+      >
+      <a
+        (click)="filterToVisit()"
+        [title]="!filterToVisitActive ? 'Filter To Visit' : 'Cancel Filter'"
+        class="to-visit"
+        [ngClass]="{ active: filterToVisitActive }"
+        >To Visit</a
+      >
+    </div>
+    <div class="content">
+      <mat-accordion multi>
+        @for (country of user.countries; track country; let indexCountry =
+        $index) {
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <app-country
+                [country]="country"
+                [updateStats]="updateStats[indexCountry]"
+                [canBeModified]="!filterVisitedActive && !filterToVisitActive"
+                (saveTripsEvent)="saveTrips(indexCountry)"
+                (deleteCountryEvent)="deleteCountry(indexCountry)"
+              ></app-country>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          @for (trip of country.trips; track trip; let indexTrip = $index) {
+          <app-trip
+            [trip]="trip"
+            [canBeModified]="!filterVisitedActive && !filterToVisitActive"
+            (saveTripsEvent)="saveTrips(indexCountry)"
+            (deleteTripEvent)="deleteTrip(indexCountry, indexTrip)"
+          ></app-trip>
+          } @if (!filterVisitedActive && !filterToVisitActive) {
+          <div class="add-container">
+            <a (click)="addTrip(indexCountry)" title="Add Trip"
+              ><i class="bx bx-plus"></i
+            ></a>
+          </div>
+          }
+        </mat-expansion-panel>
+        }
+      </mat-accordion>
+      @if (!filterVisitedActive && !filterToVisitActive) {
+      <div class="add-container">
+        <a (click)="addCountry()" title="Add Country"
+          ><i class="bx bx-plus"></i
+        ></a>
+      </div>
+      }
+    </div>
+  </div>
+</div>

@@ -9,14 +9,8 @@
     <i class="bx bxs-moon"></i>
     }
   </a>
-  @if (isHomePage()) {
-  <mat-slide-toggle
-    (toggleChange)="hideFinance()"
-    [(ngModel)]="user.perfersFinanceHidden"
-    >Hide Finance</mat-slide-toggle
-  >
-  } @else {
-  <a routerLink="/" title="Back">
+  @if (!isHomePage()) {
+  <a (click)="back()" title="Back">
     <i class="bx bx-arrow-back"></i>
   </a>
   }

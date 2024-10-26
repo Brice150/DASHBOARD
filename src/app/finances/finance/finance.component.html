@@ -1,0 +1,74 @@
+<form
+  class="finance"
+  [ngStyle]="{
+    'background-image': 'url(' + imagePath + 'finance/dark.png)'
+  }"
+>
+  @if(!modifyMode) {
+  <i class="bx bxs-diamond" [ngStyle]="{ color: finance.color }"></i>
+  } @else {
+  <a (click)="deleteFinance()" class="delete" title="Delete Finance">
+    <i class="bx bx-x"></i>
+  </a>
+  }
+  <img class="ship" [src]="imagePath + 'finance/ship.png'" />
+  <img class="mastercard" [src]="imagePath + 'finance/mastercard.png'" />
+  <mat-form-field class="subtitle">
+    @if (modifyMode) {
+    <mat-label [ngStyle]="{ color: finance.color }">TITLE</mat-label>
+    }
+    <input
+      matInput
+      [ngStyle]="{ color: finance.color }"
+      [(ngModel)]="finance.title"
+      name="title"
+      [disabled]="!modifyMode"
+      type="text"
+      [title]="finance.title"
+    />
+  </mat-form-field>
+  <mat-form-field class="total">
+    @if (modifyMode) {
+    <mat-label [ngStyle]="{ color: finance.color }">TOTAL AMOUNT</mat-label>
+    }
+    <input
+      matInput
+      [ngStyle]="{ color: finance.color }"
+      [(ngModel)]="finance.totalAmount"
+      name="totalAmount"
+      [disabled]="!modifyMode"
+      type="number"
+      [title]="finance.totalAmount + ' €'"
+    />
+    @if (!modifyMode) {
+    <span matSuffix [ngStyle]="{ color: finance.color }">€</span>
+    }
+  </mat-form-field>
+  @if (modifyMode) {
+  <mat-form-field class="color">
+    <mat-label [ngStyle]="{ color: finance.color }">COLOR</mat-label>
+    <mat-select
+      [ngStyle]="{ color: finance.color }"
+      [(ngModel)]="finance.color"
+      name="color"
+      [disabled]="!modifyMode"
+    >
+      @for (key of colorKeys; track key) {
+      <mat-option [value]="Color[key]">{{ key }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+  } @if (updateButtonAvailable) {
+  <a
+    (click)="toggleModifyMode()"
+    class="mode"
+    [title]="modifyMode ? 'Update Finance' : 'Edit Finance'"
+  >
+    @if (!modifyMode) {
+    <i class="bx bxs-edit"></i>
+    } @else {
+    <i class="bx bx-check"></i>
+    }
+  </a>
+  }
+</form>

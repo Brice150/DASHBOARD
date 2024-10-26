@@ -1,0 +1,51 @@
+<div class="main-container">
+  <app-header></app-header>
+  <div class="cards-container">
+    <div class="title">
+      <span>Tasks</span>
+    </div>
+    <div class="content">
+      <mat-accordion multi>
+        @for (mainTask of user.mainTasks; track mainTask; let indexMainTask =
+        $index) {
+        <mat-expansion-panel
+          togglePosition="before"
+          hideToggle
+          disabled
+          expanded
+        >
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <app-task
+                [task]="mainTask"
+                [animateProgressBar]="animateProgressBarArray[indexMainTask]"
+                [canBeModified]="true"
+                (deleteTaskEvent)="deleteMainTask(indexMainTask)"
+                (saveTasksEvent)="saveTasks(indexMainTask)"
+              ></app-task>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          @for (task of mainTask.tasks; track task; let indexTask = $index) {
+          <app-task
+            [task]="task"
+            [canBeModified]="true"
+            (deleteTaskEvent)="deleteTask(indexMainTask, indexTask)"
+            (saveTasksEvent)="saveTasks(indexMainTask)"
+          ></app-task>
+          }
+          <div class="add-container">
+            <a (click)="addTask(indexMainTask)" title="Add Task"
+              ><i class="bx bx-plus"></i
+            ></a>
+          </div>
+        </mat-expansion-panel>
+        }
+      </mat-accordion>
+      <div class="add-container">
+        <a (click)="addMainTask()" title="Add Main Task"
+          ><i class="bx bx-plus"></i
+        ></a>
+      </div>
+    </div>
+  </div>
+</div>

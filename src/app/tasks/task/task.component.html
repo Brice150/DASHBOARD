@@ -1,0 +1,96 @@
+<form class="task" [ngClass]="{ modifyMode: modifyMode }">
+  <div class="content">
+    @if (isMainTask) {
+    <i class="bx bxs-right-arrow"></i>
+    } @else {
+    <i class="bx bxs-square-rounded" [ngStyle]="{ fontSize: '11px' }"></i>
+    }
+    <mat-form-field class="subtitle">
+      @if (modifyMode) {
+      <mat-label>Name</mat-label>
+      }
+      <input
+        matInput
+        [(ngModel)]="task.name"
+        [disabled]="!modifyMode"
+        name="name"
+        [title]="task.name"
+        type="text"
+      />
+    </mat-form-field>
+    @if (modifyMode) {
+    <mat-form-field>
+      <mat-label>State</mat-label>
+      <mat-select
+        [(ngModel)]="task.state"
+        [disabled]="!modifyMode"
+        name="state"
+      >
+        @for (state of states; track state) {
+        <mat-option [value]="state">{{ state }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+    } @else {
+    <mat-chip
+      class="chip"
+      [ngStyle]="{ backgroundColor: getColor(task.state) }"
+    >
+      {{ task.state }}
+    </mat-chip>
+    } @if (modifyMode || (!modifyMode && (task.startDate || task.endDate))) {
+    <mat-form-field class="date">
+      @if (modifyMode) {
+      <mat-label>Enter a date range</mat-label>
+      }
+      <mat-date-range-input [rangePicker]="picker" [disabled]="!modifyMode">
+        <input
+          matStartDate
+          placeholder="Start date"
+          [(ngModel)]="task.startDate"
+          name="startDate"
+        />
+        <input
+          matEndDate
+          placeholder="End date"
+          [(ngModel)]="task.endDate"
+          name="endDate"
+        />
+      </mat-date-range-input>
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker"
+      ></mat-datepicker-toggle>
+      <mat-date-range-picker #picker></mat-date-range-picker>
+    </mat-form-field>
+    } @if (!modifyMode && isMainTask) {
+    <div class="bar" [title]="(progress | number : '1.0-0') + ' %'">
+      <span
+        class="container pourcent"
+        [ngClass]="{ animate: animateProgressBar }"
+        [ngStyle]="{ width: progress + '%' }"
+      ></span>
+    </div>
+    }
+  </div>
+  @if (canBeModified) {
+  <div class="buttons-container">
+    <a
+      (click)="toggleModifyMode()"
+      class="mode"
+      [title]="modifyMode ? 'Update Task' : 'Edit Task'"
+    >
+      @if (!modifyMode) {
+      <i class="bx bxs-edit"></i>
+      } @else {
+      <i class="bx bx-check"></i>
+      }
+    </a>
+    @if (modifyMode) {
+    <a (click)="deleteTask()" class="delete" title="Delete Task">
+      <i class="bx bx-x"></i>
+    </a>
+    }
+  </div>
+  }
+</form>

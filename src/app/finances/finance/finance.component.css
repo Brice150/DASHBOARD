@@ -1,0 +1,224 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 350px;
+  width: 100%;
+  margin: 10px;
+}
+
+.finance {
+  position: relative;
+  border-radius: var(--light-radius);
+  box-shadow: var(--box-shadow);
+  max-width: 350px;
+  width: 100%;
+  height: 220px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-size: cover;
+  overflow: hidden;
+  transition: ease 0.5s;
+  z-index: 2;
+}
+
+.finance::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 3;
+}
+
+.subtitle {
+  position: absolute;
+  font-size: 25px;
+  text-transform: uppercase;
+  left: 5px;
+  top: 5px;
+  font-style: italic;
+  width: 80%;
+  font-weight: 900;
+  z-index: 4;
+}
+
+.subtitle mat-label {
+  font-style: normal;
+  text-transform: uppercase;
+}
+
+.subtitle input {
+  text-overflow: ellipsis;
+}
+
+.mastercard {
+  position: absolute;
+  width: 65px;
+  height: auto;
+  right: 8px;
+  bottom: 8px;
+  z-index: 4;
+}
+
+.ship {
+  position: absolute;
+  width: 60px;
+  height: auto;
+  left: 20px;
+  z-index: 4;
+}
+
+.finance .bxs-diamond {
+  position: absolute;
+  font-size: 60px;
+  right: 8px;
+  top: 8px;
+  z-index: 4;
+}
+
+.finance .mode {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  color: var(--color-text-primary);
+  background-color: var(--color-background);
+  bottom: 5px;
+  left: 5px;
+  border-radius: var(--light-radius);
+  cursor: pointer;
+  transition: 0.5s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 4;
+}
+
+.finance .delete {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  color: red;
+  background-color: var(--color-background);
+  top: 5px;
+  right: 5px;
+  border-radius: var(--light-radius);
+  cursor: pointer;
+  transition: 0.5s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 4;
+}
+
+.finance .delete:hover {
+  color: var(--color-text-secondary);
+  background-color: red;
+}
+
+.finance .mode .bxs-edit {
+  font-size: 40px;
+}
+
+.finance .bx-check,
+.bx-x {
+  font-size: 50px;
+}
+
+.finance .mode:hover {
+  color: var(--color-text-secondary);
+  background-color: var(--color-text-primary);
+}
+
+.total {
+  position: absolute;
+  top: 75px;
+  left: 130px;
+  font-size: 30px;
+  font-weight: 900;
+  width: 60%;
+  z-index: 4;
+}
+
+.total input {
+  text-align: right;
+  text-overflow: ellipsis;
+}
+
+.total span {
+  font-size: 30px;
+}
+
+.color {
+  position: absolute;
+  bottom: 5px;
+  font-size: 30px;
+  font-weight: 900;
+  width: 50%;
+  z-index: 4;
+}
+
+::ng-deep .mdc-text-field--filled.mdc-text-field--disabled {
+  background-color: transparent !important;
+}
+
+::ng-deep
+  .mdc-text-field--filled.mdc-text-field--disabled
+  .mdc-line-ripple::before {
+  border-bottom-color: transparent !important;
+}
+
+::ng-deep
+  .mat-mdc-text-field-wrapper.mdc-text-field.mdc-text-field--filled.mdc-text-field--no-label.mdc-text-field--disabled {
+  padding: 0 0 0 5px !important;
+}
+
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: var(--color-background) !important;
+}
+
+::ng-deep .mat-mdc-form-field-subscript-wrapper,
+.mat-mdc-form-field-bottom-align::before {
+  display: none;
+}
+
+::ng-deep .mat-mdc-select-arrow {
+  color: var(--color-text-secondary) !important;
+}
+
+@media screen and (max-width: 400px) {
+  .total {
+    top: 55px;
+    left: 100px;
+  }
+
+  .finance {
+    height: 180px;
+  }
+
+  .finance .bxs-diamond {
+    display: none;
+  }
+
+  .ship {
+    width: 50px;
+  }
+
+  .mastercard {
+    width: 55px;
+  }
+
+  .subtitle {
+    width: 70%;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .total {
+    right: 20px;
+  }
+}

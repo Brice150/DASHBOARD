@@ -1,0 +1,75 @@
+<div class="main-container">
+  <app-header (modeChangeEvent)="changeMode()"></app-header>
+  <div class="cards-container">
+    <div class="title">
+      <span>Expenses</span>
+    </div>
+    <div class="flex">
+      <div class="graph">
+        <canvas id="doughnutGraph"></canvas>
+      </div>
+      <form>
+        <div class="value-container">
+          <div class="subtitle">
+            <i class="bx bxs-credit-card-alt"></i>
+            <span>Total Expenses :</span>
+          </div>
+          <span class="number"
+            >{{ getTotal() | currency : "EUR" : "" : "1.0-0" }} €</span
+          >
+        </div>
+        @for (expense of user.expenses; track expense; let index = $index) {
+        <div class="row">
+          <mat-form-field>
+            <mat-label>TITLE</mat-label>
+            <input
+              matInput
+              [(ngModel)]="expense.title"
+              [name]="'title' + index"
+              type="text"
+              (ngModelChange)="saveUserExpenses()"
+            />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>AMOUNT</mat-label>
+            <input
+              matInput
+              [(ngModel)]="expense.totalAmount"
+              [name]="'totalAmount' + index"
+              type="number"
+              (ngModelChange)="saveUserExpenses()"
+              min="0"
+            />
+            <span matSuffix>€</span>
+          </mat-form-field>
+          <mat-form-field class="color">
+            <mat-label [ngStyle]="{ color: expense.color }">COLOR</mat-label>
+            <mat-select
+              [ngStyle]="{ color: expense.color }"
+              [(ngModel)]="expense.color"
+              (ngModelChange)="saveUserExpenses()"
+              [name]="'color' + index"
+            >
+              @for (key of colorKeys; track key) {
+              <mat-option [value]="Color[key]">{{ key }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+          <div class="delete-container">
+            <a
+              (click)="deleteExpense(index)"
+              class="delete"
+              title="Delete Expense"
+            >
+              <i class="bx bx-x"></i>
+            </a>
+          </div>
+        </div>
+        }
+        <a (click)="addExpense()" class="add" title="Add Expense">
+          <i class="bx bx-plus"></i>
+        </a>
+      </form>
+    </div>
+  </div>
+</div>

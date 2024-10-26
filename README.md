@@ -9,21 +9,48 @@ Frontend : Angular
 <details>
   <summary>Pages Features</summary>
 
-### Weather
+### Home
 
-- See weather forecast for 4 days
-- View weather stats hourly for a selected day
-- Change weather city
+- See a summary of your recent tasks, main city weather and total finances
 
-### Finance
+### Cities
 
-- See finance forecast for 25 years
-- View your invested money vs interests
-- Change saving strategy
+- See weather of your selected cities
+- Add, update or delete a city
 
-### Tasks List
+### Cities/Weather
 
-- See your tasks
+- See weather forecast of your main city for the next 4 days
+- See temperature, precipitation and wind values at every hour in a graph
+- Change city
+
+### Cities/Trips
+
+- See your visited or to visit places
+- Add, update or delete any country or trip
+- Filter places
+
+### Finances
+
+- See finance cards
+- Add, update or delete a card
+
+### Finances/Expenses
+
+- See your expenses in a graph
+- Add, update or delete an expense
+
+### Finances/Stock Exchange
+
+- See a compound interests simulator
+
+### Finances/Real Estate
+
+- See a real estate simulator
+
+### Tasks
+
+- See your tasks and their state
 - Add, update or delete a task
 
 ### Dark/Light Mode

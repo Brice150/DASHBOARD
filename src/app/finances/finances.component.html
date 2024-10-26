@@ -1,0 +1,30 @@
+<div class="main-container">
+  <app-header></app-header>
+  <div class="cards-container">
+    <div class="title">
+      <span>Finances</span>
+    </div>
+    <div class="content">
+      @for (finance of user.finances; track finance; let index = $index) {
+      <app-finance
+        [finance]="finance"
+        [updateButtonAvailable]="true"
+        (saveFinancesEvent)="saveFinances()"
+        (deleteFinanceEvent)="deleteFinance(index)"
+      ></app-finance>
+      }
+      <div class="add-container">
+        <a (click)="addFinance()" title="Add Finance"
+          ><i class="bx bx-plus"></i
+        ></a>
+      </div>
+    </div>
+    <div class="buttons-container">
+      <a routerLink="/finances/expenses" title="Expenses">Expenses</a>
+      <a routerLink="/finances/stock-exchange" title="Stock Exchange"
+        >Stock Exchange</a
+      >
+      <a routerLink="/finances/real-estate" title="Real Estate">Real Estate</a>
+    </div>
+  </div>
+</div>

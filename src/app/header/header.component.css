@@ -25,7 +25,7 @@
 }
 
 .switch-container {
-  top: 20px;
+  top: 8px;
   position: absolute;
   display: flex;
   justify-content: space-between;
@@ -40,11 +40,25 @@
   align-items: center;
   cursor: pointer;
   text-decoration: none;
+  border-radius: var(--light-radius);
+  transition: 0.5s ease;
+  box-shadow: var(--box-shadow);
+  color: var(--color-text-primary);
+  width: 50px;
+  height: 50px;
 }
 
 .switch-container a i {
   font-size: 30px;
+}
+
+.switch-container a:hover {
   color: var(--color-text-secondary);
+  background-color: var(--color-text-primary);
+}
+
+.switch-container a .bx-arrow-back {
+  font-size: 35px;
 }
 
 ::ng-deep .mat-mdc-slide-toggle .mat-internal-form-field {
@@ -60,14 +74,4 @@
 
 ::ng-deep .mdc-switch:enabled .mdc-switch__track::after {
   background: var(--color-text-primary) !important;
-}
-
-@media screen and (max-width: 650px) {
-  .switch-container {
-    margin-top: 35px;
-  }
-
-  :host {
-    min-height: 80px;
-  }
 }

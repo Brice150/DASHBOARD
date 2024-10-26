@@ -3,6 +3,7 @@
   --color-text-primary: #006aff;
   --color-text-secondary: black;
   --color-text-button: white;
+  --color-text-subtitle: #45d606;
   --box-shadow-color: rgba(132, 139, 200, 0.18);
   --box-shadow: 0 2rem 3rem var(--box-shadow-color);
 
@@ -14,6 +15,7 @@
   --color-background: #181a1e;
   --color-text-primary: #006aff;
   --color-text-secondary: white;
+  --color-text-button: black;
   --box-shadow-color: rgba(0, 0, 0, 0.4);
   --box-shadow: 0 2rem 3rem var(--box-shadow-color);
 }

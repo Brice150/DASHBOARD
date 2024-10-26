@@ -1,0 +1,12 @@
+<div class="main-container">
+  <app-header></app-header>
+  <div class="cards-container">
+    <div class="flex">
+      <app-home-cities [user]="user"></app-home-cities>
+      <app-home-finances [totalAmount]="totalAmount"></app-home-finances>
+    </div>
+    <div class="center">
+      <app-home-tasks [mainTasks]="mainTasks"></app-home-tasks>
+    </div>
+  </div>
+</div>

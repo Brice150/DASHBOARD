@@ -1,0 +1,308 @@
+<div class="main-container">
+  <app-header></app-header>
+  <div class="cards-container">
+    <div class="title">
+      <span>Real Estate</span>
+    </div>
+    <div class="results">
+      <div class="value-container">
+        <div class="subtitle">
+          <i class="bx bxs-credit-card-alt"></i>
+          <span>Total Cost</span>
+        </div>
+        <span class="number"
+          >{{
+            user.realEstate.results.totalCost | currency : "EUR" : "" : "1.0-0"
+          }}
+          €</span
+        >
+      </div>
+      <div class="value-container">
+        <div class="subtitle">
+          <i class="bx bxs-dollar-circle"></i>
+          <span>Total Rents</span>
+        </div>
+        <span class="number"
+          >{{
+            user.realEstate.results.totalRents | currency : "EUR" : "" : "1.0-0"
+          }}
+          € / M</span
+        >
+      </div>
+      <div class="value-container">
+        <div class="subtitle">
+          <i class="bx bxs-cog"></i>
+          <span>Total Charges</span>
+        </div>
+        <span class="number"
+          >{{
+            user.realEstate.results.totalCharges
+              | currency : "EUR" : "" : "1.0-0"
+          }}
+          € / M</span
+        >
+      </div>
+      <div class="value-container">
+        <div class="subtitle">
+          <i class="bx bx-sort-up"></i>
+          <span>Gross Yield</span>
+        </div>
+        <span class="number">{{
+          user.realEstate.results.grossYield | percent : "1.1-1"
+        }}</span>
+      </div>
+      <div class="value-container">
+        <div class="subtitle">
+          <i class="bx bx-sort-down"></i>
+          <span>Net Yield</span>
+        </div>
+        <span class="number">{{
+          user.realEstate.results.netYield | percent : "1.1-1"
+        }}</span>
+      </div>
+      <div class="value-container">
+        <div class="subtitle">
+          <i class="bx bxs-coin-stack"></i>
+          <span>Cash Flow</span>
+        </div>
+        <span
+          class="number"
+          [ngStyle]="{
+            color: user.realEstate.results.cashFlow >= 0 ? '#45d606' : 'red'
+          }"
+          >{{
+            user.realEstate.results.cashFlow | currency : "EUR" : "" : "1.0-0"
+          }}
+          € / M</span
+        >
+      </div>
+    </div>
+    <form>
+      <div class="combined">
+        <div class="subform">
+          <div class="subtitle">
+            <i class="bx bxs-building-house"></i>
+            <span>Purchase</span>
+          </div>
+          <mat-form-field>
+            <mat-label>PRICE</mat-label>
+            <input
+              matInput
+              [(ngModel)]="user.realEstate.purchase.price"
+              name="purchase"
+              type="number"
+              (ngModelChange)="calculateAmounts()"
+              min="0"
+            />
+            <span matSuffix>€</span>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>NOTARY FEES</mat-label>
+            <input
+              matInput
+              [(ngModel)]="user.realEstate.purchase.notaryFees"
+              name="notary"
+              type="number"
+              (ngModelChange)="calculateAmounts()"
+              min="0"
+            />
+            <span matSuffix>€</span>
+          </mat-form-field>
+        </div>
+        <div class="subform">
+          <div class="subtitle">
+            <i class="bx bxs-hard-hat"></i>
+            <span>Renovation</span>
+          </div>
+          <mat-form-field>
+            <mat-label>PRICE</mat-label>
+            <input
+              matInput
+              [(ngModel)]="user.realEstate.renovation.price"
+              name="renovation"
+              type="number"
+              (ngModelChange)="calculateAmounts()"
+              min="0"
+            />
+            <span matSuffix>€</span>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>FURNITURE BUDGET</mat-label>
+            <input
+              matInput
+              [(ngModel)]="user.realEstate.renovation.furnitureBudget"
+              name="furniture"
+              type="number"
+              (ngModelChange)="calculateAmounts()"
+              min="0"
+            />
+            <span matSuffix>€</span>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="subform">
+        <div class="subtitle">
+          <i class="bx bxs-bank"></i>
+          <span>Financing</span>
+        </div>
+        <mat-form-field>
+          <mat-label>DOWN PAYMENT</mat-label>
+          <input
+            matInput
+            [(ngModel)]="user.realEstate.financing.downPayment"
+            name="down"
+            type="number"
+            (ngModelChange)="calculateAmounts()"
+            min="0"
+          />
+          <span matSuffix>€</span>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>LOAN RATE</mat-label>
+          <input
+            matInput
+            [(ngModel)]="user.realEstate.financing.loanRate"
+            name="loan"
+            type="number"
+            (ngModelChange)="calculateAmounts()"
+            min="0"
+          />
+          <span matSuffix>%</span>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>INSURANCE RATE</mat-label>
+          <input
+            matInput
+            [(ngModel)]="user.realEstate.financing.insuranceRate"
+            name="insurance"
+            type="number"
+            (ngModelChange)="calculateAmounts()"
+            min="0"
+          />
+          <span matSuffix>%</span>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>DURATION (YEARS)</mat-label>
+          <input
+            matInput
+            [(ngModel)]="user.realEstate.financing.duration"
+            name="duration"
+            type="number"
+            (ngModelChange)="calculateAmounts()"
+            min="0"
+          />
+          <span matSuffix>Y</span>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>TOTAL BORROWED</mat-label>
+          <input
+            matInput
+            [(ngModel)]="user.realEstate.financing.totalBorrowed"
+            name="borrowed"
+            type="number"
+            (ngModelChange)="calculateAmounts()"
+            min="0"
+            disabled
+          />
+          <span matSuffix>€</span>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>MONTHLY PAYMENTS</mat-label>
+          <input
+            matInput
+            [(ngModel)]="user.realEstate.financing.monthlyPayments"
+            name="monthly"
+            type="number"
+            (ngModelChange)="calculateAmounts()"
+            min="0"
+            disabled
+          />
+          <span matSuffix>€</span>
+        </mat-form-field>
+      </div>
+      <div class="subform">
+        <div class="subtitle">
+          <i class="bx bxs-credit-card-alt"></i>
+          <span>Annual Expenses</span>
+        </div>
+        <mat-form-field>
+          <mat-label>PROPERTY TAX</mat-label>
+          <input
+            matInput
+            [(ngModel)]="user.realEstate.annualExpenses.propertyTax"
+            name="property"
+            type="number"
+            (ngModelChange)="calculateAmounts()"
+            min="0"
+          />
+          <span matSuffix>€</span>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>PNO INSURANCE</mat-label>
+          <input
+            matInput
+            [(ngModel)]="user.realEstate.annualExpenses.pnoInsurance"
+            name="pno"
+            type="number"
+            (ngModelChange)="calculateAmounts()"
+            min="0"
+          />
+          <span matSuffix>€</span>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>CO-OWNERSHIP CHARGES</mat-label>
+          <input
+            matInput
+            [(ngModel)]="user.realEstate.annualExpenses.coownershipCharges"
+            name="ownership"
+            type="number"
+            (ngModelChange)="calculateAmounts()"
+            min="0"
+          />
+          <span matSuffix>€</span>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>OTHER CHARGES</mat-label>
+          <input
+            matInput
+            [(ngModel)]="user.realEstate.annualExpenses.otherCharges"
+            name="other"
+            type="number"
+            (ngModelChange)="calculateAmounts()"
+            min="0"
+          />
+          <span matSuffix>€</span>
+        </mat-form-field>
+      </div>
+      <div class="subform">
+        <div class="subtitle">
+          <i class="bx bxs-home-heart"></i>
+          <span>Rent</span>
+        </div>
+        <mat-form-field>
+          <mat-label>NUMBER OF LOTS</mat-label>
+          <input
+            matInput
+            [(ngModel)]="user.realEstate.rent.lotsNumber"
+            name="lots"
+            type="number"
+            (ngModelChange)="calculateAmounts()"
+            min="1"
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>RENT PER LOT</mat-label>
+          <input
+            matInput
+            [(ngModel)]="user.realEstate.rent.rentPerLot"
+            name="rent"
+            type="number"
+            (ngModelChange)="calculateAmounts()"
+            min="0"
+          />
+          <span matSuffix>€</span>
+        </mat-form-field>
+      </div>
+    </form>
+  </div>
+</div>

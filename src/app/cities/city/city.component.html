@@ -1,0 +1,103 @@
+<form
+  class="city"
+  [ngStyle]="{
+    'background-image': city.weather
+      ? (city.weather.daily.weathercode[index] | weatherImage)
+      : null
+  }"
+>
+  @if(city.weather) {
+  <div class="overlay"></div>
+  <div class="input-container">
+    <mat-form-field class="subtitle">
+      @if (modifyMode) {
+      <mat-label>City</mat-label>
+      } @if (!day) {
+      <input
+        matInput
+        [(ngModel)]="city.cityGeolocation.city"
+        name="city"
+        type="text"
+        [disabled]="!modifyMode"
+        [title]="city.cityGeolocation.city"
+      />
+      } @else {
+      <input
+        matInput
+        [(ngModel)]="day"
+        name="city"
+        type="text"
+        [disabled]="!modifyMode"
+        [title]="city.cityGeolocation.city"
+      />
+      }
+    </mat-form-field>
+    @if (modifyMode) {
+    <mat-checkbox
+      class="checkbox"
+      [(ngModel)]="city.isHome"
+      name="isHome"
+      title="Select as home city"
+      >Home</mat-checkbox
+    >
+    }
+  </div>
+  <div class="content">
+    @if (!modifyMode) {
+    <div class="value">
+      <i class="bx bxs-thermometer"></i>
+      <pre
+        >{{
+          city.weather!.daily.temperature_2m_min[index] | number : "1.0-0"
+        }}°C</pre
+      >
+      <pre> - </pre>
+      <pre
+        >{{
+          city.weather!.daily.temperature_2m_max[index] | number : "1.0-0"
+        }}°C</pre
+      >
+    </div>
+    <div class="value">
+      <i class="bx bxs-droplet"></i>
+      <pre>{{ city.weather!.daily.precipitation_sum[index] }} mm</pre>
+    </div>
+    <div class="value">
+      <i class="bx bx-wind"></i>
+      <pre>{{ city.weather!.daily.windspeed_10m_max[index] }} km/h</pre>
+    </div>
+    } @if (updateButtonAvailable) {
+    <a
+      (click)="toggleModifyMode()"
+      class="mode"
+      [title]="modifyMode ? 'Update City' : 'Edit City'"
+    >
+      @if (!modifyMode) {
+      <i class="bx bxs-edit"></i>
+      } @else {
+      <i class="bx bx-check"></i>
+      }
+    </a>
+    @if(modifyMode) {
+    <a (click)="deleteCity()" class="delete" title="Delete City">
+      <i class="bx bx-x"></i>
+    </a>
+    } } @if (selectButtonAvailable) {
+    <a
+      (click)="selectDate()"
+      class="mode"
+      [ngClass]="{ disabled: isSelected }"
+      [title]="!isSelected ? 'View weather' : 'Already viewing weather'"
+    >
+      @if (isSelected) {
+      <i class="bx bx-check"></i>
+      } @else {
+      <i class="bx bxs-cloud-rain"></i>
+      }
+    </a>
+    }
+  </div>
+  } @else {
+  <app-loading></app-loading>
+  }
+</form>

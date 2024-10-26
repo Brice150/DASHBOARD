@@ -1,0 +1,26 @@
+<div class="main-container">
+  <app-header></app-header>
+  <div class="cards-container">
+    <div class="title">
+      <span>Cities</span>
+    </div>
+    <div class="content">
+      @for (city of user.cities; track city; let index = $index) {
+      <app-city
+        [city]="city"
+        [index]="0"
+        [updateButtonAvailable]="true"
+        (saveCitiesEvent)="saveCities(index)"
+        (deleteCityEvent)="deleteCity(index)"
+      ></app-city>
+      }
+      <div class="add-container">
+        <a (click)="addCity()" title="Add City"><i class="bx bx-plus"></i></a>
+      </div>
+    </div>
+    <div class="buttons-container">
+      <a routerLink="/cities/weather" title="Weather">Weather</a>
+      <a routerLink="/cities/trips" title="Trips">Trips</a>
+    </div>
+  </div>
+</div>

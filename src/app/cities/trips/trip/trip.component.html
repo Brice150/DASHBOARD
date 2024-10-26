@@ -1,0 +1,61 @@
+<form class="trip" [ngClass]="{ modifyMode: modifyMode }">
+  <div class="content">
+    <mat-form-field class="subtitle">
+      @if (modifyMode) {
+      <mat-label>Name</mat-label>
+      }
+      <input
+        matInput
+        [(ngModel)]="trip.city"
+        [disabled]="!modifyMode"
+        name="name"
+        [title]="trip.city"
+        type="text"
+      />
+    </mat-form-field>
+    @if (modifyMode) {
+    <mat-form-field>
+      <mat-label>State</mat-label>
+      <mat-select
+        [(ngModel)]="trip.state"
+        [disabled]="!modifyMode"
+        name="state"
+      >
+        @for (state of states; track state) {
+        <mat-option [value]="state">{{ state }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+    } @else {
+    <mat-chip
+      class="chip"
+      [ngStyle]="{ backgroundColor: getColor(trip.state) }"
+    >
+      {{ trip.state }} </mat-chip
+    >}
+  </div>
+  @if (canBeModified) {
+  <div class="buttons-container">
+    <a
+      (click)="$event.stopPropagation(); toggleModifyMode()"
+      class="mode"
+      [title]="modifyMode ? 'Update Trip' : 'Edit Trip'"
+    >
+      @if (!modifyMode) {
+      <i class="bx bxs-edit"></i>
+      } @else {
+      <i class="bx bx-check"></i>
+      }
+    </a>
+    @if (modifyMode) {
+    <a
+      (click)="$event.stopPropagation(); deleteTrip()"
+      class="delete"
+      title="Delete Trip"
+    >
+      <i class="bx bx-x"></i>
+    </a>
+    }
+  </div>
+  }
+</form>

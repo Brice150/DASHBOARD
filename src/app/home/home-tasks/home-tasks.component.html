@@ -1,0 +1,25 @@
+<div class="card" routerLink="/tasks" title="Tasks">
+  <div class="title">
+    <span>Tasks</span>
+  </div>
+  <div class="content">
+    <mat-accordion (click)="$event.preventDefault()">
+      @for (mainTask of mainTasks; track mainTask) {
+      <mat-expansion-panel
+        togglePosition="before"
+        [expanded]="mainTask.tasks.length !== 0"
+        hideToggle
+      >
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <app-task [task]="mainTask" [animateProgressBar]="true"></app-task>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        @for (task of mainTask.tasks; track task) {
+        <app-task [task]="task"></app-task>
+        }
+      </mat-expansion-panel>
+      }
+    </mat-accordion>
+  </div>
+</div>

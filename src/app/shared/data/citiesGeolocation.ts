@@ -1,4 +1,4 @@
-import { CityGeolocation } from '../../core/interfaces/weatherInfos';
+import { CityGeolocation } from '../../core/interfaces/city';
 
 export const citiesGeolocation: CityGeolocation[] = [
   { city: 'Tokyo', latitude: '35,6897', longitude: '139,6922' },

@@ -10,6 +10,10 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { provideToastr } from 'ngx-toastr';
 import { provideHttpClient } from '@angular/common/http';
 import { ColorPickerModule } from 'ngx-color-picker';
+import {
+  MAT_DATE_LOCALE,
+  provideNativeDateAdapter,
+} from '@angular/material/core';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -19,5 +23,7 @@ export const appConfig: ApplicationConfig = {
     provideToastr(),
     provideAnimationsAsync(),
     importProvidersFrom(ColorPickerModule),
+    provideNativeDateAdapter(),
+    { provide: MAT_DATE_LOCALE, useValue: 'en-GB' },
   ],
 };

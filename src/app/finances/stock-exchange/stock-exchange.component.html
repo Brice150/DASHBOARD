@@ -1,0 +1,49 @@
+<div class="main-container">
+  <app-header (modeChangeEvent)="changeMode()"></app-header>
+  <div class="cards-container">
+    <div class="title">
+      <span>Stock Exchange</span>
+    </div>
+    <div class="graph">
+      <canvas id="barGraph"></canvas>
+    </div>
+    <form>
+      <mat-form-field>
+        <mat-label>INITIAL AMOUNT</mat-label>
+        <input
+          matInput
+          [(ngModel)]="user.stockExchange.totalAmount"
+          name="totalAmount"
+          type="number"
+          (ngModelChange)="saveUserStockExchange()"
+          min="0"
+        />
+        <span matSuffix>€</span>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>AMOUNT PER MONTH</mat-label>
+        <input
+          matInput
+          [(ngModel)]="user.stockExchange.amountPerMonth"
+          name="amountPerMonth"
+          type="number"
+          (ngModelChange)="saveUserStockExchange()"
+          min="0"
+        />
+        <span matSuffix>€</span>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>PERCENTAGE</mat-label>
+        <input
+          matInput
+          [(ngModel)]="user.stockExchange.percentage"
+          name="percentage"
+          type="number"
+          (ngModelChange)="saveUserStockExchange()"
+          min="0"
+        />
+        <span matSuffix>%</span>
+      </mat-form-field>
+    </form>
+  </div>
+</div>

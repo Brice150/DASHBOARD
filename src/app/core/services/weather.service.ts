@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, zip } from 'rxjs';
-import { User } from '../interfaces/user';
-import { CityGeolocation, LocalWeather } from '../interfaces/weatherInfos';
+import { forkJoin, Observable } from 'rxjs';
+import { CityGeolocation } from '../interfaces/city';
+import { Weather } from '../interfaces/weather';
 
 @Injectable({ providedIn: 'root' })
 export class WeatherService {
@@ -16,11 +16,9 @@ export class WeatherService {
 
   constructor(private http: HttpClient) {}
 
-  public getWeatherInfo(
-    user: User
-  ): Observable<[LocalWeather, LocalWeather, LocalWeather, LocalWeather]> {
+  public getWeatherInfo(cities: CityGeolocation[]): Observable<Weather[]> {
     const weatherApis: string[] = [];
-    user.weatherInfos.cities.forEach((city: CityGeolocation) => {
+    cities.forEach((city: CityGeolocation) => {
       weatherApis.push(
         this.weatherApiUrl +
           this.latitudeApiParams +
@@ -31,11 +29,11 @@ export class WeatherService {
       );
     });
 
-    return zip(
-      this.http.get<LocalWeather>(weatherApis[0]),
-      this.http.get<LocalWeather>(weatherApis[1]),
-      this.http.get<LocalWeather>(weatherApis[2]),
-      this.http.get<LocalWeather>(weatherApis[3])
+    // Crée un tableau d'observables HTTP dynamiquement
+    const weatherRequests = weatherApis.map((apiUrl) =>
+      this.http.get<Weather>(apiUrl)
     );
+
+    return forkJoin(weatherRequests);
   }
 }

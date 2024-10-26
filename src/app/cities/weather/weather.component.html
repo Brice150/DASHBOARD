@@ -1,0 +1,38 @@
+<div class="main-container">
+  <app-header (modeChangeEvent)="changeMode()"></app-header>
+  <div class="cards-container">
+    <div class="title">
+      <span>Weather</span>
+    </div>
+    <div class="graph">
+      <canvas id="lineGraph"></canvas>
+    </div>
+    <form>
+      <mat-form-field>
+        <mat-label>CITY</mat-label>
+        <input
+          matInput
+          [(ngModel)]="city.cityGeolocation.city"
+          name="city"
+          type="text"
+        />
+      </mat-form-field>
+      <a (click)="validate()" class="button" title="Update weather">
+        <i class="bx bx-check"></i>
+      </a>
+    </form>
+    <div class="forecast">
+      @for (date of city.weather!.daily.time; track date; let currentIndex =
+      $index) {
+      <app-city
+        [city]="city"
+        [index]="currentIndex"
+        [day]="date | dayOfWeek"
+        [selectButtonAvailable]="true"
+        [isSelected]="currentIndex === index"
+        (selectDateEvent)="selectDate(currentIndex)"
+      ></app-city>
+      }
+    </div>
+  </div>
+</div>
