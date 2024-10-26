@@ -241,7 +241,7 @@ export class WeatherComponent implements OnInit {
       );
 
       if (city) {
-        this.city.cityGeolocation = city;
+        this.city.cityGeolocation = { ...city };
         this.getWeather(this.city, true);
       } else {
         this.toastr.error('City is invalid', 'City', {

@@ -149,3 +149,7 @@ mat-accordion {
   display: block !important;
   margin-right: 19px !important;
 }
+
+::ng-deep .mat-expansion-panel {
+  --mat-expansion-container-background-color: var(--color-background);
+}

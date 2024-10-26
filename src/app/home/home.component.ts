@@ -35,13 +35,14 @@ export class HomeComponent implements OnInit {
     this.user.finances.forEach(
       (finance) => (this.totalAmount = this.totalAmount + finance.totalAmount)
     );
-    this.mainTasks =
+    this.mainTasks = (
       this.states
         .map((state) =>
           this.user.mainTasks.filter(
             (mainTask: MainTask) => mainTask.state === state
           )
         )
-        .find((tasks) => tasks.length > 0) || [];
+        .find((tasks) => tasks.length > 0) || []
+    ).slice(0, 1);
   }
 }
