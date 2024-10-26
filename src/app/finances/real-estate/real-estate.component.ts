@@ -79,7 +79,9 @@ export class RealEstateComponent implements OnInit {
       const totalMonthlyPayment =
         monthlyPaymentWithoutInsurance + monthlyInsurancePayment;
 
-      this.user.realEstate.financing.monthlyPayments = totalMonthlyPayment;
+      this.user.realEstate.financing.monthlyPayments = parseFloat(
+        totalMonthlyPayment.toFixed(2)
+      );
     } else {
       this.user.realEstate.financing.monthlyPayments = 0;
     }
