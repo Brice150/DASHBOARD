@@ -38,17 +38,25 @@ export class FinancesComponent implements OnInit {
       color: Color.BLUE,
     });
     this.saveFinances();
+    this.toastr.success('Finance added', 'Finances', {
+      positionClass: 'toast-top-center',
+      toastClass: 'ngx-toastr custom',
+    });
   }
 
   deleteFinance(index: number): void {
     if (this.user.finances.length === 1) {
-      this.toastr.error('One finance minimum', 'Finance', {
+      this.toastr.error('One finance minimum', 'Finances', {
         positionClass: 'toast-top-center',
         toastClass: 'ngx-toastr custom',
       });
     } else {
       this.user.finances.splice(index, 1);
       this.saveFinances();
+      this.toastr.success('Finance deleted', 'Finances', {
+        positionClass: 'toast-top-center',
+        toastClass: 'ngx-toastr custom',
+      });
     }
   }
 }

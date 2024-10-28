@@ -7,6 +7,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-trip',
@@ -30,6 +31,8 @@ export class TripComponent {
   @Output() deleteTripEvent: EventEmitter<void> = new EventEmitter<void>();
   @Output() saveTripsEvent: EventEmitter<void> = new EventEmitter<void>();
 
+  constructor(private toastr: ToastrService) {}
+
   deleteTrip(): void {
     this.deleteTripEvent.emit();
   }
@@ -37,6 +40,10 @@ export class TripComponent {
   toggleModifyMode(): void {
     if (this.modifyMode) {
       this.saveTripsEvent.emit();
+      this.toastr.success('Trip updated', 'Trips', {
+        positionClass: 'toast-top-center',
+        toastClass: 'ngx-toastr custom',
+      });
     }
     this.modifyMode = !this.modifyMode;
   }

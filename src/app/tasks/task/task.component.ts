@@ -16,6 +16,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { TaskState, StateColor } from '../../core/enums/task-state.enum';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatChipsModule } from '@angular/material/chips';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-task',
@@ -42,6 +43,8 @@ export class TaskComponent implements OnInit, OnChanges {
   progress: number = 0;
   @Output() deleteTaskEvent: EventEmitter<void> = new EventEmitter<void>();
   @Output() saveTasksEvent: EventEmitter<void> = new EventEmitter<void>();
+
+  constructor(private toastr: ToastrService) {}
 
   ngOnInit(): void {
     this.isMainTask = (this.task as MainTask).tasks !== undefined;
@@ -93,6 +96,14 @@ export class TaskComponent implements OnInit, OnChanges {
   toggleModifyMode(): void {
     if (this.modifyMode) {
       this.saveTasksEvent.emit();
+      this.toastr.success(
+        this.isMainTask ? 'Main task updated' : 'Task updated',
+        'Tasks',
+        {
+          positionClass: 'toast-top-center',
+          toastClass: 'ngx-toastr custom',
+        }
+      );
     }
     this.modifyMode = !this.modifyMode;
   }

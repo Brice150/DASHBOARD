@@ -55,6 +55,10 @@ export class TripsComponent implements OnInit {
       state: TripState.TO_VISIT,
     });
     this.saveTrips(indexCountry);
+    this.toastr.success('Trip added', 'Trips', {
+      positionClass: 'toast-top-center',
+      toastClass: 'ngx-toastr custom',
+    });
   }
 
   addCountry(): void {
@@ -65,16 +69,24 @@ export class TripsComponent implements OnInit {
     });
     this.updateStats.push(true);
     this.saveTrips(this.updateStats.length - 1);
+    this.toastr.success('Country added', 'Trips', {
+      positionClass: 'toast-top-center',
+      toastClass: 'ngx-toastr custom',
+    });
   }
 
   deleteTrip(indexCountry: number, indexTrip: number): void {
     if (this.user.countries[indexCountry].trips?.length === 1) {
-      this.toastr.error('One city minimum', 'Trip', {
+      this.toastr.error('One trip minimum', 'Trips', {
         positionClass: 'toast-top-center',
         toastClass: 'ngx-toastr custom',
       });
     } else {
       this.user.countries[indexCountry].trips?.splice(indexTrip, 1);
+      this.toastr.success('Trip deleted', 'Trips', {
+        positionClass: 'toast-top-center',
+        toastClass: 'ngx-toastr custom',
+      });
     }
     this.saveTrips(indexCountry);
   }
@@ -82,6 +94,10 @@ export class TripsComponent implements OnInit {
   deleteCountry(indexCountry: number): void {
     this.user.countries.splice(indexCountry, 1);
     this.saveTrips();
+    this.toastr.success('Country deleted', 'Trips', {
+      positionClass: 'toast-top-center',
+      toastClass: 'ngx-toastr custom',
+    });
   }
 
   triggerUpdateStats(indexCountry: number): void {

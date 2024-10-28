@@ -77,8 +77,12 @@ export class CountryComponent implements OnInit, OnChanges {
         this.country.code = newCountry.code;
         this.country.trips = this.countryBeforeUpdate.trips;
         this.saveTripsEvent.emit();
+        this.toastr.success('Country updated', 'Trips', {
+          positionClass: 'toast-top-center',
+          toastClass: 'ngx-toastr custom',
+        });
       } else {
-        this.toastr.error('Country is unknown', 'Trip', {
+        this.toastr.error('Country is unknown', 'Trips', {
           positionClass: 'toast-top-center',
           toastClass: 'ngx-toastr custom',
         });

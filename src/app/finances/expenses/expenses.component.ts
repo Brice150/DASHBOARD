@@ -127,8 +127,12 @@ export class ExpensesComponent implements OnInit {
     if (this.user.expenses.length > 1) {
       this.user.expenses.splice(index, 1);
       this.saveUserExpenses();
+      this.toastr.success('Expense deleted', 'Expenses', {
+        positionClass: 'toast-top-center',
+        toastClass: 'ngx-toastr custom',
+      });
     } else {
-      this.toastr.error('One expense minimum', 'Expense', {
+      this.toastr.error('One expense minimum', 'Expenses', {
         positionClass: 'toast-top-center',
         toastClass: 'ngx-toastr custom',
       });
@@ -158,6 +162,10 @@ export class ExpensesComponent implements OnInit {
       color: newColor,
     });
     this.saveUserExpenses();
+    this.toastr.success('Expense added', 'Expenses', {
+      positionClass: 'toast-top-center',
+      toastClass: 'ngx-toastr custom',
+    });
   }
 
   getTotal(): number {

@@ -92,17 +92,25 @@ export class CitiesComponent implements OnInit {
 
     this.user.cities.push(newCity);
     this.getWeather(newCity);
+    this.toastr.success('City added', 'Cities', {
+      positionClass: 'toast-top-center',
+      toastClass: 'ngx-toastr custom',
+    });
   }
 
   deleteCity(index: number): void {
     if (this.user.cities.length === 1) {
-      this.toastr.error('One city minimum', 'City', {
+      this.toastr.error('One city minimum', 'Cities', {
         positionClass: 'toast-top-center',
         toastClass: 'ngx-toastr custom',
       });
     } else {
       this.user.cities.splice(index, 1);
       this.saveCities(0);
+      this.toastr.success('City deleted', 'Cities', {
+        positionClass: 'toast-top-center',
+        toastClass: 'ngx-toastr custom',
+      });
     }
   }
 }

@@ -55,14 +55,18 @@ export class CityComponent {
           this.city.cityGeolocation = city;
           this.saveCitiesEvent.emit();
           this.modifyMode = !this.modifyMode;
+          this.toastr.success('City updated', 'Cities', {
+            positionClass: 'toast-top-center',
+            toastClass: 'ngx-toastr custom',
+          });
         } else {
-          this.toastr.error('City is invalid', 'City', {
+          this.toastr.error('City is invalid', 'Cities', {
             positionClass: 'toast-top-center',
             toastClass: 'ngx-toastr custom',
           });
         }
       } else {
-        this.toastr.error('City is empty', 'City', {
+        this.toastr.error('City is empty', 'Cities', {
           positionClass: 'toast-top-center',
           toastClass: 'ngx-toastr custom',
         });

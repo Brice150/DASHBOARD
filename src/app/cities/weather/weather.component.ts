@@ -243,14 +243,18 @@ export class WeatherComponent implements OnInit {
       if (city) {
         this.city.cityGeolocation = { ...city };
         this.getWeather(this.city, true);
+        this.toastr.success('City updated', 'Weather', {
+          positionClass: 'toast-top-center',
+          toastClass: 'ngx-toastr custom',
+        });
       } else {
-        this.toastr.error('City is invalid', 'City', {
+        this.toastr.error('City is invalid', 'Weather', {
           positionClass: 'toast-top-center',
           toastClass: 'ngx-toastr custom',
         });
       }
     } else {
-      this.toastr.error('City is empty', 'City', {
+      this.toastr.error('City is empty', 'Weather', {
         positionClass: 'toast-top-center',
         toastClass: 'ngx-toastr custom',
       });
@@ -261,5 +265,9 @@ export class WeatherComponent implements OnInit {
     this.index = index;
     this.getDayWeatherInfo();
     this.updateWeatherGraph();
+    this.toastr.success('Day selected', 'Weather', {
+      positionClass: 'toast-top-center',
+      toastClass: 'ngx-toastr custom',
+    });
   }
 }

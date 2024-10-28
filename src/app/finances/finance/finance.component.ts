@@ -7,6 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { Color } from '../../core/enums/color.enum';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-finance',
@@ -33,6 +34,8 @@ export class FinanceComponent {
   @Output() saveFinancesEvent: EventEmitter<void> = new EventEmitter<void>();
   @Output() deleteFinanceEvent: EventEmitter<void> = new EventEmitter<void>();
 
+  constructor(private toastr: ToastrService) {}
+
   toggleModifyMode(): void {
     if (this.modifyMode) {
       if (!this.finance.totalAmount) {
@@ -45,6 +48,10 @@ export class FinanceComponent {
         this.finance.color = Color.BLUE;
       }
       this.saveFinancesEvent.emit();
+      this.toastr.success('Finance updated', 'Finances', {
+        positionClass: 'toast-top-center',
+        toastClass: 'ngx-toastr custom',
+      });
     }
     this.modifyMode = !this.modifyMode;
   }
