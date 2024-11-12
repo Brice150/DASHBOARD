@@ -189,17 +189,20 @@ export class StockExchangeComponent implements OnInit {
 
   saveUserStockExchange(): void {
     if (
-      !this.user.stockExchange.totalAmount ||
+      this.user.stockExchange.totalAmount === undefined ||
+      this.user.stockExchange.totalAmount === null ||
       this.user.stockExchange.totalAmount < 0
     ) {
       return;
     } else if (
-      !this.user.stockExchange.amountPerMonth ||
+      this.user.stockExchange.amountPerMonth === undefined ||
+      this.user.stockExchange.amountPerMonth === null ||
       this.user.stockExchange.amountPerMonth < 0
     ) {
       return;
     } else if (
-      !this.user.stockExchange.percentage ||
+      this.user.stockExchange.percentage === undefined ||
+      this.user.stockExchange.percentage === null ||
       this.user.stockExchange.percentage < 1
     ) {
       return;
