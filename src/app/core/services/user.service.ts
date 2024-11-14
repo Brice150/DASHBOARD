@@ -13,6 +13,7 @@ import { Finance, RealEstate, StockExchange } from '../interfaces/finance';
 import { MainTask } from '../interfaces/task';
 import { User } from '../interfaces/user';
 import { Country } from '../interfaces/country';
+import { TripState } from '../enums/trip-state.enum';
 
 @Injectable({
   providedIn: 'root',
@@ -105,7 +106,37 @@ export class UserService {
 
   saveUserTrips(countries: Country[]): void {
     this.user = this.getUser();
+    this.sortUserTrips(countries);
     this.user.countries = countries;
     this.saveUser();
+  }
+
+  private sortUserTrips(countries: Country[]): void {
+    countries.sort((a, b) => {
+      const [visitedA, visitedB] = [a, b].map(
+        (country) =>
+          country.trips?.filter((trip) => trip.state === TripState.VISITED)
+            .length || 0
+      );
+      const [toVisitA, toVisitB] = [a, b].map(
+        (country) =>
+          country.trips?.filter((trip) => trip.state === TripState.TO_VISIT)
+            .length || 0
+      );
+
+      if (visitedB !== visitedA) return visitedB - visitedA;
+      if (toVisitB !== toVisitA) return toVisitB - toVisitA;
+
+      return 0;
+    });
+
+    countries.forEach((country) => {
+      if (country.trips) {
+        country.trips.sort((a, b) => {
+          const stateDiff = a.state === TripState.VISITED ? -1 : 1;
+          return stateDiff || a.city.localeCompare(b.city);
+        });
+      }
+    });
   }
 }
