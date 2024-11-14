@@ -73,7 +73,7 @@ export class HeaderComponent implements OnInit {
       const reader = new FileReader();
       reader.onload = () => {
         this.userService.importUser(JSON.parse(reader.result as string));
-        this.router.navigate(['/']);
+        location.reload();
         this.toastr.success('Data imported', 'Data', {
           positionClass: 'toast-top-center',
           toastClass: 'ngx-toastr custom',
