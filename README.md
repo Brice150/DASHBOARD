@@ -53,9 +53,11 @@ Frontend : Angular
 - See your tasks and their state
 - Add, update or delete a task
 
-### Dark/Light Mode
+### Menu
 
 - Select dark/light mode
+- Import data file
+- Download data file
 
 </details>
 
