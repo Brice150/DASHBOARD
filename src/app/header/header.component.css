@@ -34,7 +34,8 @@
   z-index: 1;
 }
 
-.switch-container a {
+a,
+button {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -42,17 +43,35 @@
   text-decoration: none;
   border-radius: var(--light-radius);
   transition: 0.5s ease;
-  box-shadow: var(--box-shadow);
   color: var(--color-text-primary);
-  width: 50px;
-  height: 50px;
 }
 
-.switch-container a i {
+.back {
+  width: 50px;
+  height: 50px;
+  box-shadow: var(--box-shadow);
+}
+
+.menu {
+  width: 50px;
+  height: 50px;
+  box-shadow: var(--box-shadow);
+}
+
+a i {
   font-size: 30px;
 }
 
-.switch-container a:hover {
+a:hover {
+  color: var(--color-text-secondary);
+  background-color: var(--color-text-primary);
+}
+
+.switch-container button i {
+  font-size: 35px;
+}
+
+.switch-container button:hover {
   color: var(--color-text-secondary);
   background-color: var(--color-text-primary);
 }
@@ -61,17 +80,37 @@
   font-size: 35px;
 }
 
-::ng-deep .mat-mdc-slide-toggle .mat-internal-form-field {
+.description {
+  margin-left: 10px;
+  font-size: 18px;
+}
+
+::ng-deep .mat-mdc-menu-content {
+  padding: 10px !important;
+  background-color: var(--color-background);
+}
+
+::ng-deep .mat-mdc-menu-item-text {
+  display: flex;
+  align-items: center;
+}
+
+::ng-deep .mdc-button {
+  min-width: 0 !important;
+}
+
+::ng-deep .mat-mdc-button:not(:disabled) {
+  color: var(--color-text-primary) !important;
+}
+
+::ng-deep .mat-mdc-button:not(:disabled):hover {
   color: var(--color-text-secondary) !important;
-  font-size: 18px !important;
-  font-weight: 700 !important;
-  letter-spacing: 1px !important;
 }
 
-::ng-deep .mdc-switch .mdc-switch__track {
-  height: 28px !important;
+::ng-deep .mdc-button__label {
+  height: 35px !important;
 }
 
-::ng-deep .mdc-switch:enabled .mdc-switch__track::after {
-  background: var(--color-text-primary) !important;
+::ng-deep .mat-mdc-button .mat-mdc-button-touch-target {
+  height: 50px !important;
 }

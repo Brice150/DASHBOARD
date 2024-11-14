@@ -19,10 +19,8 @@ import { Country } from '../interfaces/country';
 })
 export class UserService {
   private user: User = {} as User;
-  private appVersion: number = 3.0;
 
   private setDefaultUser(): void {
-    this.user.appVersion = this.appVersion;
     this.user.prefersDarkMode = false;
     this.user.mainTasks = defaultTasks;
     this.user.cities = defaultCities;
@@ -35,10 +33,7 @@ export class UserService {
 
   getUser(): User {
     const storedUser = this.getStoredUser();
-    if (
-      !storedUser ||
-      (storedUser && storedUser.appVersion !== this.appVersion)
-    ) {
+    if (!storedUser) {
       this.setDefaultUser();
       this.saveUser();
     } else {
@@ -58,6 +53,12 @@ export class UserService {
 
   private saveUser(): void {
     localStorage.setItem('userDashboard', JSON.stringify(this.user));
+  }
+
+  importUser(user: User): void {
+    this.user = user;
+    //TODO : controler si c'est bien un type user
+    this.saveUser();
   }
 
   saveUserDarkMode(prefersDarkMode: boolean): void {

@@ -2,15 +2,41 @@
   <span routerLink="/" title="Home">Dashboard</span>
 </div>
 <div class="switch-container">
-  <a (click)="changeMode()" title="Change Mode">
-    @if (user.prefersDarkMode) {
-    <i class="bx bxs-sun"></i>
-    } @else {
-    <i class="bx bxs-moon"></i>
-    }
-  </a>
+  <button mat-button [matMenuTriggerFor]="menu" class="menu" title="Menu">
+    <i class="bx bx-menu"></i>
+  </button>
+  <mat-menu #menu="matMenu">
+    <a
+      (click)="changeMode()"
+      [title]="user.prefersDarkMode ? 'Toggle Light Mode' : 'Toggle Dark Mode'"
+      mat-menu-item
+    >
+      @if (user.prefersDarkMode) {
+      <i class="bx bxs-sun"></i>
+      <span class="description">Toggle Light Mode</span>
+      } @else {
+      <i class="bx bxs-moon"></i>
+      <span class="description">Toggle Dark Mode</span>
+      }
+    </a>
+    <a (click)="importData(fileInput)" title="Import Data" mat-menu-item>
+      <i class="bx bxs-file-json"></i>
+      <span class="description">Import Data</span>
+    </a>
+    <input
+      type="file"
+      accept=".json"
+      #fileInput
+      style="display: none"
+      (change)="handleFileInput($event)"
+    />
+    <a (click)="downloadData()" title="Download Data" mat-menu-item>
+      <i class="bx bxs-download"></i>
+      <span class="description">Download Data</span>
+    </a>
+  </mat-menu>
   @if (!isHomePage()) {
-  <a (click)="back()" title="Back">
+  <a (click)="back()" title="Back" class="back">
     <i class="bx bx-arrow-back"></i>
   </a>
   }

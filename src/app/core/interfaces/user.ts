@@ -4,7 +4,6 @@ import { Finance, RealEstate, StockExchange } from './finance';
 import { MainTask } from './task';
 
 export interface User {
-  appVersion: number;
   prefersDarkMode: boolean;
   cities: City[];
   countries: Country[];
