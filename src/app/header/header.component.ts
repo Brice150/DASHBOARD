@@ -99,4 +99,9 @@ export class HeaderComponent implements OnInit {
       toastClass: 'ngx-toastr custom',
     });
   }
+
+  resetData(): void {
+    this.user = this.userService.resetUser();
+    location.reload();
+  }
 }

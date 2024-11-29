@@ -58,8 +58,12 @@ export class UserService {
 
   importUser(user: User): void {
     this.user = user;
-    //TODO : controler si c'est bien un type user
     this.saveUser();
+  }
+
+  resetUser(): User {
+    localStorage.removeItem('userDashboard');
+    return this.getUser();
   }
 
   saveUserDarkMode(prefersDarkMode: boolean): void {

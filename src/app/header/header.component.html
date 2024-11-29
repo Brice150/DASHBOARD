@@ -34,6 +34,10 @@
       <i class="bx bxs-download"></i>
       <span class="description">Download Data</span>
     </a>
+    <a (click)="resetData()" title="Reset Data" mat-menu-item>
+      <i class="bx bxs-trash"></i>
+      <span class="description">Reset Data</span>
+    </a>
   </mat-menu>
   @if (!isHomePage()) {
   <a (click)="back()" title="Back" class="back">
